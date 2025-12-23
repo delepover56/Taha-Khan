@@ -23,14 +23,14 @@ const Header = () => {
         onClick={(event) => handleClick(event, "/")}
         className="group flex items-center gap-4"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] text-[#00ff5e] shadow-[0_0_16px_rgba(0,255,94,0.25)] transition-all duration-300 group-hover:border-[#00ff5e] group-hover:bg-[#00ff5e] group-hover:text-[#06210f]">
-          <span className="lilita text-xl">TK</span>
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] text-[#00ff5e] shadow-[0_0_16px_rgba(0,255,94,0.25)] transition-all duration-300">
+          <img src="./favicon.png" alt="Logo" />
         </div>
         <div className="leading-tight">
-          <p className="merienda text-2xl text-[#00ff5e]">Taha Khan</p>
-          <p className="poppins text-[10px] uppercase tracking-[0.32em] text-[#9fffbf]">
-            Front-End Studio
-          </p>
+          <p className="merienda text-2xl text-[#00ff5e] hover:text-white transition-all duration-200">Taha Khan</p>
+          {/* <p className="poppins text-[10px] uppercase tracking-[0.32em] text-[#9fffbf]">
+            Front-End Developer
+          </p> */}
         </div>
       </NavLink>
 
