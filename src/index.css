@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 375px;
+}
+
+@font-face {
+  font-family: "LilitaOne";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/Fonts/LilitaOne-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+.lilita {
+  font-family: "LilitaOne", sans-serif;
+}
+
+@font-face {
+  font-family: "Merienda";
+  font-style: normal;
+  src: url("/Fonts/Merienda-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+.merienda {
+  font-family: "Merienda", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-black";
+  font-style: normal;
+  font-weight: 900;
+  src: url("/Fonts/Poppins-Black.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-black {
+  font-family: "Poppins-black", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/Fonts/Poppins-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-bold {
+  font-family: "Poppins-bold", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-ExtraBold";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/Fonts/Poppins-ExtraBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins-ExtraBold", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-ExtraLight";
+  font-style: normal;
+  font-weight: 200;
+  src: url("/Fonts/Poppins-ExtraLight.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-extralight {
+  font-family: "Poppins-ExtraLight", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/Fonts/Poppins-Light.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-light {
+  font-family: "Poppins-light", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/Fonts/Poppins-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-medium {
+  font-family: "Poppins-medium", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/Fonts/Poppins-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins {
+  font-family: "Poppins-regular", sans-serif;
+}
+
+.poppins-regular {
+  font-family: "Poppins-regular", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-semibold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/Fonts/Poppins-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-semibold {
+  font-family: "Poppins-semibold", sans-serif;
+}
+
+@font-face {
+  font-family: "Poppins-thin";
+  font-style: normal;
+  font-weight: 100;
+  src: url("/Fonts/Poppins-Thin.ttf") format("truetype");
+  font-display: swap;
+}
+
+.poppins-thin {
+  font-family: "Poppins-thin", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-black";
+  font-style: normal;
+  font-weight: 900;
+  src: url("/Fonts/Roboto-Black.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-black {
+  font-family: "Roboto-black", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/Fonts/Roboto-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-bold {
+  font-family: "Roboto-bold", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/Fonts/Roboto-Light.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-light {
+  font-family: "Roboto-light", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/Fonts/Roboto-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-medium {
+  font-family: "Roboto-medium", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/Fonts/Roboto-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-regular {
+  font-family: "Roboto-regular", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto-thin";
+  font-style: normal;
+  font-weight: 100;
+  src: url("/Fonts/Roboto-Thin.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-thin {
+  font-family: "Roboto-thin", sans-serif;
+}
+
+@font-face {
+  font-family: "RobotoSlab";
+  font-style: normal;
+  src: url("/Fonts/RobotoSlab-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+.roboto-slab {
+  font-family: "RobotoSlab", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #050c08;
+  box-shadow: inset 0 0 8px rgba(0, 255, 94, 0.08);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff5e, #009b39);
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(0, 255, 94, 0.35);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ff5e, #00c94d);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+body {
+  background-color: #050a08;
+  color: #e6ffee;
+  font-family: "Poppins-regular", sans-serif;
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes floatFast {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes gridShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
