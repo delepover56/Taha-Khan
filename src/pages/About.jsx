@@ -1,17 +1,43 @@
 import React from "react";
+import { motion, useReducedMotion } from "motion/react";
+import {
+  fadeUp,
+  hoverGlow,
+  staggerContainer,
+  staggerItem,
+  viewportOnce,
+} from "@/animations/motionPresets";
 
 const About = () => {
+  const shouldReduceMotion = useReducedMotion();
+  const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
+  const itemVariants = staggerItem(shouldReduceMotion);
+  const initialState = shouldReduceMotion ? "show" : "hidden";
+
   return (
-    <section className="flex w-full flex-col gap-8 sm:gap-10">
-      <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
+    <motion.section
+      variants={containerVariants}
+      initial={initialState}
+      whileInView="show"
+      viewport={viewportOnce}
+      className="flex w-full flex-col gap-8 sm:gap-10"
+    >
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
         <div className="grid gap-6 md:gap-8 xl:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               About
             </p>
-            <h1 className="merienda type-h1 mt-3 text-white">
+            <motion.h1 variants={fadeUp(shouldReduceMotion)} className="merienda type-h1 mt-3 text-white">
               Get to know me
-            </h1>
+            </motion.h1>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
+            />
             <p className="poppins type-body mt-5 leading-relaxed text-[#c7ffd8] xs:mt-6">
               Hey there! I am{" "}
               <span className="text-[#00ff5e]">M. Taha Khan</span> - a front-end
@@ -32,7 +58,7 @@ const About = () => {
               interactive tools for communities.
             </p>
           </div>
-          <div className="grid gap-4">
+          <motion.div variants={containerVariants} className="grid gap-4">
             {[
               {
                 title: "Focus",
@@ -47,8 +73,10 @@ const About = () => {
                 text: "Building confidence through real-world portfolio work.",
               },
             ].map((item) => (
-              <div
+              <motion.div
                 key={item.title}
+                variants={itemVariants}
+                whileHover={hoverGlow(shouldReduceMotion)}
                 className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e0f] xs:p-5"
               >
                 <p className="poppins type-caption uppercase tracking-[0.32em] text-[#7feaa0]">
@@ -57,28 +85,38 @@ const About = () => {
                 <p className="poppins type-body-sm mt-2 text-white">
                   {item.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Services
             </p>
-            <h2 className="merienda type-h2 mt-2 text-white">
+            <motion.h2 variants={fadeUp(shouldReduceMotion)} className="merienda type-h2 mt-2 text-white">
               What I do
-            </h2>
+            </motion.h2>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-14 origin-left rounded-full bg-[#00ff5e55]"
+            />
           </div>
           <p className="poppins type-body-sm text-[#9fffbf]">
             Clean UI, bold interactions, and polished delivery.
           </p>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-stretch gap-4 sm:gap-5 sm:mt-8">
+        <motion.div
+          variants={containerVariants}
+          className="mt-6 flex flex-wrap items-stretch gap-4 sm:gap-5 sm:mt-8"
+        >
           {[
             {
               title: "Web Development",
@@ -123,8 +161,10 @@ const About = () => {
               ),
             },
           ].map((card) => (
-            <div
+            <motion.div
               key={card.title}
+              variants={itemVariants}
+              whileHover={hoverGlow(shouldReduceMotion)}
               className="group flex h-full flex-none flex-col gap-4 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e0f] hover:shadow-[0_0_18px_rgba(0,255,94,0.2)] xs:p-5 basis-full md:basis-[calc(50%-10px)] xl:basis-[calc(50%-10px)] [@media(min-width:1920px)]:basis-[calc(33.333%-13.5px)] 2xl:basis-[calc(25%-15px)]"
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] transition-all duration-300 group-hover:bg-[#00ff5e] xs:h-12 xs:w-12">
@@ -143,11 +183,11 @@ const About = () => {
               <p className="poppins type-body-sm text-[#c7ffd8]">
                 {card.text}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

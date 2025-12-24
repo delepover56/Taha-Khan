@@ -3,8 +3,14 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./swiperCustom.css";
+import { motion, useReducedMotion } from "motion/react";
+import { hoverGlow, scaleIn } from "@/animations/motionPresets";
 
 const Slider = ({ projects = [] }) => {
+  const shouldReduceMotion = useReducedMotion();
+  const cardVariants = scaleIn(shouldReduceMotion);
+  const initialState = shouldReduceMotion ? "show" : "hidden";
+
   return (
     <Swiper
       spaceBetween={20}
@@ -24,7 +30,13 @@ const Slider = ({ projects = [] }) => {
     >
       {projects.map((project, index) => (
         <SwiperSlide key={index} className="swiper-slide-card">
-          <div className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e66] hover:shadow-[0_18px_36px_rgba(0,0,0,0.55)] xs:h-[260px] sm:h-[280px]">
+          <motion.div
+            variants={cardVariants}
+            initial={initialState}
+            animate="show"
+            whileHover={hoverGlow(shouldReduceMotion)}
+            className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e66] hover:shadow-[0_18px_36px_rgba(0,0,0,0.55)] xs:h-[260px] sm:h-[280px]"
+          >
             <a
               href={project.link}
               target="_blank"
@@ -58,7 +70,7 @@ const Slider = ({ projects = [] }) => {
                 View Live
               </a>
             </div>
-          </div>
+          </motion.div>
         </SwiperSlide>
       ))}
     </Swiper>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Background = () => {
   return (
@@ -17,4 +17,4 @@ const Background = () => {
   );
 };
 
-export default Background;
+export default memo(Background);

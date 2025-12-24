@@ -8,7 +8,10 @@ import Footer from "@/components/layout/Footer";
 import ScrollToOutlet from "@/components/ScrollToOutlet";
 import Preloader from "@/components/Preloader";
 import { useAppLoader } from "@/context/AppLoaderContext";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { fadeUp, transitionSlow } from "@/animations/motionPresets";
+import { useLocation } from "react-router";
 
 
 function App() {
@@ -18,6 +21,13 @@ function App() {
     dismissPreloader,
     markAppMounted,
   } = useAppLoader();
+  const location = useLocation();
+  const shouldReduceMotion = useReducedMotion();
+  const pageVariants = useMemo(
+    () => fadeUp(shouldReduceMotion, transitionSlow),
+    [shouldReduceMotion]
+  );
+  const initialState = shouldReduceMotion ? "show" : "hidden";
 
   useEffect(() => {
     markAppMounted();
@@ -43,7 +53,17 @@ function App() {
           <div className="grid min-w-0 grid-cols-1 gap-2 md:gap-8 lg:grid-cols-[320px_1fr] xl:grid-cols-[360px_1fr] 2xl:grid-cols-[400px_1fr] lg:items-start">
             <MyInfo />
             <div id="route-outlet" className="min-w-0 w-full">
-              <Outlet />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={location.pathname}
+                  variants={pageVariants}
+                  initial={initialState}
+                  animate="show"
+                  exit="exit"
+                >
+                  <Outlet />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>

@@ -1,9 +1,21 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import {
+  fadeUp,
+  hoverGlow,
+  staggerContainer,
+  staggerItem,
+  viewportOnce,
+} from "@/animations/motionPresets";
 
 const Contact = () => {
   const [emailStatus, setEmailStatus] = useState("");
+  const shouldReduceMotion = useReducedMotion();
+  const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
+  const itemVariants = staggerItem(shouldReduceMotion);
+  const initialState = shouldReduceMotion ? "show" : "hidden";
 
   const {
     register,
@@ -40,16 +52,32 @@ const Contact = () => {
   };
 
   return (
-    <section className="flex w-full flex-col gap-8 sm:gap-10">
-      <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
+    <motion.section
+      variants={containerVariants}
+      initial={initialState}
+      whileInView="show"
+      viewport={viewportOnce}
+      className="flex w-full flex-col gap-8 sm:gap-10"
+    >
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Contact
             </p>
-            <h1 className="merienda type-h1 mt-2 text-white">
+            <motion.h1
+              variants={fadeUp(shouldReduceMotion)}
+              className="merienda type-h1 mt-2 text-white"
+            >
               Let's build together
-            </h1>
+            </motion.h1>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
+            />
           </div>
           <div className="poppins type-body-sm rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
             Open to internships and freelance work.
@@ -57,7 +85,7 @@ const Contact = () => {
         </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1.1fr] xl:gap-8 md:mt-8">
-          <div className="flex flex-col gap-6">
+          <motion.div variants={itemVariants} className="flex flex-col gap-6">
             <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
               This portfolio is my first React.js project and the start of my
               transition from static HTML and WordPress to modern UI
@@ -65,7 +93,7 @@ const Contact = () => {
               learn, contribute, and ship high quality experiences.
             </p>
 
-            <div className="grid gap-4">
+            <motion.div variants={containerVariants} className="grid gap-4">
               {[
                 {
                   title: "Response time",
@@ -76,8 +104,10 @@ const Contact = () => {
                   text: "Front-end UI, landing pages, and dashboards.",
                 },
               ].map((item) => (
-                <div
+                <motion.div
                   key={item.title}
+                  variants={itemVariants}
+                  whileHover={hoverGlow(shouldReduceMotion)}
                   className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 xs:p-5"
                 >
                   <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
@@ -86,11 +116,14 @@ const Contact = () => {
                   <p className="poppins type-body-sm mt-2 text-white">
                     {item.text}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5">
+            <motion.div
+              variants={itemVariants}
+              className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5"
+            >
               <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
                 Quick links
               </p>
@@ -106,21 +139,23 @@ const Contact = () => {
                     href: "https://www.linkedin.com/in/taha-khan03/",
                   },
                 ].map((link) => (
-                  <a
+                  <motion.a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={hoverGlow(shouldReduceMotion)}
                     className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e12] hover:text-white xxs:text-[10px]"
                   >
                     {link.label}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <form
+          <motion.form
+            variants={itemVariants}
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-center gap-4 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
           >
@@ -138,7 +173,10 @@ const Contact = () => {
             />
 
             {Object.keys(errors).length > 0 && (
-              <div className="rounded-2xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-200">
+              <motion.div
+                variants={fadeUp(shouldReduceMotion)}
+                className="rounded-2xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-200"
+              >
                 <p className="poppins mb-1 text-xs uppercase tracking-[0.24em] text-red-300">
                   Please fix the highlighted fields
                 </p>
@@ -147,13 +185,14 @@ const Contact = () => {
                     <li key={err?.message}>{err?.message}</li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             )}
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <input
+                <motion.input
                   type="text"
+                  whileFocus={hoverGlow(shouldReduceMotion)}
                   {...register("name", {
                     required: "Name is required",
                     minLength: {
@@ -188,8 +227,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <input
+                <motion.input
                   type="email"
+                  whileFocus={hoverGlow(shouldReduceMotion)}
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -212,8 +252,9 @@ const Contact = () => {
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <input
+                <motion.input
                   type="text"
+                  whileFocus={hoverGlow(shouldReduceMotion)}
                   {...register("phone", {
                     required: "Phone number is required",
                     pattern: {
@@ -238,8 +279,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <input
+                <motion.input
                   type="text"
+                  whileFocus={hoverGlow(shouldReduceMotion)}
                   {...register("subject", {
                     required: "Purpose is required",
                     minLength: {
@@ -269,9 +311,10 @@ const Contact = () => {
             </div>
 
             <div>
-              <textarea
+              <motion.textarea
                 rows="6"
                 placeholder="Tell me about the project"
+                whileFocus={hoverGlow(shouldReduceMotion)}
                 {...register("message", {
                   required: "Message is required",
                   minLength: {
@@ -298,28 +341,45 @@ const Contact = () => {
               )}
             </div>
 
-            {emailStatus === "success" && (
-              <p className="poppins text-sm text-[#00ff5e]">
-                Your message was sent successfully.
-              </p>
-            )}
-            {emailStatus === "error" && (
-              <p className="poppins text-sm text-red-300">
-                Failed to send message. Please try again later.
-              </p>
-            )}
+            <AnimatePresence mode="wait">
+              {emailStatus === "success" && (
+                <motion.p
+                  key="success"
+                  variants={fadeUp(shouldReduceMotion)}
+                  initial={initialState}
+                  animate="show"
+                  exit="exit"
+                  className="poppins text-sm text-[#00ff5e]"
+                >
+                  Your message was sent successfully.
+                </motion.p>
+              )}
+              {emailStatus === "error" && (
+                <motion.p
+                  key="error"
+                  variants={fadeUp(shouldReduceMotion)}
+                  initial={initialState}
+                  animate="show"
+                  exit="exit"
+                  className="poppins text-sm text-red-300"
+                >
+                  Failed to send message. Please try again later.
+                </motion.p>
+              )}
+            </AnimatePresence>
 
-            <button
+            <motion.button
               type="submit"
               disabled={isSubmitting}
+              whileHover={hoverGlow(shouldReduceMotion)}
               className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] cursor-pointer transition-color duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e] hover:font-bold hover:text-[#06210f] hover:shadow-[0_0_26px_rgba(0,255,94,0.35)] xs:text-xs xs:tracking-[0.28em] sm:text-sm"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
-            </button>
-          </form>
+            </motion.button>
+          </motion.form>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

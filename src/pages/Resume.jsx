@@ -1,18 +1,47 @@
 import React from "react";
+import { motion, useReducedMotion } from "motion/react";
 import SkillCard from "@/components/SkillCard";
+import {
+  fadeUp,
+  hoverGlow,
+  staggerContainer,
+  staggerItem,
+  viewportOnce,
+} from "@/animations/motionPresets";
 
 const Resume = () => {
+  const shouldReduceMotion = useReducedMotion();
+  const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
+  const itemVariants = staggerItem(shouldReduceMotion);
+  const initialState = shouldReduceMotion ? "show" : "hidden";
+
   return (
-    <section className="flex w-full flex-col gap-8 sm:gap-10">
-      <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
+    <motion.section
+      variants={containerVariants}
+      initial={initialState}
+      whileInView="show"
+      viewport={viewportOnce}
+      className="flex w-full flex-col gap-8 sm:gap-10"
+    >
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Resume
             </p>
-            <h1 className="merienda type-h1 mt-2 text-white">
+            <motion.h1
+              variants={fadeUp(shouldReduceMotion)}
+              className="merienda type-h1 mt-2 text-white"
+            >
               Experience and education
-            </h1>
+            </motion.h1>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-20 origin-left rounded-full bg-[#00ff5e55]"
+            />
           </div>
           <p className="poppins type-body-sm text-[#9fffbf]">
             Building modern UI with consistent momentum.
@@ -20,7 +49,10 @@ const Resume = () => {
         </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-2 xl:gap-8 md:mt-8">
-          <div className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6">
+          <motion.div
+            variants={itemVariants}
+            className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
+          >
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] xs:h-11 xs:w-11">
                 <svg
@@ -37,7 +69,7 @@ const Resume = () => {
                 Education
               </h2>
             </div>
-            <div className="space-y-6 pl-5">
+            <motion.div variants={containerVariants} className="space-y-6 pl-5">
               {[
                 {
                   period: "2023 - 2025",
@@ -50,7 +82,11 @@ const Resume = () => {
                   place: "ApTech Metro, Star Gate",
                 },
               ].map((item) => (
-                <div key={item.title} className="relative">
+                <motion.div
+                  key={item.title}
+                  variants={itemVariants}
+                  className="relative"
+                >
                   <span className="absolute -left-[13px] top-1 h-3 w-3 rounded-full bg-[#00ff5e] shadow-[0_0_10px_rgba(0,255,94,0.6)]" />
                   <p className="poppins type-caption ml-3 uppercase tracking-[0.3em] text-[#7feaa0]">
                     {item.period}
@@ -61,12 +97,15 @@ const Resume = () => {
                   <p className="poppins type-body-sm text-[#c7ffd8] mt-2">
                     {item.place}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6">
+          <motion.div
+            variants={itemVariants}
+            className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
+          >
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] xs:h-11 xs:w-11">
                 <svg
@@ -82,7 +121,7 @@ const Resume = () => {
                 Experience
               </h2>
             </div>
-            <div className="space-y-6 pl-5">
+            <motion.div variants={containerVariants} className="space-y-6 pl-5">
               {[
                 {
                   period: "3 Years",
@@ -95,7 +134,11 @@ const Resume = () => {
                   place: "PHP and MySQL",
                 },
               ].map((item) => (
-                <div key={item.title} className="relative">
+                <motion.div
+                  key={item.title}
+                  variants={itemVariants}
+                  className="relative"
+                >
                   <span className="absolute -left-[13px] top-1 h-3 w-3 rounded-full bg-[#00ff5e] shadow-[0_0_10px_rgba(0,255,94,0.6)]" />
                   <p className="poppins type-caption ml-3 uppercase tracking-[0.3em] text-[#7feaa0]">
                     {item.period}
@@ -106,34 +149,55 @@ const Resume = () => {
                   <p className="poppins type-body-sm text-[#c7ffd8] mt-2">
                     {item.place}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Skills
             </p>
-            <h2 className="merienda type-h2 mt-2 text-white">
+            <motion.h2
+              variants={fadeUp(shouldReduceMotion)}
+              className="merienda type-h2 mt-2 text-white"
+            >
               Development strengths
-            </h2>
+            </motion.h2>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
+            />
           </div>
           <p className="poppins type-body-sm text-[#9fffbf]">
             Balancing quality and delivery.
           </p>
         </div>
 
-        <div className="mt-6 grid gap-5 xl:grid-cols-2 md:mt-8">
-          <SkillCard title="Front-End Development" percentage={85} />
-          <SkillCard title="Back-End Development" percentage={40} />
-        </div>
+        <motion.div
+          variants={containerVariants}
+          className="mt-6 grid gap-5 xl:grid-cols-2 md:mt-8"
+        >
+          <motion.div variants={itemVariants}>
+            <SkillCard title="Front-End Development" percentage={85} />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <SkillCard title="Back-End Development" percentage={40} />
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-8 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6 sm:mt-10">
+        <motion.div
+          variants={itemVariants}
+          whileHover={hoverGlow(shouldReduceMotion)}
+          className="mt-8 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6 sm:mt-10"
+        >
           <div className="mb-4 flex items-center justify-between">
             <h3 className="roboto-slab type-h3 text-white">
               Knowledge
@@ -153,17 +217,19 @@ const Resume = () => {
               "WordPress",
               "PHP",
             ].map((item) => (
-              <span
+              <motion.span
                 key={item}
+                variants={itemVariants}
+                whileHover={hoverGlow(shouldReduceMotion)}
                 className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e12] hover:text-white xxs:text-[10px]"
               >
                 {item}
-              </span>
+              </motion.span>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

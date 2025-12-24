@@ -44,6 +44,7 @@ Typography usage:
 
 ### Core
 - **React 19**
+- **Framer Motion v12.23.26**
 - **Vite**
 - **React Router v7**
 - **Tailwind CSS v4**

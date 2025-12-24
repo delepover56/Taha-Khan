@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Preloader = ({ isActive, onExited }) => {
   const handleTransitionEnd = () => {
     if (!isActive && onExited) {
@@ -42,4 +44,4 @@ const Preloader = ({ isActive, onExited }) => {
   );
 };
 
-export default Preloader;
+export default memo(Preloader);

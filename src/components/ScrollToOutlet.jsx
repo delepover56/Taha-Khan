@@ -16,7 +16,7 @@ export default function ScrollToOutlet() {
         outlet.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
-  }, [pathname]);
+  }, [pathname, navigationType]);
 
   return null;
 }
