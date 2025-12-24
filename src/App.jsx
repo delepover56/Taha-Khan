@@ -6,11 +6,31 @@ import MyInfo from "@/components/layout/MyInfo";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToOutlet from "@/components/ScrollToOutlet";
+import Preloader from "@/components/Preloader";
+import { useAppLoader } from "@/context/AppLoaderContext";
+import { useEffect } from "react";
 
 
 function App() {
+  const {
+    isInitialLoading,
+    shouldRenderPreloader,
+    dismissPreloader,
+    markAppMounted,
+  } = useAppLoader();
+
+  useEffect(() => {
+    markAppMounted();
+  }, [markAppMounted]);
+
   return (
     <>
+      {shouldRenderPreloader && (
+        <Preloader
+          isActive={isInitialLoading}
+          onExited={dismissPreloader}
+        />
+      )}
       <Background />
       <ScrollToOutlet />
       <main className="relative z-10 flex min-h-screen w-full flex-col items-center pb-12 pt-4 xxs:pt-5 xs:pt-6 lg:pt-8 xl:pt-10">

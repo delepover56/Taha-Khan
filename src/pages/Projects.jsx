@@ -1,7 +1,10 @@
 import React from "react";
 import Slider from "@/components/Swiper";
+import { useAppLoader } from "@/context/AppLoaderContext";
 
 const Projects = () => {
+  const { projects, projectsStatus } = useAppLoader();
+
   return (
     <section className="flex w-full flex-col gap-8 sm:gap-10">
       <div className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8">
@@ -40,7 +43,12 @@ const Projects = () => {
           </p>
         </div>
         <div className="mt-6 w-full max-w-full overflow-hidden">
-          <Slider />
+          {projects.length > 0 && <Slider projects={projects} />}
+          {projectsStatus === "error" && projects.length === 0 && (
+            <p className="poppins type-body-sm text-[#ffb4b4]">
+              Projects are temporarily unavailable. Please check back soon.
+            </p>
+          )}
         </div>
       </div>
     </section>

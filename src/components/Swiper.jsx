@@ -1,11 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import Projects from "./MyProjects";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./swiperCustom.css";
 
-const Slider = () => {
+const Slider = ({ projects = [] }) => {
   return (
     <Swiper
       spaceBetween={20}
@@ -23,7 +22,7 @@ const Slider = () => {
       speed={1400}
       className="select-none pb-10 sm:pb-12"
     >
-      {Projects.map((project, index) => (
+      {projects.map((project, index) => (
         <SwiperSlide key={index} className="swiper-slide-card">
           <div className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e66] hover:shadow-[0_18px_36px_rgba(0,0,0,0.55)] xs:h-[260px] sm:h-[280px]">
             <a
