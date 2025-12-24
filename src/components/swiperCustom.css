@@ -22,6 +22,24 @@
   }
 }
 
+@media (max-width: 425px) {
+  .swiper {
+    height: 310px;
+  }
+}
+
+@media (max-width: 375px) {
+  .swiper {
+    height: 300px;
+  }
+}
+
+@media (max-width: 320px) {
+  .swiper {
+    height: 290px;
+  }
+}
+
 .swiper-pagination-bullet {
   background-color: #00ff5e !important;
   opacity: 0.35 !important;

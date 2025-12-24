@@ -86,10 +86,10 @@ const MyInfo = () => {
   ];
 
   return (
-    <aside className="lg:sticky lg:top-24">
-      <div className="flex flex-col gap-6 rounded-3xl border border-[#00ff5e26] bg-[#0a120db8] p-6 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] sm:p-7">
-        <div className="flex items-center gap-4">
-          <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-[#00ff5e44] bg-[#06180f]">
+    <aside className="lg:sticky lg:top-10">
+      <div className="flex flex-col gap-6 rounded-3xl border border-[#00ff5e26] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7">
+        <div className="flex flex-col gap-3 xs:flex-row xs:items-center xs:gap-4">
+          <div className="relative h-20 w-20 overflow-hidden rounded-2xl border border-[#00ff5e44] bg-[#06180f] xxs:h-22 xxs:w-22 sm:h-24 sm:w-24">
             <img
               src="/Images/myAvatar.webp"
               alt="Taha Khan"
@@ -98,20 +98,22 @@ const MyInfo = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#00ff5e33]" />
           </div>
           <div>
-            <h2 className="merienda text-2xl text-white">M. Taha Khan</h2>
-            <p className="poppins text-xs uppercase tracking-[0.32em] text-[#9fffbf]">
+            <h2 className="merienda type-h3 text-white">
+              M. Taha Khan
+            </h2>
+            <p className="poppins type-caption uppercase tracking-[0.32em] text-[#9fffbf]">
               Front-End Developer
             </p>
-            <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-1">
+            <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-1 sm:py-1.5">
               <span className="h-2 w-2 rounded-full bg-[#00ff5e] shadow-[0_0_8px_rgba(0,255,94,0.6)] animate-[glowPulse_2.8s_ease-in-out_infinite]" />
-              <span className="poppins text-[10px] uppercase tracking-[0.28em] text-[#9fffbf]">
+              <span className="poppins type-caption capitalize tracking-[0.28em] text-[#9fffbf]">
                 Available
               </span>
             </div>
           </div>
         </div>
 
-        <p className="poppins text-sm leading-relaxed text-[#c7ffd8]">
+        <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
           I build immersive interfaces with clean, responsive layouts and
           thoughtful interactions. Focused on React, Tailwind, and modern UI
           engineering.
@@ -122,7 +124,7 @@ const MyInfo = () => {
             (item) => (
               <span
                 key={item}
-                className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-[#9fffbf]"
+                className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] xxs:text-[10px]"
               >
                 {item}
               </span>
@@ -131,31 +133,35 @@ const MyInfo = () => {
         </div>
 
         <div className="grid gap-3">
-          {contactItems.map((item) => (
+          {contactItems.map((item) => {
+            const isEmail = item.label === "Email";
+
+            return (
             <div
               key={item.label}
-              className="group flex items-center gap-3 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-3 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e10]"
+              className="group flex items-center gap-3 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-3 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e10] xs:p-4"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#06180f] transition-all duration-300 group-hover:bg-[#00ff5e]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#06180f] transition-all duration-300 group-hover:bg-[#00ff5e] xs:h-11 xs:w-11">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
                   viewBox="0 0 24 24"
                   fill="#00ff5e"
-                  className="transition-all duration-300 group-hover:fill-[#06210f]"
+                  className="h-5 w-5 transition-all duration-300 group-hover:fill-[#06210f] xs:h-[22px] xs:w-[22px]"
                 >
                   {item.icon}
                 </svg>
               </div>
               <div className="min-w-0">
-                <p className="poppins text-[10px] uppercase tracking-[0.28em] text-[#7feaa0]">
+                <p className="poppins type-caption uppercase tracking-[0.28em] text-[#7feaa0]">
                   {item.label}
                 </p>
                 {item.href ? (
                   <a
                     href={item.href}
-                    className="poppins-semibold text-sm text-white hover:text-[#00ff5e]"
+                    className={[
+                      "poppins-semibold type-body-sm text-white hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px]",
+                      isEmail ? "whitespace-nowrap text-[12px] xs:text-[13px] sm:text-sm" : "break-all",
+                    ].join(" ")}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={
                       item.href.startsWith("http")
@@ -166,13 +172,14 @@ const MyInfo = () => {
                     {item.value}
                   </a>
                 ) : (
-                  <p className="poppins-semibold text-sm text-white">
+                  <p className="poppins-semibold type-body-sm break-words text-white xxs:text-[11px]">
                     {item.value}
                   </p>
                 )}
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
 
         <div className="flex items-center gap-3">
@@ -183,17 +190,15 @@ const MyInfo = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={[
-                "group flex h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 hover:border-[#00ff5e88]",
+                "group flex h-10 w-10 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-transform duration-300 hover:scale-105 hover:border-0 xs:h-11 xs:w-11",
                 `hover:bg-gradient-to-br ${item.gradient}`,
               ].join(" ")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                width="20"
-                height="20"
                 fill="white"
-                className="transition-all duration-300 group-hover:fill-white"
+                className="h-4 w-4 transition-all duration-300 group-hover:fill-white xs:h-5 xs:w-5"
               >
                 {item.path}
               </svg>
@@ -206,7 +211,7 @@ const MyInfo = () => {
           href="/TahaResume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-center text-sm uppercase tracking-[0.28em] text-[#00ff5e] transition-all duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e] hover:text-[#06210f] hover:shadow-[0_0_26px_rgba(0,255,94,0.35)]"
+          className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-center text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e] hover:text-[#06210f] hover:font-semibold hover:shadow-[0_0_26px_rgba(0,255,94,0.35)] xs:text-xs xs:tracking-[0.28em] sm:text-sm"
         >
           Download Resume
         </a>

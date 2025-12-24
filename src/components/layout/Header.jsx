@@ -17,17 +17,19 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-4 z-[100] hidden w-full items-center justify-between rounded-2xl border border-[#00ff5e26] bg-[#0a120db8] px-6 py-4 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.45)] lg:flex">
+    <header className="sticky top-0 z-[100] hidden w-full items-center justify-between rounded-2xl border border-[#00ff5e26] bg-[#0a120db8] px-5 py-3 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.45)] lg:flex xl:px-6 xl:py-4">
       <NavLink
         to="/"
         onClick={(event) => handleClick(event, "/")}
         className="group flex items-center gap-4"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] text-[#00ff5e] shadow-[0_0_16px_rgba(0,255,94,0.25)] transition-all duration-300">
-          <img src="./favicon.png" alt="Logo" />
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl shadow-[0_0_16px_rgba(0,255,94,0.25)] transition-all duration-300">
+          <img src="./favicon.png" alt="Logo" className="h-full w-full" />
         </div>
         <div className="leading-tight">
-          <p className="merienda text-2xl text-[#00ff5e] hover:text-white transition-all duration-200">Taha Khan</p>
+          <p className="merienda text-xl text-[#00ff5e] transition-all duration-200 hover:text-white xl:text-2xl">
+            Taha Khan
+          </p>
           {/* <p className="poppins text-[10px] uppercase tracking-[0.32em] text-[#9fffbf]">
             Front-End Developer
           </p> */}
@@ -43,7 +45,7 @@ const Header = () => {
                 onClick={(event) => handleClick(event, item.to)}
                 className={({ isActive }) =>
                   [
-                    "rounded-full border px-5 py-2 text-[11px] uppercase tracking-[0.28em] transition-all duration-300",
+                    "rounded-full border px-4 py-2 text-[10px] uppercase tracking-[0.28em] transition-all duration-300 xl:px-5 xl:py-2.5 xl:text-[11px]",
                     isActive
                       ? "border-[#00ff5e88] bg-[#00ff5e1a] text-white shadow-[0_0_18px_rgba(0,255,94,0.25)]"
                       : "border-transparent text-[#9fffbf] hover:border-[#00ff5e55] hover:bg-[#00ff5e12] hover:text-white",
@@ -59,7 +61,7 @@ const Header = () => {
 
       <div className="flex items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-4 py-2">
         <span className="h-2 w-2 rounded-full bg-[#00ff5e] shadow-[0_0_8px_rgba(0,255,94,0.6)] animate-[glowPulse_2.8s_ease-in-out_infinite]" />
-        <span className="poppins text-[11px] uppercase tracking-[0.26em] text-[#9fffbf]">
+        <span className="poppins text-[10px] uppercase tracking-[0.26em] text-[#9fffbf] xl:text-[11px]">
           Open to work
         </span>
       </div>

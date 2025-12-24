@@ -49,8 +49,10 @@ const SkillCard = ({ title, percentage }) => {
       className="group flex w-full flex-col gap-4 rounded-2xl border border-[#00ff5e22] bg-[#0b140d] p-5 shadow-[0_12px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e0a]"
     >
       <div className="flex items-center justify-between">
-        <h3 className="roboto-slab text-base text-white">{title}</h3>
-        <span className="rounded-full border border-[#00ff5e33] bg-[#06180f] px-3 py-1 text-xs text-[#9fffbf]">
+        <h3 className="roboto-slab type-h4 text-white">
+          {title}
+        </h3>
+        <span className="rounded-full border border-[#00ff5e33] bg-[#06180f] px-3 py-1 text-[11px] text-[#9fffbf] xs:text-xs">
           {count}%
         </span>
       </div>

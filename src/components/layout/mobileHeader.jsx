@@ -19,12 +19,12 @@ const MobileHeader = () => {
   };
 
   return (
-    <header className="sticky top-4 z-[120] w-full lg:hidden">
-      <div className="flex items-center justify-between rounded-2xl border border-[#00ff5e26] bg-[#0a120db8] px-5 py-4 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.45)]">
+    <header className="sticky top-0 z-[120] w-full lg:hidden">
+      <div className="flex items-center justify-between rounded-2xl border border-[#00ff5e26] bg-[#0a120db8] px-4 py-3 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.45)] xs:px-5 xs:py-4">
         <button
           type="button"
           onClick={() => handleClick("/")}
-          className="merienda text-xl text-[#00ff5e]"
+          className="merienda text-lg text-[#00ff5e] xs:text-xl"
         >
           Taha Khan
         </button>
@@ -33,7 +33,7 @@ const MobileHeader = () => {
           aria-label="Toggle menu"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
-          className="flex flex-col h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] transition-all duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e1a]"
+          className="flex h-10 w-10 flex-col items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] transition-all duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e1a] xs:h-11 xs:w-11"
         >
           <span
             className={[
@@ -65,13 +65,15 @@ const MobileHeader = () => {
 
       <aside
         className={[
-          "fixed right-0 top-0 z-50 flex h-full w-72 flex-col border-l border-[#00ff5e26] bg-[#0a110d] px-6 pt-8 transition-transform duration-300",
+          "fixed right-0 top-0 z-50 flex h-full w-64 flex-col border-l border-[#00ff5e26] bg-[#0a110d] px-6 pt-8 transition-transform duration-300 xs:w-72",
           isOpen ? "translate-x-0" : "translate-x-full",
         ].join(" ")}
       >
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <p className="merienda text-2xl text-[#00ff5e]">Menu</p>
+            <p className="merienda text-xl text-[#00ff5e] xs:text-2xl">
+              Menu
+            </p>
             <p className="poppins text-xs uppercase tracking-[0.3em] text-[#9fffbf]">
               Navigate
             </p>
