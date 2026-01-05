@@ -50,7 +50,7 @@ const CONTACT_ITEMS = [
 
 const SOCIAL_LINKS = [
   {
-    href: "https://www.instagram.com/its.me_t.a.h.a/",
+    href: "https://www.instagram.com/just.t.a.h.a/",
     label: "Instagram",
     gradient: "from-[#f09433] via-[#e6683c] to-[#dc2743]",
     path: (
