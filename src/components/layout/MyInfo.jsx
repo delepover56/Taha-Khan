@@ -244,7 +244,7 @@ const MyInfo = () => {
         </div>
 
         <motion.a
-          href="/TahaResume.pdf"
+          href="/Taha-Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={hoverGlow(shouldReduceMotion)}
