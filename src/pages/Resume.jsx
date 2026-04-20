@@ -189,7 +189,7 @@ const Resume = () => {
             <SkillCard title="Front-End Development" percentage={85} />
           </motion.div>
           <motion.div variants={itemVariants}>
-            <SkillCard title="Back-End Development" percentage={25} />
+            <SkillCard title="Back-End Development" percentage={40} />
           </motion.div>
         </motion.div>
 
