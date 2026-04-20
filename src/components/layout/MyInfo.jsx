@@ -144,7 +144,7 @@ const MyInfo = () => {
         </p>
 
         <div className="flex flex-wrap gap-2">
-          {["React", "Tailwind", "JavaScript", "WordPress", "Discord.js"].map(
+          {["HTML5", "CSS3","React", "Tailwind", "JavaScript", "WordPress", "Shopify"].map(
             (item) => (
               <span
                 key={item}
