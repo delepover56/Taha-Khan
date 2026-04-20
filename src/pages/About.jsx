@@ -45,17 +45,16 @@ const About = () => {
               with clean HTML, modern CSS, and thoughtful JavaScript.
               <br />
               <br />
-              I have hands-on experience with{" "}
+              I have extensive experience delivering custom{" "}
               <span className="text-[#00ff5e]">WordPress</span> and{" "}
-              <span className="text-[#00ff5e]">PHP</span>, and I am leveling up
-              fast in <span className="text-[#00ff5e]">React.js</span> with{" "}
-              <span className="text-[#00ff5e]">Next.js</span> on deck.
+              <span className="text-[#00ff5e]">Shopify</span> solutions,
+              specializing in performance optimization and pixel-perfect design.
               <br />
               <br />
-              I also explore{" "}
-              <span className="text-[#00ff5e]">Discord bot development</span>{" "}
-              using <span className="text-[#00ff5e]">Discord.js</span> to build
-              interactive tools for communities.
+              Currently, I am expanding my technical expertise in{" "}
+              <span className="text-[#00ff5e]">React.js</span> and{" "}
+              <span className="text-[#00ff5e]">Tailwind CSS</span> to build
+              modern, scalable web applications that push the boundaries of the user experience.
             </p>
           </div>
           <motion.div variants={containerVariants} className="grid gap-4">
@@ -128,12 +127,16 @@ const About = () => {
               ),
             },
             {
-              title: "Discord Bots",
-              text: "Custom automations and community tools with Discord.js.",
+              title: "CMS Management",
+              text: "Expertise in building scalable sites using WordPress and Shopify with custom Liquid and Elementor logic.",
               iconViewBox: "0 0 24 24",
               iconSizeClass: "h-[21px] w-[21px]",
               icon: (
-                <path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z"></path>
+                <>
+                  <path d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z"></path>
+                  <path d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z"></path>
+                  <path d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z"></path>
+                </>
               ),
             },
             {
