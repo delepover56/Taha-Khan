@@ -81,7 +81,7 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    href: "https://wa.me/923372353901",
+    href: "https://wa.me/923133017855",
     label: "WhatsApp",
     gradient: "from-[#22c55e] via-[#16a34a] to-[#86efac]",
     path: (
