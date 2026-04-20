@@ -119,7 +119,7 @@ const About = () => {
           {[
             {
               title: "Web Development",
-              text: "Crafting sleek, responsive websites with modern tools.",
+              text: "Building pixel-perfect, interactive front-ends with React.js, Tailwind CSS, and optimized JavaScript.",
               iconViewBox: "0 0 24 24",
               iconSizeClass: "h-[22px] w-[22px]",
               icon: (
