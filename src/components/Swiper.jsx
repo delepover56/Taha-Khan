@@ -41,7 +41,7 @@ const Slider = ({ projects = [] }) => {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative h-[160px] w-full overflow-hidden xs:h-[170px] sm:h-[180px]"
+              className="relative h-40 w-full overflow-hidden xs:h-[170px] sm:h-[180px]"
             >
               <img
                 src={project.image}
@@ -50,7 +50,7 @@ const Slider = ({ projects = [] }) => {
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 draggable={false}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-90" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-90" />
             </a>
             <div className="flex flex-1 flex-col justify-between gap-3 p-4 sm:p-5">
               <div>
