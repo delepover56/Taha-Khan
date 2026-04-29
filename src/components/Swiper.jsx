@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -11,22 +12,68 @@ const Slider = ({ projects = [] }) => {
   const shouldReduceMotion = useReducedMotion();
   const cardVariants = scaleIn(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
+  const canLoop = projects.length > 1;
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    const swiper = swiperRef.current;
+
+    if (!swiper) {
+      return;
+    }
+
+    swiper.update();
+
+    if (canLoop) {
+      swiper.params.loop = true;
+      swiper.loopCreate?.();
+      swiper.autoplay?.start();
+      return;
+    }
+
+    swiper.autoplay?.stop();
+  }, [canLoop, projects.length]);
 
   return (
     <Swiper
-      spaceBetween={20}
-      slidesPerView="auto"
+      onSwiper={(swiper) => {
+        swiperRef.current = swiper;
+      }}
+      spaceBetween={16}
+      slidesPerView={1.05}
       grabCursor={true}
       modules={[Autoplay, Pagination]}
       pagination={true}
-      loop={true}
+      loop={canLoop}
+      loopAdditionalSlides={projects.length}
       centeredSlides={false}
+      observeParents={true}
+      observer={true}
+      watchSlidesProgress={true}
       autoplay={{
-        delay: 3200,
+        delay: 2800,
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
-      speed={1400}
+      breakpoints={{
+        480: {
+          slidesPerView: 1.12,
+          spaceBetween: 18,
+        },
+        640: {
+          slidesPerView: 1.35,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1.6,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 2,
+          spaceBetween: 24,
+        },
+      }}
+      speed={900}
       className="select-none pb-10 sm:pb-12"
     >
       {projects.map((project, index) => (
@@ -54,13 +101,23 @@ const Slider = ({ projects = [] }) => {
               <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-90" />
             </a>
             <div className="flex flex-1 flex-col justify-between gap-3 p-4 sm:p-5">
-              <div>
-                <p className="poppins type-caption uppercase tracking-[0.32em] text-[#7feaa0]">
-                  Featured Project
-                </p>
+              <div className="flex flex-row justify-between items-center">
                 <h3 className="merienda type-h4 text-white">
                   {project.name}
                 </h3>
+                <div className="flex items-center gap-2">
+                  {(project.tech ?? []).map((techIcon, techIndex) => (
+                    <img
+                      key={`${project.name}-tech-${techIndex}`}
+                      src={techIcon}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-5 w-5 object-contain"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  ))}
+                </div>
               </div>
               <a
                 href={project.link}
