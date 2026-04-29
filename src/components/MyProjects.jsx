@@ -6,23 +6,17 @@ const MyProjects = [
         alt: "Website screenshot of Chic Lighting project",
     },
     {
-        name: "Champion Garage Doors",
-        link: "https://maxwelltranslate.com/",
-        image: "/Images/Projects/MaxWell.webp",
-        alt: "Website screenshot of Maxwell Translate project",
+        name: "Tasbeeh Wala",
+        link: "https://tasbeeh-wala.vercel.app/",
+        image: "/Images/Projects/Tasbeeh_Wala.webp",
+        alt "Website screenshot of Tasbeeh Wala project"
     },
     {
-        name: "SpamX",
-        link: "https://spamx.co/",
-        image: "/Images/Projects/SpamX.webp",
-        alt: "Website screenshot of SpamX project",
-    },
-    {
-        name: "Puri Group",
-        link: "https://valscode.com/puri-group/",
-        image: "/Images/Projects/PuriGroup.webp",
-        alt: "Website screenshot of Puri Group project",
-    },
+        name: "True Vegan Sea Food",
+        link: "https://true-vegan-seafood.vercel.app/",
+        image: "/Images/Projects/True_Vegan_Sea_Food.webp",
+        alt "Website screenshot of True Vegan Sea Food project"
+    }
 ];
 
 export default MyProjects;
