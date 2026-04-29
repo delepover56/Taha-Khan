@@ -84,36 +84,15 @@ export const AppLoaderProvider = ({ children }) => {
     let isMounted = true;
     const shouldShowPreloader = shouldShowPreloaderRef.current;
 
-    const loadProjects = async () => {
-      setProjectsStatus("loading");
-      try {
-        const response = await fetch("/data/projects.json", {
-          cache: "force-cache",
-        });
-        if (!response.ok) {
-          throw new Error("Failed to load projects");
-        }
-        const data = await response.json();
-        if (isMounted) {
-          setProjects(data);
-          setProjectsStatus("success");
-        }
-        return data;
-      } catch (error) {
-        if (isMounted) {
-          setProjects(fallbackProjects);
-          setProjectsStatus("error");
-        }
-        return fallbackProjects;
-      }
-    };
-
     const bootstrap = async () => {
       const fontsPromise = preloadFonts();
-      const projectData = await loadProjects();
+      if (isMounted) {
+        setProjects(fallbackProjects);
+        setProjectsStatus("success");
+      }
       const imageSources = [
         "/Images/myAvatar.webp",
-        ...projectData.map((project) => project.image),
+        ...fallbackProjects.map((project) => project.image),
       ];
 
       await Promise.all([

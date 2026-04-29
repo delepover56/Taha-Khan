@@ -6,6 +6,7 @@ import "./swiperCustom.css";
 import { motion, useReducedMotion } from "motion/react";
 import { hoverGlow, scaleIn } from "@/animations/motionPresets";
 
+
 const Slider = ({ projects = [] }) => {
   const shouldReduceMotion = useReducedMotion();
   const cardVariants = scaleIn(shouldReduceMotion);
