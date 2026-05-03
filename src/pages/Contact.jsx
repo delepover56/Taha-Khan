@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   fadeUp,
@@ -10,8 +10,34 @@ import {
   viewportOnce,
 } from "@/animations/motionPresets";
 
+const EMAIL_SERVICE_ID = "service_3nieuno";
+const EMAIL_TEMPLATE_ID = "template_qtaiccb";
+const EMAIL_PUBLIC_KEY = "HFW-a6QjiVhvMlD8Q";
+
+const getEmailErrorMessage = (error) => {
+  if (
+    error instanceof EmailJSResponseStatus ||
+    typeof error?.status === "number"
+  ) {
+    switch (error.status) {
+      case 400:
+      case 401:
+      case 404:
+        return "Email service is not configured correctly. Please check the EmailJS service, template, and public key.";
+      case 403:
+        return "Email service rejected this request. Please check your EmailJS domain/security settings.";
+      case 429:
+        return "Too many messages were sent recently. Please try again later.";
+      default:
+        return error.text || "Email service rejected the message. Please try again later.";
+    }
+  }
+
+  return "Network error while sending message. Please try again later.";
+};
+
 const Contact = () => {
-  const [emailStatus, setEmailStatus] = useState("");
+  const [emailStatus, setEmailStatus] = useState({ type: "", message: "" });
   const shouldReduceMotion = useReducedMotion();
   const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
   const itemVariants = staggerItem(shouldReduceMotion);
@@ -25,31 +51,116 @@ const Contact = () => {
   } = useForm({ mode: "onTouched" });
 
   const handleFieldChange = () => {
-    if (emailStatus) setEmailStatus("");
+    if (emailStatus.type) setEmailStatus({ type: "", message: "" });
   };
 
   const onSubmit = async (data) => {
     if (data.company?.trim()) {
-      setEmailStatus("error");
+      setEmailStatus({
+        type: "error",
+        message: "Failed to send message. Please try again later.",
+      });
       return;
     }
 
     try {
-      const payload = { ...data };
+      const payload = {
+        ...data,
+        from_name: data.name,
+        from_email: data.email,
+        reply_to: data.email,
+      };
       delete payload.company;
 
       await emailjs.send(
-        "service_6vy2z4m",
-        "template_qtaiccb",
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID,
         payload,
-        "HFW-a6QjiVhvMlD8Q"
+        { publicKey: EMAIL_PUBLIC_KEY }
       );
-      setEmailStatus("success");
+      setEmailStatus({
+        type: "success",
+        message: "Your message was sent successfully.",
+      });
       reset();
     } catch (error) {
-      setEmailStatus("error");
+      console.error("EmailJS send failed:", error);
+      setEmailStatus({ type: "error", message: getEmailErrorMessage(error) });
     }
   };
+
+  const nameField = register("name", {
+    required: "Name is required",
+    minLength: {
+      value: 2,
+      message: "Name must be at least 2 characters",
+    },
+    maxLength: {
+      value: 40,
+      message: "Name must be under 40 characters",
+    },
+    pattern: {
+      value: /^[A-Za-z\s]+$/,
+      message: "Name can only contain letters",
+    },
+    setValueAs: (value) => value.trim(),
+  });
+
+  const emailField = register("email", {
+    required: "Email is required",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Invalid email format",
+    },
+    setValueAs: (value) => value.trim().toLowerCase(),
+  });
+
+  const phoneField = register("phone", {
+    required: "Phone number is required",
+    pattern: {
+      value: /^[+()\s\d-]+$/,
+      message: "Phone can include numbers, spaces, +, and -",
+    },
+    validate: (value) =>
+      value.replace(/\D/g, "").length >= 7
+        ? true
+        : "Phone must be at least 7 digits",
+    setValueAs: (value) => value.trim(),
+  });
+
+  const subjectField = register("subject", {
+    required: "Purpose is required",
+    minLength: {
+      value: 3,
+      message: "Purpose must be at least 3 characters",
+    },
+    maxLength: {
+      value: 80,
+      message: "Purpose must be under 80 characters",
+    },
+    pattern: {
+      value: /^[^<>]*$/,
+      message: "Purpose cannot include < or > characters",
+    },
+    setValueAs: (value) => value.trim(),
+  });
+
+  const messageField = register("message", {
+    required: "Message is required",
+    minLength: {
+      value: 20,
+      message: "Message must be at least 20 characters",
+    },
+    maxLength: {
+      value: 1000,
+      message: "Message must be under 1000 characters",
+    },
+    pattern: {
+      value: /^[^<>]*$/,
+      message: "Message cannot include < or > characters",
+    },
+    setValueAs: (value) => value.trim(),
+  });
 
   return (
     <motion.section
@@ -179,28 +290,14 @@ const Contact = () => {
                 <motion.input
                   type="text"
                   whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...register("name", {
-                    required: "Name is required",
-                    minLength: {
-                      value: 2,
-                      message: "Name must be at least 2 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "Name must be under 40 characters",
-                    },
-                    pattern: {
-                      value: /^[A-Za-z\s]+$/,
-                      message: "Name can only contain letters",
-                    },
-                    setValueAs: (value) => value.trim(),
-                  })}
-                  onChange={handleFieldChange}
-                  onInput={(event) => {
+                  {...nameField}
+                  onChange={(event) => {
                     event.target.value = event.target.value.replace(
                       /[^A-Za-z\s]/g,
                       ""
                     );
+                    nameField.onChange(event);
+                    handleFieldChange();
                   }}
                   aria-invalid={errors.name ? "true" : "false"}
                   placeholder="Full name"
@@ -217,15 +314,11 @@ const Contact = () => {
                 <motion.input
                   type="email"
                   whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Invalid email format",
-                    },
-                    setValueAs: (value) => value.trim().toLowerCase(),
-                  })}
-                  onChange={handleFieldChange}
+                  {...emailField}
+                  onChange={(event) => {
+                    emailField.onChange(event);
+                    handleFieldChange();
+                  }}
                   aria-invalid={errors.email ? "true" : "false"}
                   placeholder="Email address"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
@@ -243,19 +336,11 @@ const Contact = () => {
                 <motion.input
                   type="text"
                   whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...register("phone", {
-                    required: "Phone number is required",
-                    pattern: {
-                      value: /^[+()\s\d-]+$/,
-                      message: "Phone can include numbers, spaces, +, and -",
-                    },
-                    validate: (value) =>
-                      value.replace(/\D/g, "").length >= 7
-                        ? true
-                        : "Phone must be at least 7 digits",
-                    setValueAs: (value) => value.trim(),
-                  })}
-                  onChange={handleFieldChange}
+                  {...phoneField}
+                  onChange={(event) => {
+                    phoneField.onChange(event);
+                    handleFieldChange();
+                  }}
                   aria-invalid={errors.phone ? "true" : "false"}
                   placeholder="Phone number"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
@@ -271,23 +356,11 @@ const Contact = () => {
                 <motion.input
                   type="text"
                   whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...register("subject", {
-                    required: "Purpose is required",
-                    minLength: {
-                      value: 3,
-                      message: "Purpose must be at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 80,
-                      message: "Purpose must be under 80 characters",
-                    },
-                    pattern: {
-                      value: /^[^<>]*$/,
-                      message: "Purpose cannot include < or > characters",
-                    },
-                    setValueAs: (value) => value.trim(),
-                  })}
-                  onChange={handleFieldChange}
+                  {...subjectField}
+                  onChange={(event) => {
+                    subjectField.onChange(event);
+                    handleFieldChange();
+                  }}
                   aria-invalid={errors.subject ? "true" : "false"}
                   placeholder="Project purpose"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
@@ -305,23 +378,11 @@ const Contact = () => {
                 rows="6"
                 placeholder="Tell me about the project"
                 whileFocus={hoverGlow(shouldReduceMotion)}
-                {...register("message", {
-                  required: "Message is required",
-                  minLength: {
-                    value: 20,
-                    message: "Message must be at least 20 characters",
-                  },
-                  maxLength: {
-                    value: 1000,
-                    message: "Message must be under 1000 characters",
-                  },
-                  pattern: {
-                    value: /^[^<>]*$/,
-                    message: "Message cannot include < or > characters",
-                  },
-                  setValueAs: (value) => value.trim(),
-                })}
-                onChange={handleFieldChange}
+                {...messageField}
+                onChange={(event) => {
+                  messageField.onChange(event);
+                  handleFieldChange();
+                }}
                 aria-invalid={errors.message ? "true" : "false"}
                 className="w-full resize-none rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
               />
@@ -333,7 +394,7 @@ const Contact = () => {
             </div>
 
             <AnimatePresence mode="wait">
-              {emailStatus === "success" && (
+              {emailStatus.type === "success" && (
                 <motion.p
                   key="success"
                   variants={fadeUp(shouldReduceMotion)}
@@ -342,10 +403,10 @@ const Contact = () => {
                   exit="exit"
                   className="poppins text-sm text-[#00ff5e]"
                 >
-                  Your message was sent successfully.
+                  {emailStatus.message}
                 </motion.p>
               )}
-              {emailStatus === "error" && (
+              {emailStatus.type === "error" && (
                 <motion.p
                   key="error"
                   variants={fadeUp(shouldReduceMotion)}
@@ -354,7 +415,7 @@ const Contact = () => {
                   exit="exit"
                   className="poppins text-sm text-red-300"
                 >
-                  Failed to send message. Please try again later.
+                  {emailStatus.message}
                 </motion.p>
               )}
             </AnimatePresence>
