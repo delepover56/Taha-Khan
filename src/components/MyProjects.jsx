@@ -1,7 +1,7 @@
 const MyProjects = [
     {
         name: "Chic Lighting",
-        link: "https://chiclightingproject1.vercel.app/",
+        link: "https://chiclighting.vercel.app/",
         image: "/Images/Projects/ChicLighting.webp",
         alt: "Website screenshot of Chic Lighting project",
         tech: [
