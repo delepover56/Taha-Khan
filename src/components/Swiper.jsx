@@ -44,7 +44,7 @@ const Slider = ({ projects = [] }) => {
       grabCursor={true}
       modules={[Autoplay, Pagination]}
       pagination={true}
-      loop={canLoop}
+      loop={true}
       loopAdditionalSlides={projects.length}
       centeredSlides={false}
       observeParents={true}
@@ -52,7 +52,7 @@ const Slider = ({ projects = [] }) => {
       watchSlidesProgress={true}
       autoplay={{
         delay: 2800,
-        disableOnInteraction: false,
+        disableOnInteraction: true,
         pauseOnMouseEnter: true,
       }}
       breakpoints={{
