@@ -174,22 +174,6 @@ const Contact = () => {
               {...register("company")}
             />
 
-            {Object.keys(errors).length > 0 && (
-              <motion.div
-                variants={fadeUp(shouldReduceMotion)}
-                className="rounded-2xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-200"
-              >
-                <p className="poppins mb-1 text-xs uppercase tracking-[0.24em] text-red-300">
-                  Please fix the highlighted fields
-                </p>
-                <ul className="poppins list-disc space-y-1 pl-5 text-xs text-red-200">
-                  {Object.values(errors).map((err) => (
-                    <li key={err?.message}>{err?.message}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
-
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <motion.input
@@ -218,11 +202,12 @@ const Contact = () => {
                       ""
                     );
                   }}
+                  aria-invalid={errors.name ? "true" : "false"}
                   placeholder="Full name"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                 />
                 {errors.name && (
-                  <p className="poppins mt-2 text-xs text-red-300">
+                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
                     {errors.name.message}
                   </p>
                 )}
@@ -241,11 +226,12 @@ const Contact = () => {
                     setValueAs: (value) => value.trim().toLowerCase(),
                   })}
                   onChange={handleFieldChange}
+                  aria-invalid={errors.email ? "true" : "false"}
                   placeholder="Email address"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                 />
                 {errors.email && (
-                  <p className="poppins mt-2 text-xs text-red-300">
+                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
                     {errors.email.message}
                   </p>
                 )}
@@ -270,11 +256,12 @@ const Contact = () => {
                     setValueAs: (value) => value.trim(),
                   })}
                   onChange={handleFieldChange}
+                  aria-invalid={errors.phone ? "true" : "false"}
                   placeholder="Phone number"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                 />
                 {errors.phone && (
-                  <p className="poppins mt-2 text-xs text-red-300">
+                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
                     {errors.phone.message}
                   </p>
                 )}
@@ -301,11 +288,12 @@ const Contact = () => {
                     setValueAs: (value) => value.trim(),
                   })}
                   onChange={handleFieldChange}
+                  aria-invalid={errors.subject ? "true" : "false"}
                   placeholder="Project purpose"
                   className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                 />
                 {errors.subject && (
-                  <p className="poppins mt-2 text-xs text-red-300">
+                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
                     {errors.subject.message}
                   </p>
                 )}
@@ -334,10 +322,11 @@ const Contact = () => {
                   setValueAs: (value) => value.trim(),
                 })}
                 onChange={handleFieldChange}
+                aria-invalid={errors.message ? "true" : "false"}
                 className="w-full resize-none rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
               />
               {errors.message && (
-                <p className="poppins mt-2 text-xs text-red-300">
+                <p role="alert" className="poppins mt-2 text-xs text-red-300">
                   {errors.message.message}
                 </p>
               )}
