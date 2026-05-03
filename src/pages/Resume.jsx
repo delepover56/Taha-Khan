@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from "motion/react";
 import SkillCard from "@/components/SkillCard";
 import {
   fadeUp,
-  hoverGlow,
   staggerContainer,
   staggerItem,
   viewportOnce,
@@ -48,7 +47,7 @@ const Resume = () => {
           </p>
         </div>
 
-        <div className="mt-6 grid gap-6 xl:grid-cols-2 xl:gap-8 md:mt-8">
+        <div className="mt-6 grid gap-6 md:mt-8 md:grid-cols-2 md:gap-6 xl:gap-8">
           <motion.div
             variants={itemVariants}
             className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
@@ -183,50 +182,84 @@ const Resume = () => {
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid gap-5 xl:grid-cols-2 md:mt-8"
+          className="mt-6 grid gap-5 md:mt-8 md:grid-cols-2"
         >
           <motion.div variants={itemVariants}>
             <SkillCard title="Front-End Development" percentage={85} />
           </motion.div>
           <motion.div variants={itemVariants}>
-            <SkillCard title="Back-End Development" percentage={40} />
+            <SkillCard title="Back-End Development" percentage={30} />
           </motion.div>
         </motion.div>
 
-        <motion.div
-          variants={itemVariants}
-          whileHover={hoverGlow(shouldReduceMotion)}
-          className="mt-8 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6 sm:mt-10"
-        >
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="roboto-slab type-h3 text-white">
+        <motion.div variants={itemVariants} className="mt-8 sm:mt-10">
+          <div>
+            <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Knowledge
-            </h3>
-            <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
-              Toolset
             </p>
+            <motion.h3
+              variants={fadeUp(shouldReduceMotion)}
+              className="merienda type-h3 mt-2 text-white"
+            >
+              Applied toolset
+            </motion.h3>
+            <motion.span
+              variants={fadeUp(shouldReduceMotion)}
+              className="mt-3 block h-[2px] w-14 origin-left rounded-full bg-[#00ff5e55]"
+            />
           </div>
-          <div className="flex flex-wrap gap-3">
+
+          <motion.div
+            variants={containerVariants}
+            className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
             {[
-              "HTML",
-              "CSS",
-              "JavaScript",
-              "React",
-              "Tailwind",
-              "Discord.js",
-              "WordPress",
-              "PHP",
-            ].map((item) => (
-              <motion.span
-                key={item}
+              {
+                title: "Interface foundations",
+                items: ["HTML", "CSS", "JavaScript"],
+              },
+              {
+                title: "React workflow",
+                items: ["React", "Tailwind CSS", "Vite"],
+              },
+              {
+                title: "CMS management",
+                items: ["WordPress", "Shopify", "Elementor", "Liquid", "Theme editor"],
+              },
+              {
+                title: "Backend",
+                items: ["PHP", "MySQL"],
+              },
+              {
+                title: "Delivery habits",
+                items: ["Responsive UI", "Performance", "Polish"],
+              },
+              {
+                title: "Next focus",
+                items: ["Next.js", "TypeScript", "Production patterns"],
+              },
+            ].map((group) => (
+              <motion.div
+                key={group.title}
                 variants={itemVariants}
-                whileHover={hoverGlow(shouldReduceMotion)}
-                className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e12] hover:text-white xxs:text-[10px]"
+                className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 xs:p-5"
               >
-                {item}
-              </motion.span>
+                <h4 className="roboto-slab type-h4 text-white">
+                  {group.title}
+                </h4>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1.5 text-[9px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
     </motion.section>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 
 const widthClassMap = {
+  30: "w-[30%]",
   40: "w-[40%]",
   85: "w-[85%]",
 };
@@ -9,6 +10,7 @@ const widthClassMap = {
 const SkillCard = ({ title, percentage }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const hasAnimatedRef = useRef(false);
   const cardRef = useRef(null);
   const widthClass = widthClassMap[percentage] || "w-0";
   const shouldReduceMotion = useReducedMotion();
@@ -16,10 +18,10 @@ const SkillCard = ({ title, percentage }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          hasAnimatedRef.current = true;
           setIsVisible(true);
-        }
-        if (entry.isIntersecting && count === 0) {
+
           if (shouldReduceMotion) {
             setCount(percentage);
             return;
@@ -47,7 +49,7 @@ const SkillCard = ({ title, percentage }) => {
     return () => {
       if (cardRef.current) observer.unobserve(cardRef.current);
     };
-  }, [count, isVisible, percentage, shouldReduceMotion]);
+  }, [percentage, shouldReduceMotion]);
 
   return (
     <div

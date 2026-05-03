@@ -59,7 +59,7 @@ const Slider = ({ projects = [] }) => {
             initial={initialState}
             animate="show"
             whileHover={hoverGlow(shouldReduceMotion)}
-            className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e66] hover:shadow-[0_18px_36px_rgba(0,0,0,0.55)] xs:h-[260px] sm:h-[280px]"
+            className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e88] hover:bg-[#00ff5e08] xs:h-[260px] sm:h-[280px]"
           >
             <a
               href={project.link}

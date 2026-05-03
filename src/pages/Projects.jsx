@@ -41,7 +41,7 @@ const Projects = () => {
               className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
             />
           </div>
-          <div className="poppins type-body-sm rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
+          <div className="poppins type-body-sm w-fit max-w-full rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
             Focused on UI, responsiveness, and motion.
           </div>
         </div>

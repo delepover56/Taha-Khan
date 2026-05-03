@@ -79,7 +79,7 @@ const Contact = () => {
               className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
             />
           </div>
-          <div className="poppins type-body-sm rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
+          <div className="poppins type-body-sm w-fit max-w-full rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
             Open to internships and freelance work.
           </div>
         </div>
@@ -93,7 +93,7 @@ const Contact = () => {
               learn, contribute, and ship high quality experiences.
             </p>
 
-            <motion.div variants={containerVariants} className="grid gap-4">
+            <motion.div variants={containerVariants} className="grid gap-4 md:grid-cols-2">
               {[
                 {
                   title: "Response time",
@@ -103,54 +103,56 @@ const Contact = () => {
                   title: "Preferred work",
                   text: "Front-end UI, landing pages, and dashboards.",
                 },
+                {
+                  title: "Quick links",
+                  links: [
+                    {
+                      label: "Email",
+                      href: "mailto:Taha82426980@gmail.com",
+                    },
+                    { label: "GitHub", href: "https://github.com/delepover56" },
+                    {
+                      label: "LinkedIn",
+                      href: "https://www.linkedin.com/in/taha-khan03/",
+                    },
+                  ],
+                },
+                {
+                  title: "Availability",
+                  text: "Open to internships and freelance work.",
+                },
               ].map((item) => (
                 <motion.div
                   key={item.title}
                   variants={itemVariants}
                   whileHover={hoverGlow(shouldReduceMotion)}
-                  className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 xs:p-5"
+                  className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] xs:p-5"
                 >
                   <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
                     {item.title}
                   </p>
-                  <p className="poppins type-body-sm mt-2 text-white">
-                    {item.text}
-                  </p>
+                  {item.links ? (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {item.links.map((link) => (
+                        <motion.a
+                          key={link.label}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={hoverGlow(shouldReduceMotion)}
+                          className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
+                        >
+                          {link.label}
+                        </motion.a>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="poppins type-body-sm mt-2 text-white">
+                      {item.text}
+                    </p>
+                  )}
                 </motion.div>
               ))}
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5"
-            >
-              <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
-                Quick links
-              </p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {[
-                  {
-                    label: "Email",
-                    href: "mailto:Taha82426980@gmail.com",
-                  },
-                  { label: "GitHub", href: "https://github.com/delepover56" },
-                  {
-                    label: "LinkedIn",
-                    href: "https://www.linkedin.com/in/taha-khan03/",
-                  },
-                ].map((link) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={hoverGlow(shouldReduceMotion)}
-                    className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e12] hover:text-white xxs:text-[10px]"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </div>
             </motion.div>
           </motion.div>
 
@@ -372,7 +374,7 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               whileHover={hoverGlow(shouldReduceMotion)}
-              className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] cursor-pointer transition-color duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e] hover:font-bold hover:text-[#06210f] hover:shadow-[0_0_26px_rgba(0,255,94,0.35)] xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+              className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] cursor-pointer transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:font-bold hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </motion.button>

@@ -112,8 +112,7 @@ export const hoverGlow = (reducedMotion = false) =>
   reducedMotion
     ? {}
     : {
-        scale: 1.02,
-        boxShadow: "0 0 20px rgba(0, 255, 94, 0.35)",
+        scale: 1.01,
         transition: transitionFast,
       };
 

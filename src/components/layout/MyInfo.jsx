@@ -148,7 +148,7 @@ const MyInfo = () => {
             (item) => (
               <span
                 key={item}
-                className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] xxs:text-[10px]"
+                className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
               >
                 {item}
               </span>
@@ -170,19 +170,19 @@ const MyInfo = () => {
                 key={item.label}
                 variants={itemVariants}
                 whileHover={hoverGlow(shouldReduceMotion)}
-                className="group flex items-center gap-3 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-3 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e10] xs:p-4"
+                className="group flex min-w-0 items-center gap-3 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-3 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] xs:p-4"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#06180f] transition-all duration-300 group-hover:bg-[#00ff5e] xs:h-11 xs:w-11">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-transparent bg-[#06180f] transition-colors duration-200 group-hover:border-[#00ff5e66] group-hover:bg-[#00ff5e14] xs:h-11 xs:w-11">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="#00ff5e"
-                    className="h-5 w-5 transition-all duration-300 group-hover:fill-[#06210f] xs:h-[22px] xs:w-[22px]"
+                    className="h-5 w-5 transition-colors duration-200 group-hover:fill-white xs:h-[22px] xs:w-[22px]"
                   >
                     {item.icon}
                   </svg>
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="poppins type-caption uppercase tracking-[0.28em] text-[#7feaa0]">
                     {item.label}
                   </p>
@@ -192,8 +192,8 @@ const MyInfo = () => {
                       className={[
                         "poppins-semibold type-body-sm text-white hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px]",
                         isEmail
-                          ? "whitespace-nowrap text-[12px] xs:text-[13px] sm:text-sm"
-                          : "break-all",
+                          ? "break-all text-[12px] xs:text-[13px] sm:text-sm lg:whitespace-nowrap lg:break-normal lg:text-[13px] xl:text-sm"
+                          : "break-words",
                       ].join(" ")}
                       target={
                         item.href.startsWith("http") ? "_blank" : undefined
@@ -226,15 +226,15 @@ const MyInfo = () => {
               rel="noopener noreferrer"
               whileHover={hoverGlow(shouldReduceMotion)}
               className={[
-                "group flex h-10 w-10 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-transform duration-300 hover:scale-105 hover:border-0 xs:h-11 xs:w-11",
+                "group flex h-10 w-10 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] bg-clip-padding shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-colors duration-200 hover:border-transparent xs:h-11 xs:w-11",
                 `hover:bg-gradient-to-br ${item.gradient}`,
               ].join(" ")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                fill="white"
-                className="h-4 w-4 transition-all duration-300 group-hover:fill-white xs:h-5 xs:w-5"
+                fill="#9fffbf"
+                className="h-4 w-4 transition-colors duration-200 group-hover:fill-white xs:h-5 xs:w-5"
               >
                 {item.path}
               </svg>
@@ -248,7 +248,7 @@ const MyInfo = () => {
           target="_blank"
           rel="noopener noreferrer"
           whileHover={hoverGlow(shouldReduceMotion)}
-          className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-center text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e] hover:text-[#06210f] hover:font-semibold hover:shadow-[0_0_26px_rgba(0,255,94,0.35)] xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+          className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-center text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white hover:font-semibold xs:text-xs xs:tracking-[0.28em] sm:text-sm"
         >
           Download Resume
         </motion.a>

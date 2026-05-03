@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import {
   fadeDown,
-  hoverGlow,
   staggerContainer,
   staggerItem,
 } from "@/animations/motionPresets";
@@ -41,7 +40,7 @@ const Header = () => {
         onClick={(event) => handleClick(event, "/")}
         className="group flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
       >
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl shadow-[0_0_14px_rgba(0,255,94,0.18)] transition-all duration-300 group-hover:shadow-[0_0_22px_rgba(0,255,94,0.35)] group-hover:border-[#00ff5e88]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-transparent transition-colors duration-200 group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14]">
           <img src="./favicon.png" alt="Logo" className="h-full w-full" />
         </div>
 
@@ -72,10 +71,10 @@ const Header = () => {
                 onClick={(event) => handleClick(event, item.to)}
                 className={({ isActive }) =>
                   [
-                    "rounded-full border px-4 py-2 text-[10px] uppercase tracking-[0.28em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] xl:px-5 xl:py-2.5 xl:text-[11px]",
+                    "rounded-full border px-4 py-2 text-[10px] uppercase tracking-[0.28em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] xl:px-5 xl:py-2.5 xl:text-[11px]",
                     isActive
-                      ? "border-[#00ff5e88] bg-[#00ff5e1a] text-white shadow-[0_0_18px_rgba(0,255,94,0.25)]"
-                      : "border-transparent text-[#9fffbf] hover:border-[#00ff5e55] hover:bg-[#00ff5e12] hover:text-white",
+                      ? "border-[#00ff5e88] bg-[#00ff5e1a] text-white"
+                      : "border-transparent text-[#9fffbf] hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white",
                   ].join(" ")
                 }
               >

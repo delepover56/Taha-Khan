@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   fadeDown,
   fadeIn,
-  hoverGlow,
   slideLeft,
   staggerContainer,
   staggerItem,
@@ -101,7 +100,7 @@ const MobileHeader = () => {
           <button
             type="button"
             onClick={handleBrandClick}
-            className="flex h-11 w-11 items-center justify-center rounded-xl shadow-[0_0_16px_rgba(0,255,94,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-transparent transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
             aria-label="Go to home"
           >
             <img src="./favicon.png" alt="Logo" className="h-full w-full" />
@@ -121,7 +120,7 @@ const MobileHeader = () => {
           aria-expanded={isOpen}
           aria-controls="mobile-menu-panel"
           onClick={toggleMenu}
-          className="flex h-11 w-11 flex-col items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] transition-all duration-300 hover:border-[#00ff5e] hover:bg-[#00ff5e1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+          className="flex h-11 w-11 flex-col items-center justify-center rounded-xl border border-[#00ff5e44] bg-[#06180f] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
         >
           <span
             className={[
@@ -210,11 +209,11 @@ const MobileHeader = () => {
                       [
                         "group relative block w-full rounded-xl border px-4 py-3",
                         "text-left text-[11px] uppercase tracking-[0.2em]",
-                        "transition-all duration-300 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]",
+                        "transition-colors duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]",
                         "flex items-center justify-between",
                         isActive
-                          ? "border-[#00ff5e88] bg-[#00ff5e1a] text-white shadow-[0_0_18px_rgba(0,255,94,0.22)]"
-                          : "border-[#00ff5e1f] text-[#9fffbf] hover:border-[#00ff5e55] hover:bg-[#00ff5e12] hover:text-white",
+                          ? "border-[#00ff5e88] bg-[#00ff5e1a] text-white"
+                          : "border-[#00ff5e1f] text-[#9fffbf] hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white",
                       ].join(" ")
                     }
                   >

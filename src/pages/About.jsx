@@ -26,38 +26,40 @@ const About = () => {
         variants={itemVariants}
         className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
       >
-        <div className="grid gap-6 md:gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
-              About
-            </p>
-            <motion.h1 variants={fadeUp(shouldReduceMotion)} className="merienda type-h1 mt-3 text-white">
-              Get to know me
-            </motion.h1>
-            <motion.span
-              variants={fadeUp(shouldReduceMotion)}
-              className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
-            />
-            <p className="poppins type-body mt-5 leading-relaxed text-[#c7ffd8] xs:mt-6">
-              Hey there! I am{" "}
-              <span className="text-[#00ff5e]">M. Taha Khan</span> - a front-end
-              developer from Karachi. I craft immersive, responsive interfaces
-              with clean HTML, modern CSS, and thoughtful JavaScript.
-              <br />
-              <br />
-              I have extensive experience delivering custom{" "}
-              <span className="text-[#00ff5e]">WordPress</span> and{" "}
-              <span className="text-[#00ff5e]">Shopify</span> solutions,
-              specializing in performance optimization and pixel-perfect design.
-              <br />
-              <br />
-              Currently, I am expanding my technical expertise in{" "}
-              <span className="text-[#00ff5e]">React.js</span> and{" "}
-              <span className="text-[#00ff5e]">Tailwind CSS</span> to build
-              modern, scalable web applications that push the boundaries of the user experience.
-            </p>
-          </div>
-          <motion.div variants={containerVariants} className="grid gap-4">
+        <div>
+          <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
+            About
+          </p>
+          <motion.h1 variants={fadeUp(shouldReduceMotion)} className="merienda type-h1 mt-3 text-white">
+            Get to know me
+          </motion.h1>
+          <motion.span
+            variants={fadeUp(shouldReduceMotion)}
+            className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
+          />
+          <p className="poppins type-body mt-5 max-w-5xl leading-relaxed text-[#c7ffd8] xs:mt-6 2xl:max-w-6xl">
+            Hey there! I am{" "}
+            <span className="text-[#00ff5e]">M. Taha Khan</span> - a front-end
+            developer from Karachi. I craft immersive, responsive interfaces
+            with clean HTML, modern CSS, and thoughtful JavaScript.
+            <br />
+            <br />
+            I have extensive experience delivering custom{" "}
+            <span className="text-[#00ff5e]">WordPress</span> and{" "}
+            <span className="text-[#00ff5e]">Shopify</span> solutions,
+            specializing in performance optimization and pixel-perfect design.
+            <br />
+            <br />
+            Currently, I am expanding my technical expertise in{" "}
+            <span className="text-[#00ff5e]">React.js</span> and{" "}
+            <span className="text-[#00ff5e]">Tailwind CSS</span> to build
+            modern, scalable web applications that push the boundaries of the user experience.
+          </p>
+
+          <motion.div
+            variants={containerVariants}
+            className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:gap-5"
+          >
             {[
               {
                 title: "Focus",
@@ -76,7 +78,7 @@ const About = () => {
                 key={item.title}
                 variants={itemVariants}
                 whileHover={hoverGlow(shouldReduceMotion)}
-                className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e0f] xs:p-5"
+                className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] xs:p-5 2xl:p-6"
               >
                 <p className="poppins type-caption uppercase tracking-[0.32em] text-[#7feaa0]">
                   {item.title}
@@ -168,14 +170,14 @@ const About = () => {
               key={card.title}
               variants={itemVariants}
               whileHover={hoverGlow(shouldReduceMotion)}
-              className="group flex h-full flex-none flex-col gap-4 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-all duration-300 hover:border-[#00ff5e66] hover:bg-[#00ff5e0f] hover:shadow-[0_0_18px_rgba(0,255,94,0.2)] xs:p-5 basis-full md:basis-[calc(50%-10px)] xl:basis-[calc(50%-10px)] [@media(min-width:1920px)]:basis-[calc(33.333%-13.5px)] 2xl:basis-[calc(25%-15px)]"
+              className="group flex h-full flex-none flex-col gap-4 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] xs:p-5 basis-full md:basis-[calc(50%-10px)] xl:basis-[calc(50%-10px)] [@media(min-width:1920px)]:basis-[calc(33.333%-13.5px)] 2xl:basis-[calc(25%-15px)]"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] transition-all duration-300 group-hover:bg-[#00ff5e] xs:h-12 xs:w-12">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] transition-colors duration-200 group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14] xs:h-12 xs:w-12">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox={card.iconViewBox}
                   fill="#00ff5e"
-                  className={`transition-all duration-300 group-hover:fill-[#06210f] ${card.iconSizeClass}`}
+                  className={`transition-colors duration-200 group-hover:fill-white ${card.iconSizeClass}`}
                 >
                   {card.icon}
                 </svg>
