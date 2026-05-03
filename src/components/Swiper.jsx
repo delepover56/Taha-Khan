@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -12,47 +11,24 @@ const Slider = ({ projects = [] }) => {
   const shouldReduceMotion = useReducedMotion();
   const cardVariants = scaleIn(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
-  const canLoop = projects.length > 1;
-  const swiperRef = useRef(null);
-
-  useEffect(() => {
-    const swiper = swiperRef.current;
-
-    if (!swiper) {
-      return;
-    }
-
-    swiper.update();
-
-    if (canLoop) {
-      swiper.params.loop = true;
-      swiper.loopCreate?.();
-      swiper.autoplay?.start();
-      return;
-    }
-
-    swiper.autoplay?.stop();
-  }, [canLoop, projects.length]);
+  const canLoop = projects.length >= 3;
 
   return (
     <Swiper
-      onSwiper={(swiper) => {
-        swiperRef.current = swiper;
-      }}
+      key={projects.length}
       spaceBetween={16}
       slidesPerView={1.05}
       grabCursor={true}
       modules={[Autoplay, Pagination]}
-      pagination={true}
-      loop={true}
-      loopAdditionalSlides={projects.length}
+      pagination={{ clickable: true }}
+      loop={canLoop}
       centeredSlides={false}
       observeParents={true}
       observer={true}
       watchSlidesProgress={true}
       autoplay={{
         delay: 2800,
-        disableOnInteraction: true,
+        disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
       breakpoints={{
