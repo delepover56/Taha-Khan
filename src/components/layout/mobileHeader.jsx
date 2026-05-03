@@ -101,10 +101,10 @@ const MobileHeader = () => {
           <button
             type="button"
             onClick={handleBrandClick}
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#00ff5e33] bg-[#06180f] shadow-[0_0_16px_rgba(0,255,94,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+            className="flex h-11 w-11 items-center justify-center rounded-xl shadow-[0_0_16px_rgba(0,255,94,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
             aria-label="Go to home"
           >
-            <img src="./favicon.png" alt="Logo" className="h-6 w-6" />
+            <img src="./favicon.png" alt="Logo" className="h-full w-full" />
           </button>
           <div className="leading-tight">
             <p className="merienda text-lg text-[#00ff5e] xs:text-xl">
