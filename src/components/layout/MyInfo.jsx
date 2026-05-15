@@ -50,7 +50,7 @@ const CONTACT_ITEMS = [
 
 const SOCIAL_LINKS = [
   {
-    href: "https://www.instagram.com/just.t.a.h.a/",
+    href: "https://www.instagram.com/m.e_t.a.h.a/",
     label: "Instagram",
     gradient: "from-[#f09433] via-[#e6683c] to-[#dc2743]",
     path: (
@@ -144,7 +144,7 @@ const MyInfo = () => {
         </p>
 
         <div className="flex flex-wrap gap-2">
-          {["HTML5", "CSS3","React", "Tailwind", "JavaScript", "WordPress", "Shopify"].map(
+          {["HTML5", "CSS3", "React", "Tailwind", "JavaScript", "WordPress", "Shopify"].map(
             (item) => (
               <span
                 key={item}
