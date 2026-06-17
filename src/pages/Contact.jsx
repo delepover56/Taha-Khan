@@ -10,9 +10,135 @@ import {
   viewportOnce,
 } from "@/animations/motionPresets";
 
-const EMAIL_SERVICE_ID = "service_3nieuno";
-const EMAIL_TEMPLATE_ID = "template_qtaiccb";
-const EMAIL_PUBLIC_KEY = "HFW-a6QjiVhvMlD8Q";
+const EMAILJS_RUNTIME_CONFIG_URL = "/emailjs-config.json";
+
+const EMAILJS_ENV_CONFIG = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim() ?? "",
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID?.trim() ?? "",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim() ?? "",
+};
+
+const EMAILJS_CONFIG_REQUIREMENTS = [
+  { envKey: "VITE_EMAILJS_SERVICE_ID", configKey: "serviceId" },
+  { envKey: "VITE_EMAILJS_TEMPLATE_ID", configKey: "templateId" },
+  { envKey: "VITE_EMAILJS_PUBLIC_KEY", configKey: "publicKey" },
+];
+
+const FORM_MIN_FILL_TIME_MS = 3000;
+const SUBMISSION_COOLDOWN_MS = 15000;
+
+const FIELD_LIMITS = {
+  name: 80,
+  email: 254,
+  subject: 120,
+  message: 1000,
+};
+
+const HTML_INJECTION_PATTERN =
+  /<\s*\/?\s*[a-z][^>]*>|javascript\s*:|on[a-z]+\s*=|&lt;\s*\/?\s*[a-z]|&#x?0*3c/i;
+
+const trimValue = (value) => (typeof value === "string" ? value.trim() : "");
+
+const trimEmailValue = (value) => trimValue(value).toLowerCase();
+
+const hasUnsafeContent = (value) => HTML_INJECTION_PATTERN.test(value);
+
+const getTimestamp = () => performance.now();
+
+let runtimeEmailConfigPromise;
+
+const isPlaceholderValue = (value) =>
+  value.toLowerCase().startsWith("your_emailjs_");
+
+const normalizeEmailConfig = (config) => ({
+  serviceId: trimValue(config?.serviceId ?? config?.VITE_EMAILJS_SERVICE_ID),
+  templateId: trimValue(
+    config?.templateId ?? config?.VITE_EMAILJS_TEMPLATE_ID
+  ),
+  publicKey: trimValue(config?.publicKey ?? config?.VITE_EMAILJS_PUBLIC_KEY),
+});
+
+const getInvalidEmailConfigKeys = (config, source = "env") =>
+  EMAILJS_CONFIG_REQUIREMENTS.filter(({ configKey }) => {
+    const value = config?.[configKey] ?? "";
+
+    return !value || isPlaceholderValue(value);
+  }).map(({ envKey, configKey }) =>
+    source === "runtime" ? `${EMAILJS_RUNTIME_CONFIG_URL}:${configKey}` : envKey
+  );
+
+const warnInvalidEmailConfig = (invalidKeys) => {
+  if (!import.meta.env.DEV || invalidKeys.length === 0) return;
+
+  console.warn(
+    [
+      `EmailJS is not configured. Missing or placeholder config key(s): ${invalidKeys.join(", ")}.`,
+      "Both Vite env config and the public runtime fallback are invalid or unavailable.",
+    ].join(" ")
+  );
+};
+
+const invalidEnvConfigKeys = getInvalidEmailConfigKeys(EMAILJS_ENV_CONFIG);
+
+const validatePlainText = (label) => (value) => {
+  const trimmedValue = trimValue(value);
+
+  if (!trimmedValue) {
+    return `${label} is required`;
+  }
+
+  if (hasUnsafeContent(trimmedValue)) {
+    return `${label} cannot include HTML or script content`;
+  }
+
+  return true;
+};
+
+const fetchRuntimeEmailConfig = async () => {
+  if (!runtimeEmailConfigPromise) {
+    runtimeEmailConfigPromise = fetch(EMAILJS_RUNTIME_CONFIG_URL, {
+      cache: "no-store",
+    })
+      .then((response) => {
+        if (!response.ok) return null;
+
+        return response.json();
+      })
+      .then((config) => normalizeEmailConfig(config))
+      .catch((error) => {
+        if (import.meta.env.DEV) {
+          console.warn(
+            `Unable to load EmailJS runtime config from ${EMAILJS_RUNTIME_CONFIG_URL}.`,
+            error
+          );
+        }
+
+        return null;
+      });
+  }
+
+  return runtimeEmailConfigPromise;
+};
+
+const getEmailConfig = async () => {
+  if (invalidEnvConfigKeys.length === 0) {
+    return EMAILJS_ENV_CONFIG;
+  }
+
+  const runtimeConfig = await fetchRuntimeEmailConfig();
+  const invalidRuntimeConfigKeys = getInvalidEmailConfigKeys(
+    runtimeConfig,
+    "runtime"
+  );
+
+  if (invalidRuntimeConfigKeys.length > 0) {
+    warnInvalidEmailConfig([...invalidEnvConfigKeys, ...invalidRuntimeConfigKeys]);
+
+    return null;
+  }
+
+  return runtimeConfig;
+};
 
 const getEmailErrorMessage = (error) => {
   if (
@@ -38,6 +164,8 @@ const getEmailErrorMessage = (error) => {
 
 const Contact = () => {
   const [emailStatus, setEmailStatus] = useState({ type: "", message: "" });
+  const [formStartedAt, setFormStartedAt] = useState(getTimestamp);
+  const [cooldownUntil, setCooldownUntil] = useState(0);
   const shouldReduceMotion = useReducedMotion();
   const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
   const itemVariants = staggerItem(shouldReduceMotion);
@@ -56,32 +184,65 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     if (data.company?.trim()) {
+      return;
+    }
+
+    const submittedAt = getTimestamp();
+
+    if (submittedAt - formStartedAt < FORM_MIN_FILL_TIME_MS) {
       setEmailStatus({
         type: "error",
-        message: "Failed to send message. Please try again later.",
+        message: "Please take a moment to complete the form before sending.",
       });
       return;
     }
 
+    if (submittedAt < cooldownUntil) {
+      setEmailStatus({
+        type: "error",
+        message: "Please wait a moment before sending another message.",
+      });
+      return;
+    }
+
+    const emailConfig = await getEmailConfig();
+
+    if (!emailConfig) {
+      setEmailStatus({
+        type: "error",
+        message:
+          "The contact form is temporarily unavailable. Please email me directly instead.",
+      });
+      return;
+    }
+
+    const payload = {
+      name: trimValue(data.name),
+      email: trimEmailValue(data.email),
+      phone: trimValue(data.phone),
+      subject: trimValue(data.subject),
+      message: trimValue(data.message),
+    };
+
     try {
-      const payload = {
-        ...data,
-        from_name: data.name,
-        from_email: data.email,
-        reply_to: data.email,
-      };
-      delete payload.company;
+      setCooldownUntil(submittedAt + SUBMISSION_COOLDOWN_MS);
 
       await emailjs.send(
-        EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID,
-        payload,
-        { publicKey: EMAIL_PUBLIC_KEY }
+        emailConfig.serviceId,
+        emailConfig.templateId,
+        {
+          ...payload,
+          from_name: payload.name,
+          from_email: payload.email,
+          reply_to: payload.email,
+        },
+        { publicKey: emailConfig.publicKey }
       );
       setEmailStatus({
         type: "success",
         message: "Your message was sent successfully.",
       });
+      setFormStartedAt(getTimestamp());
       reset();
     } catch (error) {
       console.error("EmailJS send failed:", error);
@@ -96,23 +257,29 @@ const Contact = () => {
       message: "Name must be at least 2 characters",
     },
     maxLength: {
-      value: 40,
-      message: "Name must be under 40 characters",
+      value: FIELD_LIMITS.name,
+      message: `Name must be ${FIELD_LIMITS.name} characters or fewer`,
     },
     pattern: {
       value: /^[A-Za-z\s]+$/,
       message: "Name can only contain letters",
     },
-    setValueAs: (value) => value.trim(),
+    validate: validatePlainText("Name"),
+    setValueAs: trimValue,
   });
 
   const emailField = register("email", {
     required: "Email is required",
+    maxLength: {
+      value: FIELD_LIMITS.email,
+      message: `Email must be ${FIELD_LIMITS.email} characters or fewer`,
+    },
     pattern: {
       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       message: "Invalid email format",
     },
-    setValueAs: (value) => value.trim().toLowerCase(),
+    validate: (value) => (trimValue(value) ? true : "Email is required"),
+    setValueAs: trimEmailValue,
   });
 
   const phoneField = register("phone", {
@@ -125,7 +292,7 @@ const Contact = () => {
       value.replace(/\D/g, "").length >= 7
         ? true
         : "Phone must be at least 7 digits",
-    setValueAs: (value) => value.trim(),
+    setValueAs: trimValue,
   });
 
   const subjectField = register("subject", {
@@ -135,14 +302,15 @@ const Contact = () => {
       message: "Purpose must be at least 3 characters",
     },
     maxLength: {
-      value: 80,
-      message: "Purpose must be under 80 characters",
+      value: FIELD_LIMITS.subject,
+      message: `Purpose must be ${FIELD_LIMITS.subject} characters or fewer`,
     },
     pattern: {
       value: /^[^<>]*$/,
       message: "Purpose cannot include < or > characters",
     },
-    setValueAs: (value) => value.trim(),
+    validate: validatePlainText("Purpose"),
+    setValueAs: trimValue,
   });
 
   const messageField = register("message", {
@@ -152,14 +320,15 @@ const Contact = () => {
       message: "Message must be at least 20 characters",
     },
     maxLength: {
-      value: 1000,
-      message: "Message must be under 1000 characters",
+      value: FIELD_LIMITS.message,
+      message: `Message must be ${FIELD_LIMITS.message} characters or fewer`,
     },
     pattern: {
       value: /^[^<>]*$/,
       message: "Message cannot include < or > characters",
     },
-    setValueAs: (value) => value.trim(),
+    validate: validatePlainText("Message"),
+    setValueAs: trimValue,
   });
 
   return (
@@ -289,6 +458,7 @@ const Contact = () => {
               <div>
                 <motion.input
                   type="text"
+                  maxLength={FIELD_LIMITS.name}
                   whileFocus={hoverGlow(shouldReduceMotion)}
                   {...nameField}
                   onChange={(event) => {
@@ -313,6 +483,7 @@ const Contact = () => {
               <div>
                 <motion.input
                   type="email"
+                  maxLength={FIELD_LIMITS.email}
                   whileFocus={hoverGlow(shouldReduceMotion)}
                   {...emailField}
                   onChange={(event) => {
@@ -355,6 +526,7 @@ const Contact = () => {
               <div>
                 <motion.input
                   type="text"
+                  maxLength={FIELD_LIMITS.subject}
                   whileFocus={hoverGlow(shouldReduceMotion)}
                   {...subjectField}
                   onChange={(event) => {
@@ -376,6 +548,7 @@ const Contact = () => {
             <div>
               <motion.textarea
                 rows="6"
+                maxLength={FIELD_LIMITS.message}
                 placeholder="Tell me about the project"
                 whileFocus={hoverGlow(shouldReduceMotion)}
                 {...messageField}

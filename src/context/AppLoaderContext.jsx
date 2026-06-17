@@ -1,15 +1,12 @@
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import fallbackProjects from "@/components/MyProjects";
-
-const AppLoaderContext = createContext(null);
+import { AppLoaderContext } from "@/context/loaderContext";
 
 const PRELOADER_KEY = "portfolio-preloader-ready";
 
@@ -49,22 +46,22 @@ const getInitialPreloaderState = () => {
 export const AppLoaderProvider = ({ children }) => {
   const [projects, setProjects] = useState(fallbackProjects);
   const [projectsStatus, setProjectsStatus] = useState("success");
-  const shouldShowPreloaderRef = useRef(getInitialPreloaderState());
+  const [shouldShowPreloader] = useState(getInitialPreloaderState);
   const appMountedRef = useRef(false);
-  const appMountedPromiseRef = useRef(null);
-  const appMountedResolverRef = useRef(null);
-  const [isInitialLoading, setIsInitialLoading] = useState(
-    shouldShowPreloaderRef.current
-  );
-  const [shouldRenderPreloader, setShouldRenderPreloader] = useState(
-    shouldShowPreloaderRef.current
-  );
-
-  if (!appMountedPromiseRef.current) {
-    appMountedPromiseRef.current = new Promise((resolve) => {
-      appMountedResolverRef.current = resolve;
+  const [{ appMountedPromise, resolveAppMounted }] = useState(() => {
+    let resolver = () => {};
+    const promise = new Promise((resolve) => {
+      resolver = resolve;
     });
-  }
+
+    return {
+      appMountedPromise: promise,
+      resolveAppMounted: resolver,
+    };
+  });
+  const [isInitialLoading, setIsInitialLoading] = useState(shouldShowPreloader);
+  const [shouldRenderPreloader, setShouldRenderPreloader] =
+    useState(shouldShowPreloader);
 
   useEffect(() => {
     const handlePageHide = () => {
@@ -82,7 +79,6 @@ export const AppLoaderProvider = ({ children }) => {
 
   useEffect(() => {
     let isMounted = true;
-    const shouldShowPreloader = shouldShowPreloaderRef.current;
 
     const bootstrap = async () => {
       const fontsPromise = preloadFonts();
@@ -98,7 +94,7 @@ export const AppLoaderProvider = ({ children }) => {
       await Promise.all([
         fontsPromise,
         preloadImages(imageSources),
-        appMountedPromiseRef.current,
+        appMountedPromise,
       ]);
 
       if (!isMounted) return;
@@ -114,7 +110,7 @@ export const AppLoaderProvider = ({ children }) => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [appMountedPromise, shouldShowPreloader]);
 
   const dismissPreloader = () => {
     setShouldRenderPreloader(false);
@@ -123,10 +119,8 @@ export const AppLoaderProvider = ({ children }) => {
   const markAppMounted = useCallback(() => {
     if (appMountedRef.current) return;
     appMountedRef.current = true;
-    if (appMountedResolverRef.current) {
-      appMountedResolverRef.current();
-    }
-  }, []);
+    resolveAppMounted();
+  }, [resolveAppMounted]);
 
   const value = useMemo(
     () => ({
@@ -151,12 +145,4 @@ export const AppLoaderProvider = ({ children }) => {
       {children}
     </AppLoaderContext.Provider>
   );
-};
-
-export const useAppLoader = () => {
-  const context = useContext(AppLoaderContext);
-  if (!context) {
-    throw new Error("useAppLoader must be used within AppLoaderProvider");
-  }
-  return context;
 };

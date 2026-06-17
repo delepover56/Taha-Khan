@@ -45,9 +45,11 @@ const SkillCard = ({ title, percentage }) => {
       { threshold: 0.5 }
     );
 
-    if (cardRef.current) observer.observe(cardRef.current);
+    const observedCard = cardRef.current;
+    if (observedCard) observer.observe(observedCard);
+
     return () => {
-      if (cardRef.current) observer.unobserve(cardRef.current);
+      if (observedCard) observer.unobserve(observedCard);
     };
   }, [percentage, shouldReduceMotion]);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import Slider from "@/components/Swiper";
-import { useAppLoader } from "@/context/AppLoaderContext";
+import { useAppLoader } from "@/context/loaderContext";
 import {
   fadeUp,
   staggerContainer,

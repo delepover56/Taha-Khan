@@ -7,7 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToOutlet from "@/components/ScrollToOutlet";
 import Preloader from "@/components/Preloader";
-import { useAppLoader } from "@/context/AppLoaderContext";
+import { useAppLoader } from "@/context/loaderContext";
 import { useEffect, useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { fadeUp, transitionSlow } from "@/animations/motionPresets";
