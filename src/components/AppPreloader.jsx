@@ -37,7 +37,7 @@ const AppPreloader = () => {
           >
             <div className="mx-auto flex h-14 w-14 items-center justify-center xs:h-16 xs:w-16 sm:h-[68px] sm:w-[68px]">
               <img
-                src="/favicon.svg"
+                src="/favicon.png"
                 alt="Taha Khan site logo"
                 className="h-full w-full object-contain"
               />
