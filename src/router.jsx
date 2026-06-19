@@ -7,18 +7,25 @@ const Resume = lazy(() => import("@/pages/Resume"));
 const Projects = lazy(() => import("@/pages/Projects"));
 const Contact = lazy(() => import("@/pages/Contact"));
 
-const withFallback = (element) => (
-  <Suspense fallback={null}>{element}</Suspense>
-);
+const withFallback = (element) => <Suspense fallback={null}>{element}</Suspense>;
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       { path: "/", element: withFallback(<About />) },
-      { path: "/resume", element: withFallback(<Resume />) },
-      { path: "/projects", element: withFallback(<Projects />) },
-      { path: "/contact", element: withFallback(<Contact />) },
+      {
+        path: "/resume",
+        element: withFallback(<Resume />),
+      },
+      {
+        path: "/projects",
+        element: withFallback(<Projects />),
+      },
+      {
+        path: "/contact",
+        element: withFallback(<Contact />),
+      },
     ],
   },
 ]);

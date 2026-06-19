@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import SkillCard from "@/components/SkillCard";
+import ResumeDownloadCard from "@/components/resume/ResumeDownloadCard";
+import ResumeSkillGroup from "@/components/resume/ResumeSkillGroup";
+import ResumeTimeline from "@/components/resume/ResumeTimeline";
+import { SpotlightCard } from "@/components/reactbits";
 import {
   fadeUp,
   staggerContainer,
   staggerItem,
   viewportOnce,
 } from "@/animations/motionPresets";
+import resumeData from "@/data/resumeData.json";
+import { useAppLoader } from "@/context/loaderContext";
 
 const Resume = () => {
+  const { markRouteReady } = useAppLoader();
   const shouldReduceMotion = useReducedMotion();
   const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
   const itemVariants = staggerItem(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
+
+  useEffect(() => {
+    markRouteReady();
+  }, [markRouteReady]);
 
   return (
     <motion.section
@@ -20,247 +30,147 @@ const Resume = () => {
       initial={initialState}
       whileInView="show"
       viewport={viewportOnce}
-      className="flex w-full flex-col gap-8 sm:gap-10"
+      className="flex w-full flex-col gap-7 sm:gap-9"
     >
       <motion.div
         variants={itemVariants}
         className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
       >
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
-              Resume
+              {resumeData.intro.eyebrow}
             </p>
             <motion.h1
               variants={fadeUp(shouldReduceMotion)}
               className="merienda type-h1 mt-2 text-white"
             >
-              Experience and education
+              {resumeData.intro.title}
             </motion.h1>
             <motion.span
               variants={fadeUp(shouldReduceMotion)}
               className="mt-3 block h-[2px] w-20 origin-left rounded-full bg-[#00ff5e55]"
             />
           </div>
-          <p className="poppins type-body-sm text-[#9fffbf]">
-            Building modern UI with consistent momentum.
-          </p>
+          <div className="flex flex-wrap gap-2">
+            {resumeData.intro.tags.map((item) => (
+              <span
+                key={item}
+                className="poppins rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1.5 text-[9px] uppercase tracking-[0.24em] text-[#9fffbf] xxs:text-[10px]"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
+        <p className="poppins type-body mt-5 max-w-5xl leading-relaxed text-[#c7ffd8] xs:mt-6">
+          {resumeData.intro.summary}
+        </p>
+      </motion.div>
 
-        <div className="mt-6 grid gap-6 md:mt-8 md:grid-cols-2 md:gap-6 xl:gap-8">
-          <motion.div
-            variants={itemVariants}
-            className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] xs:h-11 xs:w-11">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="#00ff5e"
-                  className="h-5 w-5 xs:h-[22px] xs:w-[22px]"
-                >
-                  <path d="M21 10h-2V4h1V2H4v2h1v6H3a1 1 0 0 0-1 1v9h20v-9a1 1 0 0 0-1-1zm-7 8v-4h-4v4H7V4h10v14h-3z"></path>
-                  <path d="M9 6h2v2H9zm4 0h2v2h-2zm-4 4h2v2H9zm4 0h2v2h-2z"></path>
-                </svg>
-              </div>
-              <h2 className="roboto-slab type-h3 text-white">
-                Education
-              </h2>
-            </div>
-            <motion.div variants={containerVariants} className="space-y-6 pl-5">
-              {[
-                {
-                  period: "2023 - 2025",
-                  title: "Diploma in Web Development",
-                  place: "ApTech Metro, Star Gate",
-                },
-                {
-                  period: "2025 - Present",
-                  title: "Intermediate",
-                  place: "ApTech Metro, Star Gate",
-                },
-              ].map((item) => (
-                <motion.div
-                  key={item.title}
-                  variants={itemVariants}
-                  className="relative"
-                >
-                  <span className="absolute -left-[13px] top-1 h-3 w-3 rounded-full bg-[#00ff5e] shadow-[0_0_10px_rgba(0,255,94,0.6)]" />
-                  <p className="poppins type-caption ml-3 uppercase tracking-[0.3em] text-[#7feaa0]">
-                    {item.period}
-                  </p>
-                  <h3 className="roboto-slab type-h4 mt-5 text-white">
-                    {item.title}
-                  </h3>
-                  <p className="poppins type-body-sm text-[#c7ffd8] mt-2">
-                    {item.place}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+      <motion.div variants={itemVariants}>
+        <ResumeTimeline
+          eyebrow={resumeData.experience.eyebrow}
+          title={resumeData.experience.title}
+          summary={resumeData.experience.summary}
+          items={resumeData.experience.items}
+        />
+      </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[#00ff5e33] bg-[#06180f] xs:h-11 xs:w-11">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="#00ff5e"
-                  className="h-5 w-5 xs:h-[22px] xs:w-[22px]"
-                >
-                  <path d="m20.895 7.553-2-4A1.001 1.001 0 0 0 18 3h-5c-.379 0-.725.214-.895.553L10.382 7H6c-.379 0-.725.214-.895.553l-2 4a1 1 0 0 0 0 .895l2 4c.17.338.516.552.895.552h4.382l1.724 3.447A.998.998 0 0 0 13 21h5c.379 0 .725-.214.895-.553l2-4a1 1 0 0 0 0-.895L19.118 12l1.776-3.553a1 1 0 0 0 .001-.894zM13.618 5h3.764l1.5 3-1.5 3h-3.764l-1.5-3 1.5-3zm-8.5 7 1.5-3h3.764l1.5 3-1.5 3H6.618l-1.5-3zm12.264 7h-3.764l-1.5-3 1.5-3h3.764l1.5 3-1.5 3z"></path>
-                </svg>
-              </div>
-              <h2 className="roboto-slab type-h3 text-white">
-                Experience
-              </h2>
-            </div>
-            <motion.div variants={containerVariants} className="space-y-6 pl-5">
-              {[
-                {
-                  period: "3 Years",
-                  title: "Front-End Development",
-                  place: "HTML, CSS, JavaScript, React, WordPress",
-                },
-                {
-                  period: "1 Year",
-                  title: "Back-End Development",
-                  place: "PHP and MySQL",
-                },
-              ].map((item) => (
-                <motion.div
-                  key={item.title}
-                  variants={itemVariants}
-                  className="relative"
-                >
-                  <span className="absolute -left-[13px] top-1 h-3 w-3 rounded-full bg-[#00ff5e] shadow-[0_0_10px_rgba(0,255,94,0.6)]" />
-                  <p className="poppins type-caption ml-3 uppercase tracking-[0.3em] text-[#7feaa0]">
-                    {item.period}
-                  </p>
-                  <h3 className="roboto-slab type-h4 mt-5 text-white">
-                    {item.title}
-                  </h3>
-                  <p className="poppins type-body-sm text-[#c7ffd8] mt-2">
-                    {item.place}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
+      <motion.div variants={itemVariants}>
+        <ResumeTimeline
+          eyebrow={resumeData.education.eyebrow}
+          title={resumeData.education.title}
+          summary={resumeData.education.summary}
+          items={resumeData.education.items}
+        />
       </motion.div>
 
       <motion.div
         variants={itemVariants}
         className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
       >
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
-              Skills
+              {resumeData.skills.eyebrow}
             </p>
             <motion.h2
               variants={fadeUp(shouldReduceMotion)}
               className="merienda type-h2 mt-2 text-white"
             >
-              Development strengths
+              {resumeData.skills.title}
             </motion.h2>
             <motion.span
               variants={fadeUp(shouldReduceMotion)}
               className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
             />
           </div>
-          <p className="poppins type-body-sm text-[#9fffbf]">
-            Balancing quality and delivery.
+          <p className="poppins type-body-sm max-w-xl text-[#9fffbf]">
+            {resumeData.skills.summary}
           </p>
         </div>
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid gap-5 md:mt-8 md:grid-cols-2"
+          className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
         >
-          <motion.div variants={itemVariants}>
-            <SkillCard title="Front-End Development" percentage={85} />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <SkillCard title="Back-End Development" percentage={30} />
-          </motion.div>
+          {resumeData.skills.groups.map((group) => (
+            <motion.div key={group.title} variants={itemVariants}>
+              <ResumeSkillGroup {...group} />
+            </motion.div>
+          ))}
         </motion.div>
+      </motion.div>
 
-        <motion.div variants={itemVariants} className="mt-8 sm:mt-10">
+      <motion.div
+        variants={itemVariants}
+        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+      >
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
           <div>
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
-              Knowledge
+              {resumeData.learning.eyebrow}
             </p>
-            <motion.h3
+            <motion.h2
               variants={fadeUp(shouldReduceMotion)}
-              className="merienda type-h3 mt-2 text-white"
+              className="merienda type-h2 mt-2 text-white"
             >
-              Applied toolset
-            </motion.h3>
+              {resumeData.learning.title}
+            </motion.h2>
             <motion.span
               variants={fadeUp(shouldReduceMotion)}
-              className="mt-3 block h-[2px] w-14 origin-left rounded-full bg-[#00ff5e55]"
+              className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
             />
           </div>
+          <p className="poppins type-body-sm max-w-xl text-[#9fffbf]">
+            {resumeData.learning.summary}
+          </p>
+        </div>
 
-          <motion.div
-            variants={containerVariants}
-            className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
-          >
-            {[
-              {
-                title: "Interface foundations",
-                items: ["HTML", "CSS", "JavaScript"],
-              },
-              {
-                title: "React workflow",
-                items: ["React", "Tailwind CSS", "Vite"],
-              },
-              {
-                title: "CMS management",
-                items: ["WordPress", "Shopify", "Elementor", "Liquid", "Theme editor"],
-              },
-              {
-                title: "Backend",
-                items: ["PHP", "MySQL"],
-              },
-              {
-                title: "Delivery habits",
-                items: ["Responsive UI", "Performance", "Polish"],
-              },
-              {
-                title: "Next focus",
-                items: ["Next.js", "TypeScript", "Production patterns"],
-              },
-            ].map((group) => (
-              <motion.div
-                key={group.title}
-                variants={itemVariants}
-                className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 xs:p-5"
-              >
-                <h4 className="roboto-slab type-h4 text-white">
-                  {group.title}
-                </h4>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-3 py-1.5 text-[9px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        <motion.div
+          variants={containerVariants}
+          className="mt-6 grid gap-4 md:grid-cols-3"
+        >
+          {resumeData.learning.items.map((item) => (
+            <motion.div key={item.title} variants={itemVariants}>
+              <SpotlightCard className="h-full p-5 xs:p-6">
+                <article>
+                  <h3 className="roboto-slab type-h4 text-white">
+                    {item.title}
+                  </h3>
+                  <p className="poppins type-body-sm mt-3 leading-relaxed text-[#c7ffd8]">
+                    {item.text}
+                  </p>
+                </article>
+              </SpotlightCard>
+            </motion.div>
+          ))}
         </motion.div>
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <ResumeDownloadCard data={resumeData.download} />
       </motion.div>
     </motion.section>
   );

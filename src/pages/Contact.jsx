@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
@@ -9,6 +9,10 @@ import {
   staggerItem,
   viewportOnce,
 } from "@/animations/motionPresets";
+import ContactInfoCard from "@/components/contact/ContactInfoCard";
+import { GradientText, SpotlightCard, StarBorder } from "@/components/reactbits";
+import contactData from "@/data/contactData.json";
+import { useAppLoader } from "@/context/loaderContext";
 
 const EMAILJS_RUNTIME_CONFIG_URL = "/emailjs-config.json";
 
@@ -36,6 +40,15 @@ const FIELD_LIMITS = {
 
 const HTML_INJECTION_PATTERN =
   /<\s*\/?\s*[a-z][^>]*>|javascript\s*:|on[a-z]+\s*=|&lt;\s*\/?\s*[a-z]|&#x?0*3c/i;
+
+const renderSegments = (segments) =>
+  segments.map((segment, index) =>
+    segment.highlight ? (
+      <GradientText key={`${segment.text}-${index}`}>{segment.text}</GradientText>
+    ) : (
+      <span key={`${segment.text}-${index}`}>{segment.text}</span>
+    )
+  );
 
 const trimValue = (value) => (typeof value === "string" ? value.trim() : "");
 
@@ -163,6 +176,7 @@ const getEmailErrorMessage = (error) => {
 };
 
 const Contact = () => {
+  const { markRouteReady } = useAppLoader();
   const [emailStatus, setEmailStatus] = useState({ type: "", message: "" });
   const [formStartedAt, setFormStartedAt] = useState(getTimestamp);
   const [cooldownUntil, setCooldownUntil] = useState(0);
@@ -170,6 +184,10 @@ const Contact = () => {
   const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
   const itemVariants = staggerItem(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
+
+  useEffect(() => {
+    markRouteReady();
+  }, [markRouteReady]);
 
   const {
     register,
@@ -337,271 +355,296 @@ const Contact = () => {
       initial={initialState}
       whileInView="show"
       viewport={viewportOnce}
-      className="flex w-full flex-col gap-8 sm:gap-10"
+      className="flex w-full min-w-0 flex-col gap-6 sm:gap-8"
     >
       <motion.div
         variants={itemVariants}
-        className="rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 backdrop-blur-xl shadow-[0_16px_34px_rgba(0,0,0,0.45)] xxs:p-6 sm:p-7 lg:p-8"
+        className="relative min-w-0 overflow-hidden rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.44)] backdrop-blur-xl xxs:p-6 sm:p-7 lg:p-8"
       >
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-          <div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-[#00ff5e88] to-transparent"
+        />
+        <div className="relative z-10 flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+          <div className="max-w-4xl">
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
-              Contact
+              {contactData.intro.eyebrow}
             </p>
             <motion.h1
               variants={fadeUp(shouldReduceMotion)}
               className="merienda type-h1 mt-2 text-white"
             >
-              Let's build together
+              {renderSegments(contactData.intro.titleSegments)}
             </motion.h1>
             <motion.span
               variants={fadeUp(shouldReduceMotion)}
               className="mt-3 block h-[2px] w-16 origin-left rounded-full bg-[#00ff5e55]"
             />
+            <p className="poppins type-body mt-5 max-w-3xl leading-relaxed text-[#c7ffd8]">
+              {contactData.intro.summary}
+            </p>
           </div>
-          <div className="poppins type-body-sm w-fit max-w-full rounded-2xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[#9fffbf]">
-            Open to internships and freelance work.
+          <div className="poppins type-body-sm w-fit max-w-full rounded-2xl border border-[#00ff5e3a] bg-[#06180f] px-4 py-3 text-[#9fffbf] shadow-[0_0_22px_rgba(0,255,94,0.08)]">
+            {contactData.intro.availability}
           </div>
         </div>
+      </motion.div>
 
-        <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1.1fr] xl:gap-8 md:mt-8">
-          <motion.div variants={itemVariants} className="flex flex-col gap-6">
-            <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
-              This portfolio is my first React.js project and the start of my
-              transition from static HTML and WordPress to modern UI
-              engineering. I am excited to collaborate on projects where I can
-              learn, contribute, and ship high quality experiences.
-            </p>
+      <motion.div
+        variants={containerVariants}
+        className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        aria-label="Quick contact links"
+      >
+        {contactData.quickContactCards.map((item) => (
+          <motion.div key={item.title} variants={itemVariants}>
+            <ContactInfoCard {...item} />
+          </motion.div>
+        ))}
+      </motion.div>
 
-            <motion.div variants={containerVariants} className="grid gap-4 md:grid-cols-2">
-              {[
-                {
-                  title: "Response time",
-                  text: "Usually within 24 hours.",
-                },
-                {
-                  title: "Preferred work",
-                  text: "Front-end UI, landing pages, and dashboards.",
-                },
-                {
-                  title: "Quick links",
-                  links: [
-                    {
-                      label: "Email",
-                      href: "mailto:Taha82426980@gmail.com",
-                    },
-                    { label: "GitHub", href: "https://github.com/delepover56" },
-                    {
-                      label: "LinkedIn",
-                      href: "https://www.linkedin.com/in/taha-khan03/",
-                    },
-                  ],
-                },
-                {
-                  title: "Availability",
-                  text: "Open to internships and freelance work.",
-                },
-              ].map((item) => (
-                <motion.div
-                  key={item.title}
-                  variants={itemVariants}
-                  whileHover={hoverGlow(shouldReduceMotion)}
-                  className="rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-4 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] xs:p-5"
-                >
-                  <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
-                    {item.title}
-                  </p>
-                  {item.links ? (
-                    <div className="mt-3 flex flex-wrap gap-3">
-                      {item.links.map((link) => (
-                        <motion.a
-                          key={link.label}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={hoverGlow(shouldReduceMotion)}
-                          className="rounded-full border border-[#00ff5e26] bg-[#06180f] px-4 py-2 text-[9px] uppercase tracking-[0.28em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
-                        >
-                          {link.label}
-                        </motion.a>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="poppins type-body-sm mt-2 text-white">
-                      {item.text}
+      <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.28fr)_minmax(280px,0.72fr)] xl:gap-8">
+        <motion.div variants={itemVariants} className="min-w-0">
+          <SpotlightCard className="p-0 shadow-[0_18px_42px_rgba(0,0,0,0.4)]">
+            <motion.form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex min-w-0 flex-col gap-4 p-5 xs:p-6 lg:p-7"
+            >
+              <div className="mb-2">
+                <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
+                  {contactData.formIntro.eyebrow}
+                </p>
+                <h2 className="roboto-slab type-h3 mt-2 text-white">
+                  {contactData.formIntro.title}
+                </h2>
+                <p className="poppins type-body-sm mt-2 max-w-2xl text-[#9fffbf]">
+                  {contactData.formIntro.summary}
+                </p>
+              </div>
+
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+                {...register("company")}
+              />
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label className="sr-only" htmlFor="contact-name">
+                    Full name
+                  </label>
+                  <motion.input
+                    id="contact-name"
+                    type="text"
+                    maxLength={FIELD_LIMITS.name}
+                    whileFocus={hoverGlow(shouldReduceMotion)}
+                    {...nameField}
+                    onChange={(event) => {
+                      event.target.value = event.target.value.replace(
+                        /[^A-Za-z\s]/g,
+                        ""
+                      );
+                      nameField.onChange(event);
+                      handleFieldChange();
+                    }}
+                    aria-invalid={errors.name ? "true" : "false"}
+                    placeholder="Full name"
+                    className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
+                  />
+                  {errors.name && (
+                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                      {errors.name.message}
                     </p>
                   )}
-                </motion.div>
-              ))}
+                </div>
+
+                <div>
+                  <label className="sr-only" htmlFor="contact-email">
+                    Email address
+                  </label>
+                  <motion.input
+                    id="contact-email"
+                    type="email"
+                    maxLength={FIELD_LIMITS.email}
+                    whileFocus={hoverGlow(shouldReduceMotion)}
+                    {...emailField}
+                    onChange={(event) => {
+                      emailField.onChange(event);
+                      handleFieldChange();
+                    }}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    placeholder="Email address"
+                    className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
+                  />
+                  {errors.email && (
+                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label className="sr-only" htmlFor="contact-phone">
+                    Phone number
+                  </label>
+                  <motion.input
+                    id="contact-phone"
+                    type="text"
+                    whileFocus={hoverGlow(shouldReduceMotion)}
+                    {...phoneField}
+                    onChange={(event) => {
+                      phoneField.onChange(event);
+                      handleFieldChange();
+                    }}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    placeholder="Phone number"
+                    className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
+                  />
+                  {errors.phone && (
+                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                      {errors.phone.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="sr-only" htmlFor="contact-subject">
+                    Project purpose
+                  </label>
+                  <motion.input
+                    id="contact-subject"
+                    type="text"
+                    maxLength={FIELD_LIMITS.subject}
+                    whileFocus={hoverGlow(shouldReduceMotion)}
+                    {...subjectField}
+                    onChange={(event) => {
+                      subjectField.onChange(event);
+                      handleFieldChange();
+                    }}
+                    aria-invalid={errors.subject ? "true" : "false"}
+                    placeholder="Project purpose"
+                    className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
+                  />
+                  {errors.subject && (
+                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                      {errors.subject.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="sr-only" htmlFor="contact-message">
+                  Tell me about the project
+                </label>
+                <motion.textarea
+                  id="contact-message"
+                  rows="6"
+                  maxLength={FIELD_LIMITS.message}
+                  placeholder="Tell me about the project"
+                  whileFocus={hoverGlow(shouldReduceMotion)}
+                  {...messageField}
+                  onChange={(event) => {
+                    messageField.onChange(event);
+                    handleFieldChange();
+                  }}
+                  aria-invalid={errors.message ? "true" : "false"}
+                  className="w-full resize-none rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
+                />
+                {errors.message && (
+                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
+
+              <AnimatePresence mode="wait">
+                {emailStatus.type === "success" && (
+                  <motion.p
+                    key="success"
+                    variants={fadeUp(shouldReduceMotion)}
+                    initial={initialState}
+                    animate="show"
+                    exit="exit"
+                    className="poppins rounded-xl border border-[#00ff5e33] bg-[#00ff5e10] px-4 py-3 text-sm text-[#00ff5e]"
+                  >
+                    {emailStatus.message}
+                  </motion.p>
+                )}
+                {emailStatus.type === "error" && (
+                  <motion.p
+                    key="error"
+                    variants={fadeUp(shouldReduceMotion)}
+                    initial={initialState}
+                    animate="show"
+                    exit="exit"
+                    className="poppins rounded-xl border border-red-300/25 bg-red-300/10 px-4 py-3 text-sm text-red-300"
+                  >
+                    {emailStatus.message}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                whileHover={hoverGlow(shouldReduceMotion)}
+                className="cursor-pointer rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:font-bold hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] disabled:cursor-not-allowed disabled:opacity-60 xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </motion.button>
+            </motion.form>
+          </SpotlightCard>
+        </motion.div>
+
+        <motion.aside
+          variants={containerVariants}
+          className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-1"
+          aria-label="Contact expectations"
+        >
+          {contactData.detailCards.map((item) => (
+            <motion.div key={item.title} variants={itemVariants}>
+              <ContactInfoCard {...item} />
             </motion.div>
-          </motion.div>
+          ))}
+        </motion.aside>
+      </div>
 
-          <motion.form
-            variants={itemVariants}
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col justify-center gap-4 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5 xs:p-6"
+      <motion.div
+        variants={itemVariants}
+        className="flex min-w-0 flex-col gap-4 rounded-3xl border border-[#00ff5e22] bg-[#0a120db8] p-5 shadow-[0_16px_34px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:p-6"
+      >
+        <div>
+          <p className="poppins type-caption uppercase tracking-[0.3em] text-[#7feaa0]">
+            {contactData.ctaStrip.eyebrow}
+          </p>
+          <p className="poppins type-body-sm mt-2 max-w-2xl text-[#c7ffd8]">
+            {contactData.ctaStrip.text}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <StarBorder
+            href={contactData.ctaStrip.email.href}
+            aria-label={contactData.ctaStrip.email.ariaLabel}
+            className="text-[10px] uppercase tracking-[0.24em] sm:text-xs"
           >
-            <h4 className="poppins type-h4 mb-4 text-white">
-              Let's get connected
-            </h4>
-
-            <input
-              type="text"
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-              aria-hidden="true"
-              {...register("company")}
-            />
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <motion.input
-                  type="text"
-                  maxLength={FIELD_LIMITS.name}
-                  whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...nameField}
-                  onChange={(event) => {
-                    event.target.value = event.target.value.replace(
-                      /[^A-Za-z\s]/g,
-                      ""
-                    );
-                    nameField.onChange(event);
-                    handleFieldChange();
-                  }}
-                  aria-invalid={errors.name ? "true" : "false"}
-                  placeholder="Full name"
-                  className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
-                />
-                {errors.name && (
-                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <motion.input
-                  type="email"
-                  maxLength={FIELD_LIMITS.email}
-                  whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...emailField}
-                  onChange={(event) => {
-                    emailField.onChange(event);
-                    handleFieldChange();
-                  }}
-                  aria-invalid={errors.email ? "true" : "false"}
-                  placeholder="Email address"
-                  className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
-                />
-                {errors.email && (
-                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <motion.input
-                  type="text"
-                  whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...phoneField}
-                  onChange={(event) => {
-                    phoneField.onChange(event);
-                    handleFieldChange();
-                  }}
-                  aria-invalid={errors.phone ? "true" : "false"}
-                  placeholder="Phone number"
-                  className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
-                />
-                {errors.phone && (
-                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
-                    {errors.phone.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <motion.input
-                  type="text"
-                  maxLength={FIELD_LIMITS.subject}
-                  whileFocus={hoverGlow(shouldReduceMotion)}
-                  {...subjectField}
-                  onChange={(event) => {
-                    subjectField.onChange(event);
-                    handleFieldChange();
-                  }}
-                  aria-invalid={errors.subject ? "true" : "false"}
-                  placeholder="Project purpose"
-                  className="w-full rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
-                />
-                {errors.subject && (
-                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
-                    {errors.subject.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <motion.textarea
-                rows="6"
-                maxLength={FIELD_LIMITS.message}
-                placeholder="Tell me about the project"
-                whileFocus={hoverGlow(shouldReduceMotion)}
-                {...messageField}
-                onChange={(event) => {
-                  messageField.onChange(event);
-                  handleFieldChange();
-                }}
-                aria-invalid={errors.message ? "true" : "false"}
-                className="w-full resize-none rounded-xl border border-[#00ff5e2a] bg-transparent px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
-              />
-              {errors.message && (
-                <p role="alert" className="poppins mt-2 text-xs text-red-300">
-                  {errors.message.message}
-                </p>
-              )}
-            </div>
-
-            <AnimatePresence mode="wait">
-              {emailStatus.type === "success" && (
-                <motion.p
-                  key="success"
-                  variants={fadeUp(shouldReduceMotion)}
-                  initial={initialState}
-                  animate="show"
-                  exit="exit"
-                  className="poppins text-sm text-[#00ff5e]"
-                >
-                  {emailStatus.message}
-                </motion.p>
-              )}
-              {emailStatus.type === "error" && (
-                <motion.p
-                  key="error"
-                  variants={fadeUp(shouldReduceMotion)}
-                  initial={initialState}
-                  animate="show"
-                  exit="exit"
-                  className="poppins text-sm text-red-300"
-                >
-                  {emailStatus.message}
-                </motion.p>
-              )}
-            </AnimatePresence>
-
-            <motion.button
-              type="submit"
-              disabled={isSubmitting}
-              whileHover={hoverGlow(shouldReduceMotion)}
-              className="rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] cursor-pointer transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:font-bold hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+            {contactData.ctaStrip.email.label}
+          </StarBorder>
+          {contactData.ctaStrip.socialLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="poppins rounded-2xl border border-[#00ff5e2e] bg-[#06180f] px-4 py-3 text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
             >
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </motion.button>
-          </motion.form>
+              {link.label}
+            </a>
+          ))}
         </div>
       </motion.div>
     </motion.section>

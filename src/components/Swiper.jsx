@@ -1,39 +1,59 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { A11y, Autoplay, Keyboard, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./swiperCustom.css";
 import { motion, useReducedMotion } from "motion/react";
-import { hoverGlow, scaleIn } from "@/animations/motionPresets";
+import { scaleIn } from "@/animations/motionPresets";
+import ProjectCard from "@/components/projects/ProjectCard";
 
 
-const Slider = ({ projects = [] }) => {
+const Slider = ({ projects = [], swiperKey }) => {
   const shouldReduceMotion = useReducedMotion();
   const cardVariants = scaleIn(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
   const canLoop = projects.length >= 3;
 
+  if (projects.length === 0) return null;
+
   return (
     <Swiper
-      key={projects.length}
+      key={swiperKey ?? projects.length}
       spaceBetween={16}
-      slidesPerView={1.05}
+      slidesPerView={1.03}
       grabCursor={true}
-      modules={[Autoplay, Pagination]}
-      pagination={{ clickable: true }}
+      modules={[A11y, Autoplay, Keyboard, Pagination]}
+      pagination={{
+        clickable: true,
+        bulletElement: "button",
+      }}
+      keyboard={{
+        enabled: true,
+        onlyInViewport: true,
+      }}
+      a11y={{
+        enabled: true,
+        containerMessage: "Project gallery carousel",
+        slideLabelMessage: "{{index}} of {{slidesLength}}",
+        paginationBulletMessage: "Go to project slide {{index}}",
+      }}
       loop={canLoop}
       centeredSlides={false}
       observeParents={true}
       observer={true}
       watchSlidesProgress={true}
-      autoplay={{
-        delay: 2800,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }}
+      autoplay={
+        shouldReduceMotion
+          ? false
+          : {
+              delay: 3200,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }
+      }
       breakpoints={{
         480: {
-          slidesPerView: 1.12,
+          slidesPerView: 1.06,
           spaceBetween: 18,
         },
         640: {
@@ -50,60 +70,17 @@ const Slider = ({ projects = [] }) => {
         },
       }}
       speed={900}
-      className="select-none pb-10 sm:pb-12"
+      className="select-none pb-12 sm:pb-14"
     >
       {projects.map((project, index) => (
-        <SwiperSlide key={index} className="swiper-slide-card">
+        <SwiperSlide key={`${project.name}-${index}`} className="swiper-slide-card">
           <motion.div
             variants={cardVariants}
             initial={initialState}
             animate="show"
-            whileHover={hoverGlow(shouldReduceMotion)}
-            className="group flex h-[250px] w-full flex-col overflow-hidden rounded-2xl border border-[#00ff5e26] bg-[#0b140d] shadow-[0_16px_30px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#00ff5e88] hover:bg-[#00ff5e08] xs:h-[260px] sm:h-[280px]"
+            className="h-full w-full min-w-0"
           >
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative h-40 w-full overflow-hidden xs:h-[170px] sm:h-[180px]"
-            >
-              <img
-                src={project.image}
-                alt={project.alt}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                draggable={false}
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-90" />
-            </a>
-            <div className="flex flex-1 flex-col justify-between gap-3 p-4 sm:p-5">
-              <div className="flex flex-row justify-between items-center">
-                <h3 className="merienda type-h4 text-white">
-                  {project.name}
-                </h3>
-                <div className="flex items-center gap-2">
-                  {(project.tech ?? []).map((techIcon, techIndex) => (
-                    <img
-                      key={`${project.name}-tech-${techIndex}`}
-                      src={techIcon}
-                      alt=""
-                      aria-hidden="true"
-                      className="h-5 w-5 object-contain"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                  ))}
-                </div>
-              </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="poppins-semibold type-button uppercase tracking-[0.28em] text-[#00ff5e] transition-all duration-300 hover:text-white"
-              >
-                View Live
-              </a>
-            </div>
+            <ProjectCard project={project} />
           </motion.div>
         </SwiperSlide>
       ))}

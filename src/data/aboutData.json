@@ -1,0 +1,146 @@
+{
+  "hero": {
+    "eyebrow": "Front-End Developer",
+    "namePrefix": "Hi, I am ",
+    "name": "M. Taha Khan",
+    "introParagraphs": [
+      [
+        {
+          "text": "I am a front-end developer from Karachi crafting immersive, responsive interfaces with clean HTML, modern CSS, thoughtful JavaScript, and a growing React workflow."
+        }
+      ],
+      [
+        {
+          "text": "My background includes custom "
+        },
+        {
+          "text": "WordPress",
+          "highlight": true
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "Shopify",
+          "highlight": true
+        },
+        {
+          "text": " solutions, performance optimization, and pixel-perfect delivery. I am currently building deeper expertise in "
+        },
+        {
+          "text": "React.js",
+          "highlight": true
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "Tailwind CSS",
+          "highlight": true
+        },
+        {
+          "text": "."
+        }
+      ]
+    ],
+    "ctaLabel": "View Projects",
+    "ctaPath": "/projects",
+    "stackSummary": "React, Tailwind, WordPress, Shopify"
+  },
+  "heroFocusCards": [
+    {
+      "title": "UI Engineering",
+      "description": "Component-minded interfaces with clean structure and modern React habits."
+    },
+    {
+      "title": "Responsive UX",
+      "description": "Layouts that stay readable, touch-friendly, and balanced across screens."
+    },
+    {
+      "title": "CMS Builds",
+      "description": "WordPress and Shopify experience for content and storefront delivery."
+    },
+    {
+      "title": "Clean Delivery",
+      "description": "Polished details, performance awareness, and maintainable frontend work."
+    }
+  ],
+  "buildSection": {
+    "eyebrow": "About / Focus",
+    "title": "What I build",
+    "summary": "Clean UI, practical CMS delivery, subtle interactions, and responsive layouts that keep the portfolio professional instead of noisy.",
+    "cards": [
+      {
+        "label": "React / Tailwind UI",
+        "title": "Component-minded interfaces",
+        "text": "Building pixel-perfect, responsive front-ends with React.js, Tailwind CSS, optimized JavaScript, and a clean component workflow."
+      },
+      {
+        "label": "CMS / E-commerce",
+        "title": "WordPress and Shopify builds",
+        "text": "Creating scalable CMS and storefront experiences with WordPress, Shopify, Elementor, Liquid, and practical theme customization."
+      },
+      {
+        "label": "Responsive Design",
+        "title": "Layouts that hold up everywhere",
+        "text": "Turning clean HTML, modern CSS, and thoughtful UI structure into interfaces that stay usable across desktop and mobile."
+      },
+      {
+        "label": "Performance / Polish",
+        "title": "Fast, tidy delivery",
+        "text": "Keeping interactions subtle, code organized, and visuals refined with occasional image-editing support and game-inspired visual systems."
+      }
+    ]
+  },
+  "stackSection": {
+    "eyebrow": "Working Stack",
+    "title": "Technical showcase",
+    "summary": "A technical showcase of the frontend, styling, CMS, and workflow tools I use to turn ideas into polished interfaces.",
+    "skillGroups": [
+      {
+        "label": "Frontend",
+        "title": "Interface foundations",
+        "description": "The core layer I use to shape interactive browser experiences.",
+        "skills": ["HTML", "CSS", "JavaScript", "React.js"]
+      },
+      {
+        "label": "Styling / UI",
+        "title": "Visual systems",
+        "description": "Responsive layouts, utility-first styling, and polished UI details.",
+        "skills": ["Tailwind CSS", "Responsive UI", "Glassmorphism", "Performance CSS"],
+        "featured": true
+      },
+      {
+        "label": "CMS / E-commerce",
+        "title": "Content and storefronts",
+        "description": "Practical site-building experience across CMS and commerce tools.",
+        "skills": ["WordPress", "Shopify", "Elementor", "Liquid", "Theme editor"]
+      },
+      {
+        "label": "Tools",
+        "title": "Build workflow",
+        "description": "The current toolchain behind this portfolio and daily UI work.",
+        "skills": ["Vite", "React Router", "React Hook Form", "Swiper"]
+      }
+    ]
+  },
+  "growthSection": {
+    "eyebrow": "Future Growth",
+    "title": "Currently learning",
+    "summary": "The next layer of my growth connects today's UI work with more scalable React and production patterns.",
+    "items": [
+      {
+        "title": "Advanced React",
+        "text": "Strengthening component architecture, state patterns, and production-minded UI decisions."
+      },
+      {
+        "title": "Next.js and TypeScript",
+        "text": "Learning the stack behind more scalable React workflows and safer interfaces."
+      },
+      {
+        "title": "Production patterns",
+        "text": "Improving structure, performance habits, and deployment confidence."
+      }
+    ]
+  }
+}

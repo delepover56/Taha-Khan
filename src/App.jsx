@@ -1,26 +1,16 @@
-// src/App.jsx
-import { Outlet } from "react-router"; // v7
+import { Outlet, useLocation } from "react-router";
 import Background from "@/components/background";
 import MobileHeader from "@/components/layout/mobileHeader.jsx";
 import MyInfo from "@/components/layout/MyInfo";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToOutlet from "@/components/ScrollToOutlet";
-import Preloader from "@/components/Preloader";
-import { useAppLoader } from "@/context/loaderContext";
-import { useEffect, useMemo } from "react";
+import AppPreloader from "@/components/AppPreloader";
+import { useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { fadeUp, transitionSlow } from "@/animations/motionPresets";
-import { useLocation } from "react-router";
-
 
 function App() {
-  const {
-    isInitialLoading,
-    shouldRenderPreloader,
-    dismissPreloader,
-    markAppMounted,
-  } = useAppLoader();
   const location = useLocation();
   const shouldReduceMotion = useReducedMotion();
   const pageVariants = useMemo(
@@ -29,19 +19,10 @@ function App() {
   );
   const initialState = shouldReduceMotion ? "show" : "hidden";
 
-  useEffect(() => {
-    markAppMounted();
-  }, [markAppMounted]);
-
   return (
     <>
-      {shouldRenderPreloader && (
-        <Preloader
-          isActive={isInitialLoading}
-          onExited={dismissPreloader}
-        />
-      )}
       <Background />
+      <AppPreloader />
       <ScrollToOutlet />
       <main className="relative z-10 flex min-h-screen w-full flex-col items-center pb-12 pt-4 xxs:pt-5 xs:pt-6 lg:pt-8 xl:pt-10">
         <div className="w-full max-w-[1320px] px-4 xs:px-5 sm:px-6 lg:px-8 2xl:max-w-[1600px]">

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Chic Lighting",
+    "link": "https://chiclighting.vercel.app/",
+    "github": null,
+    "image": "/Images/Projects/ChicLighting.webp",
+    "alt": "Homepage screenshot of the Chic Lighting frontend project",
+    "description": "A polished lighting storefront interface focused on clean product presentation and responsive frontend layout.",
+    "category": "Frontend",
+    "filters": ["Frontend"],
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "tech": [
+      "/Images/Icons/HTML.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": false
+  },
+  {
+    "name": "Tasbeeh Wala",
+    "link": "https://tasbeeh-wala.vercel.app/",
+    "github": null,
+    "image": "/Images/Projects/Tasbeeh_Wala.webp",
+    "alt": "Homepage screenshot of the Tasbeeh Wala frontend project",
+    "description": "A focused digital tasbeeh experience with a simple interaction model and mobile-friendly presentation.",
+    "category": "Frontend",
+    "filters": ["Frontend"],
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "tech": [
+      "/Images/Icons/HTML.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": false
+  },
+  {
+    "name": "True Vegan Sea Food",
+    "link": "https://true-vegan-seafood.vercel.app/",
+    "github": null,
+    "image": "/Images/Projects/True_Vegan_Sea_Food.webp",
+    "alt": "Homepage screenshot of the True Vegan Sea Food frontend project",
+    "description": "A responsive restaurant-style website presenting brand content, sections, and calls to action with a clean visual flow.",
+    "category": "Frontend",
+    "filters": ["Frontend"],
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "tech": [
+      "/Images/Icons/HTML.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": false
+  }
+]

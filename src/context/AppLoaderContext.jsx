@@ -1,143 +1,87 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import fallbackProjects from "@/components/MyProjects";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import projectsData from "@/data/projectsData.json";
+import sideInfoBox from "@/data/sideInfoBox.json";
 import { AppLoaderContext } from "@/context/loaderContext";
 
-const PRELOADER_KEY = "portfolio-preloader-ready";
+const getImageSources = () =>
+  Array.from(
+    new Set([
+      "/favicon.svg",
+      sideInfoBox.profile.avatarSrc,
+      ...projectsData.flatMap((project) => [
+        project.image,
+        ...(Array.isArray(project.tech) ? project.tech : []),
+      ]),
+    ].filter(Boolean))
+  );
 
-const preloadFonts = () => {
-  if (document.fonts && document.fonts.ready) {
-    return document.fonts.ready;
-  }
-  return Promise.resolve();
+const waitForWindowLoad = () => {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (document.readyState === "complete") return Promise.resolve();
+
+  return new Promise((resolve) => {
+    window.addEventListener("load", resolve, { once: true });
+  });
 };
 
-const preloadImage = (src) =>
+const waitForFonts = () => {
+  if (typeof document === "undefined" || !document.fonts?.ready) {
+    return Promise.resolve();
+  }
+
+  return document.fonts.ready.catch(() => undefined);
+};
+
+const waitForImage = (src) =>
   new Promise((resolve) => {
-    if (!src) {
-      resolve();
-      return;
-    }
-    const img = new Image();
-    img.src = src;
-    if (img.decode) {
-      img.decode().then(resolve).catch(resolve);
-    } else {
-      img.onload = () => resolve();
-      img.onerror = () => resolve();
+    const image = new Image();
+
+    image.onload = () => resolve();
+    image.onerror = () => resolve();
+    image.src = src;
+
+    if (image.decode) {
+      image.decode().then(resolve).catch(resolve);
     }
   });
 
-const preloadImages = async (sources) => {
-  const uniqueSources = Array.from(new Set(sources.filter(Boolean)));
-  await Promise.all(uniqueSources.map(preloadImage));
-};
-
-const getInitialPreloaderState = () => {
-  if (typeof window === "undefined") return false;
-  return sessionStorage.getItem(PRELOADER_KEY) !== "true";
-};
+const waitForPortfolioAssets = () =>
+  Promise.all(getImageSources().map(waitForImage));
 
 export const AppLoaderProvider = ({ children }) => {
-  const [projects, setProjects] = useState(fallbackProjects);
-  const [projectsStatus, setProjectsStatus] = useState("success");
-  const [shouldShowPreloader] = useState(getInitialPreloaderState);
-  const appMountedRef = useRef(false);
-  const [{ appMountedPromise, resolveAppMounted }] = useState(() => {
-    let resolver = () => {};
-    const promise = new Promise((resolve) => {
-      resolver = resolve;
-    });
-
-    return {
-      appMountedPromise: promise,
-      resolveAppMounted: resolver,
-    };
-  });
-  const [isInitialLoading, setIsInitialLoading] = useState(shouldShowPreloader);
-  const [shouldRenderPreloader, setShouldRenderPreloader] =
-    useState(shouldShowPreloader);
-
-  useEffect(() => {
-    const handlePageHide = () => {
-      sessionStorage.removeItem(PRELOADER_KEY);
-    };
-
-    window.addEventListener("beforeunload", handlePageHide);
-    window.addEventListener("pagehide", handlePageHide);
-
-    return () => {
-      window.removeEventListener("beforeunload", handlePageHide);
-      window.removeEventListener("pagehide", handlePageHide);
-    };
+  const [projects] = useState(projectsData);
+  const [projectsStatus] = useState("success");
+  const [isRouteReady, setIsRouteReady] = useState(false);
+  const [areAssetsReady, setAreAssetsReady] = useState(false);
+  const isPreloaderVisible = !isRouteReady || !areAssetsReady;
+  const markRouteReady = useCallback(() => {
+    setIsRouteReady(true);
   }, []);
 
   useEffect(() => {
     let isMounted = true;
 
-    const bootstrap = async () => {
-      const fontsPromise = preloadFonts();
-      if (isMounted) {
-        setProjects(fallbackProjects);
-        setProjectsStatus("success");
-      }
-      const imageSources = [
-        "/Images/myAvatar.webp",
-        ...fallbackProjects.map((project) => project.image),
-      ];
-
-      await Promise.all([
-        fontsPromise,
-        preloadImages(imageSources),
-        appMountedPromise,
-      ]);
-
-      if (!isMounted) return;
-
-      if (shouldShowPreloader) {
-        setIsInitialLoading(false);
-        sessionStorage.setItem(PRELOADER_KEY, "true");
-      }
-    };
-
-    bootstrap();
+    Promise.all([
+      waitForWindowLoad(),
+      waitForFonts(),
+      waitForPortfolioAssets(),
+    ]).then(() => {
+      if (isMounted) setAreAssetsReady(true);
+    });
 
     return () => {
       isMounted = false;
     };
-  }, [appMountedPromise, shouldShowPreloader]);
-
-  const dismissPreloader = () => {
-    setShouldRenderPreloader(false);
-  };
-
-  const markAppMounted = useCallback(() => {
-    if (appMountedRef.current) return;
-    appMountedRef.current = true;
-    resolveAppMounted();
-  }, [resolveAppMounted]);
+  }, []);
 
   const value = useMemo(
     () => ({
-      isInitialLoading,
-      shouldRenderPreloader,
-      dismissPreloader,
-      markAppMounted,
+      isPreloaderVisible,
+      markRouteReady,
       projects,
       projectsStatus,
     }),
-    [
-      isInitialLoading,
-      shouldRenderPreloader,
-      projects,
-      projectsStatus,
-      markAppMounted,
-    ]
+    [isPreloaderVisible, markRouteReady, projects, projectsStatus]
   );
 
   return (

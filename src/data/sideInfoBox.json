@@ -1,0 +1,68 @@
+{
+  "profile": {
+    "name": "M. Taha Khan",
+    "role": "Front-End Developer",
+    "statusText": "Open to work",
+    "avatarSrc": "/Images/myAvatar.webp",
+    "avatarAlt": "Taha Khan",
+    "intro": "I build responsive, polished interfaces with clean structure, thoughtful interactions, and a growing React/Tailwind workflow.",
+    "resumeHref": "/Taha-Resume.pdf",
+    "resumeLabel": "Download Resume"
+  },
+  "stackItems": [
+    "HTML5",
+    "CSS3",
+    "React",
+    "Tailwind",
+    "JavaScript",
+    "WordPress",
+    "Shopify"
+  ],
+  "contactItems": [
+    {
+      "label": "Phone",
+      "value": "+92 319 292 4947",
+      "href": "tel:+923192924947",
+      "iconKey": "phone"
+    },
+    {
+      "label": "Email",
+      "value": "Taha82426980@gmail.com",
+      "href": "mailto:Taha82426980@gmail.com",
+      "iconKey": "email"
+    },
+    {
+      "label": "Location",
+      "value": "Karachi, Pakistan",
+      "href": "https://www.google.com/maps/place/Karachi/@25.0740005,66.9469006,12z/",
+      "iconKey": "location"
+    },
+    {
+      "label": "Birthday",
+      "value": "11 October",
+      "iconKey": "birthday"
+    }
+  ],
+  "socialLinks": [
+    {
+      "href": "https://www.instagram.com/m.e_t.a.h.a/",
+      "label": "Instagram",
+      "iconKey": "instagram"
+    },
+    {
+      "href": "https://github.com/delepover56",
+      "label": "GitHub",
+      "iconKey": "github"
+    },
+    {
+      "href": "https://www.linkedin.com/in/taha-khan03/",
+      "label": "LinkedIn",
+      "iconKey": "linkedin"
+    },
+    {
+      "href": "https://wa.me/923133017855",
+      "label": "WhatsApp",
+      "iconKey": "whatsapp"
+    }
+  ]
+}

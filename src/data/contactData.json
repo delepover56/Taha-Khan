@@ -1,0 +1,87 @@
+{
+  "intro": {
+    "eyebrow": "Contact",
+    "titleSegments": [
+      {
+        "text": "Let's build "
+      },
+      {
+        "text": "together",
+        "highlight": true
+      }
+    ],
+    "summary": "Have a frontend build, CMS update, internship opportunity, or collaboration in mind? Send the details and I will reply with a clear next step.",
+    "availability": "Open to internships and freelance work."
+  },
+  "quickContactCards": [
+    {
+      "eyebrow": "Email",
+      "title": "Direct inbox",
+      "text": "Best for project details, internship conversations, and follow-ups.",
+      "href": "mailto:Taha82426980@gmail.com",
+      "linkLabel": "Email me"
+    },
+    {
+      "eyebrow": "GitHub",
+      "title": "Code profile",
+      "text": "Review my public repositories and current learning progress.",
+      "href": "https://github.com/delepover56",
+      "linkLabel": "Open GitHub",
+      "external": true
+    },
+    {
+      "eyebrow": "LinkedIn",
+      "title": "Professional network",
+      "text": "Connect for roles, collaborations, and professional updates.",
+      "href": "https://www.linkedin.com/in/taha-khan03/",
+      "linkLabel": "Open LinkedIn",
+      "external": true
+    },
+    {
+      "eyebrow": "Location",
+      "title": "Pakistan based",
+      "text": "Available for remote frontend, CMS, and learning-focused opportunities."
+    }
+  ],
+  "formIntro": {
+    "eyebrow": "Message",
+    "title": "Tell me about the work",
+    "summary": "Share the project purpose, timeline, and anything I should know before replying."
+  },
+  "detailCards": [
+    {
+      "eyebrow": "Response time",
+      "title": "Usually within 24 hours",
+      "text": "I read every message and reply with the next useful step."
+    },
+    {
+      "eyebrow": "Preferred work",
+      "title": "Frontend UI and web builds",
+      "text": "Landing pages, portfolio sites, dashboards, CMS work, and responsive interfaces."
+    },
+    {
+      "eyebrow": "Availability",
+      "title": "Open to internships and freelance work",
+      "text": "Best fit is a team or project where I can contribute, learn, and ship carefully."
+    }
+  ],
+  "ctaStrip": {
+    "eyebrow": "Prefer email?",
+    "text": "You can also reach me directly if the form is unavailable or you want to continue a conversation.",
+    "email": {
+      "href": "mailto:Taha82426980@gmail.com",
+      "label": "Email Directly",
+      "ariaLabel": "Email Taha Khan directly"
+    },
+    "socialLinks": [
+      {
+        "href": "https://github.com/delepover56",
+        "label": "GitHub"
+      },
+      {
+        "href": "https://www.linkedin.com/in/taha-khan03/",
+        "label": "LinkedIn"
+      }
+    ]
+  }
+}
