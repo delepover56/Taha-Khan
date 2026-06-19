@@ -8,6 +8,7 @@ import {
   staggerItem,
 } from "@/animations/motionPresets";
 import ProfileCard from "@/components/reactbits/ProfileCard/ProfileCard";
+import { StarBorder } from "@/components/reactbits";
 import sideInfoBox from "@/data/sideInfoBox.json";
 
 const ICON_MAP = {
@@ -133,15 +134,14 @@ const MyInfo = () => {
                 ))}
               </div>
 
-              <motion.a
+              <StarBorder
                 href={sideInfoBox.profile.resumeHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={hoverGlow(shouldReduceMotion)}
-                className="rounded-2xl border border-[#00ff5e88] bg-[#00ff5e10] px-6 py-3 text-center text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] shadow-[0_0_22px_rgba(0,255,94,0.14)] transition-colors duration-200 hover:border-[#00ff5e] hover:bg-[#00ff5e1a] hover:text-white hover:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+                className="poppins-semibold w-full justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
               >
                 {sideInfoBox.profile.resumeLabel}
-              </motion.a>
+              </StarBorder>
             </>
           }
         >

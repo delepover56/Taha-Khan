@@ -589,14 +589,13 @@ const Contact = () => {
                 )}
               </AnimatePresence>
 
-              <motion.button
+              <StarBorder
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={hoverGlow(shouldReduceMotion)}
-                className="cursor-pointer rounded-2xl border border-[#00ff5e66] bg-[#06180f] px-6 py-3 text-[11px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:font-bold hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] disabled:cursor-not-allowed disabled:opacity-60 xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+                className="poppins-semibold w-full cursor-pointer justify-center text-[11px] uppercase tracking-[0.24em] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 xs:text-xs xs:tracking-[0.28em] sm:w-fit sm:text-sm"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
-              </motion.button>
+              </StarBorder>
             </motion.form>
           </SpotlightCard>
         </motion.div>
@@ -635,15 +634,16 @@ const Contact = () => {
             {contactData.ctaStrip.email.label}
           </StarBorder>
           {contactData.ctaStrip.socialLinks.map((link) => (
-            <a
+            <StarBorder
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="poppins rounded-2xl border border-[#00ff5e2e] bg-[#06180f] px-4 py-3 text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+              className="poppins text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] hover:text-white"
+              contentClassName="px-4 py-3"
             >
               {link.label}
-            </a>
+            </StarBorder>
           ))}
         </div>
       </motion.div>

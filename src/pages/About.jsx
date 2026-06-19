@@ -93,7 +93,7 @@ const About = () => {
             <StarBorder
               type="button"
               onClick={handleProjectsClick}
-              className="poppins-semibold type-button uppercase tracking-[0.26em] transition-colors duration-200 hover:text-white"
+              className="poppins-semibold type-button uppercase tracking-[0.26em] transition-colors duration-200 cursor-pointer hover:text-white"
             >
               {aboutData.hero.ctaLabel}
             </StarBorder>

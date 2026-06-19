@@ -1,5 +1,5 @@
 import { useReducedMotion } from "motion/react";
-import { SpotlightCard } from "@/components/reactbits";
+import { SpotlightCard, StarBorder } from "@/components/reactbits";
 
 const STATUS_STYLES = {
   Live: "border-[#00ff5e55] bg-[#00ff5e14] text-[#c7ffd8]",
@@ -107,26 +107,28 @@ const ProjectCard = ({ project }) => {
 
           <div className="mt-5 flex flex-wrap gap-3 pb-1">
             {project.link && (
-              <a
+              <StarBorder
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.name} live site`}
-                className="poppins-semibold inline-flex min-h-10 items-center justify-center rounded-full border border-[#00ff5e66] bg-[#00ff5e12] px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-[#00ff5e] transition-colors duration-200 hover:border-[#00ff5e] hover:bg-[#00ff5e1f] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+                className="poppins-semibold rounded-full text-[10px] uppercase tracking-[0.24em] hover:text-white"
+                contentClassName="min-h-10 px-4 py-2"
               >
                 View Live
-              </a>
+              </StarBorder>
             )}
             {project.github && (
-              <a
+              <StarBorder
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.name} GitHub repository`}
-                className="poppins-semibold inline-flex min-h-10 items-center justify-center rounded-full border border-[#00ff5e2a] bg-[#06180f] px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e10] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+                className="poppins-semibold rounded-full text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] hover:text-white"
+                contentClassName="min-h-10 px-4 py-2"
               >
                 GitHub
-              </a>
+              </StarBorder>
             )}
           </div>
         </div>
