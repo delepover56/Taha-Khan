@@ -46,10 +46,10 @@ const Slider = ({ projects = [], swiperKey }) => {
         shouldReduceMotion
           ? false
           : {
-              delay: 3200,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }
+            delay: 3200,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }
       }
       breakpoints={{
         480: {

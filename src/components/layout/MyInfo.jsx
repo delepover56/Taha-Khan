@@ -107,7 +107,7 @@ const MyInfo = () => {
           }
           actions={
             <>
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3 sm:w-max self-center md:self-start">
                 {sideInfoBox.socialLinks.map((item) => (
                   <motion.a
                     key={item.label}
@@ -138,7 +138,7 @@ const MyInfo = () => {
                 href={sideInfoBox.profile.resumeHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="poppins-semibold w-full justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+                className="poppins-semibold w-max md:w-full sm:w-max self-center justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
               >
                 {sideInfoBox.profile.resumeLabel}
               </StarBorder>

@@ -13,7 +13,7 @@ const StarBorder = ({
       <span className="pointer-events-none absolute inset-[-40%] animate-[starBorderSpin_7s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,var(--star-border-color)_40deg,transparent_80deg,transparent_360deg)] opacity-70 motion-reduce:animate-none" />
       <span
         className={[
-          "relative z-10 rounded-[15px] bg-[#06180f] px-6 py-3",
+          "relative z-10 rounded-[15px] bg-[#06180f] px-6 py-3 md:w-max w-full text-center",
           contentClassName,
         ].join(" ")}
       >

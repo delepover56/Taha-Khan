@@ -2,7 +2,7 @@
   {
     "name": "Chic Lighting",
     "link": "https://chiclighting.vercel.app/",
-    "github": null,
+    "github": "https://github.com/delepover56/Chic-Lightnings",
     "image": "/Images/Projects/ChicLighting.webp",
     "alt": "Homepage screenshot of the Chic Lighting frontend project",
     "description": "A polished lighting storefront interface focused on clean product presentation and responsive frontend layout.",
@@ -15,12 +15,12 @@
       "/Images/Icons/JavaScript.svg"
     ],
     "status": "Live",
-    "featured": false
+    "featured": true
   },
   {
     "name": "Tasbeeh Wala",
     "link": "https://tasbeeh-wala.vercel.app/",
-    "github": null,
+    "github": "https://github.com/delepover56/TasbeehWala",
     "image": "/Images/Projects/Tasbeeh_Wala.webp",
     "alt": "Homepage screenshot of the Tasbeeh Wala frontend project",
     "description": "A focused digital tasbeeh experience with a simple interaction model and mobile-friendly presentation.",
@@ -38,7 +38,7 @@
   {
     "name": "True Vegan Sea Food",
     "link": "https://true-vegan-seafood.vercel.app/",
-    "github": null,
+    "github": "https://github.com/delepover56/True-Vegan-Seafood",
     "image": "/Images/Projects/True_Vegan_Sea_Food.webp",
     "alt": "Homepage screenshot of the True Vegan Sea Food frontend project",
     "description": "A responsive restaurant-style website presenting brand content, sections, and calls to action with a clean visual flow.",
@@ -52,5 +52,23 @@
     ],
     "status": "Live",
     "featured": false
+  },
+  {
+    "name": "Jalbani Writes",
+    "link": "https://jalbaniwrites.com/",
+    "github": "https://github.com/delepover56/Portfolio",
+    "image": "/Images/Projects/Jalbani-Writes.webp",
+    "alt": "Homepage screenshot of the Jalbani Writes Client project",
+    "description": "A responsive WordPress website for a professional writing brand, showcasing services, expertise, and contact options through a clean, modern interface.",
+    "category": "Frontend",
+    "filters": ["WordPress", "Frontend"],
+    "stack": ["WordPress", "CSS", "JavaScript"],
+    "tech": [
+      "/Images/Icons/WordPress.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": true
   }
 ]

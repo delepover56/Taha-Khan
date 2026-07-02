@@ -70,15 +70,33 @@ const ProjectCard = ({ project }) => {
           </span>
         </div>
 
-        <div>
-          <h3 className="merienda type-h4 text-white">{project.name}</h3>
+        <div className="mt-4">
+          <div className="flex w-full justify-between gap-2">
+            <h3 className="merienda type-h4 text-white">{project.name}</h3>
+            {(project.tech ?? []).length > 0 && (
+              <div className="mb-4 flex items-center gap-2" aria-hidden="true">
+                {project.tech.map((techIcon, index) => (
+                  <img
+                    key={`${project.name}-tech-${index}`}
+                    src={techIcon}
+                    alt=""
+                    className="h-5 w-5 object-contain opacity-80"
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
           <p className="poppins type-body-sm mt-2 leading-relaxed text-[#c7ffd8]">
             {project.description}
           </p>
         </div>
 
         <div className="mt-auto">
-          <div className="flex flex-wrap gap-2" aria-label={`${project.name} tech stack`}>
+          {/* <div className="flex flex-wrap gap-2" aria-label={`${project.name} tech stack`}>
             {(project.stack ?? []).map((item) => (
               <span
                 key={item}
@@ -87,32 +105,16 @@ const ProjectCard = ({ project }) => {
                 {item}
               </span>
             ))}
-          </div>
+          </div> */}
 
-          {(project.tech ?? []).length > 0 && (
-            <div className="mt-4 flex items-center gap-2" aria-hidden="true">
-              {project.tech.map((techIcon, index) => (
-                <img
-                  key={`${project.name}-tech-${index}`}
-                  src={techIcon}
-                  alt=""
-                  className="h-5 w-5 object-contain opacity-80"
-                  loading="lazy"
-                  decoding="async"
-                  draggable={false}
-                />
-              ))}
-            </div>
-          )}
-
-          <div className="mt-5 flex flex-wrap gap-3 pb-1">
+          <div className="mt-2 flex flex-wrap gap-3 pb-1">
             {project.link && (
               <StarBorder
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.name} live site`}
-                className="poppins-semibold rounded-full text-[10px] uppercase tracking-[0.24em] hover:text-white"
+                className="poppins-semibold rounded-full md:w-max w-full text-center text-[10px] uppercase tracking-[0.24em] hover:text-white"
                 contentClassName="min-h-10 px-4 py-2"
               >
                 View Live
@@ -124,7 +126,7 @@ const ProjectCard = ({ project }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.name} GitHub repository`}
-                className="poppins-semibold rounded-full text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] hover:text-white"
+                className="poppins-semibold rounded-full md:w-max w-full text-center text-[10px] uppercase tracking-[0.24em] text-[#9fffbf] hover:text-white"
                 contentClassName="min-h-10 px-4 py-2"
               >
                 GitHub
