@@ -7,7 +7,7 @@ const MagicBento = ({
   return (
     <div
       className={[
-        "grid w-full min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3",
+        "flex w-full min-w-0 flex-wrap gap-4",
         className,
       ].join(" ")}
       style={{ "--magic-bento-glow": glowColor }}
@@ -17,12 +17,12 @@ const MagicBento = ({
         <article
           key={item.title}
           className={[
-            "group min-w-0 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5",
+            "group min-w-0 basis-full shrink-0 rounded-2xl border border-[#00ff5e1f] bg-[#0b140d] p-5",
             "shadow-[0_14px_32px_rgba(0,0,0,0.26),0_0_0_1px_rgba(var(--magic-bento-glow),0.03)]",
             staticMode
               ? ""
               : "transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e12] hover:shadow-[0_14px_32px_rgba(0,0,0,0.3),0_0_24px_rgba(var(--magic-bento-glow),0.08)] focus-within:border-[#00ff5e88] motion-reduce:transition-none",
-            item.featured ? "md:col-span-2" : "",
+            "sm:basis-[calc(50%_-_0.5rem)]",
           ].join(" ")}
           role="listitem"
         >

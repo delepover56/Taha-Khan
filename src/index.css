@@ -332,7 +332,7 @@ body {
   }
 }
 
-@keyframes gridShift {
+@keyframes ambientDrift {
   0% {
     transform: translate(0, 0);
   }

@@ -392,18 +392,25 @@ const Contact = () => {
 
       <motion.div
         variants={containerVariants}
-        className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        className="flex min-w-0 flex-wrap gap-4"
         aria-label="Quick contact links"
       >
         {contactData.quickContactCards.map((item) => (
-          <motion.div key={item.title} variants={itemVariants}>
+          <motion.div
+            key={item.title}
+            variants={itemVariants}
+            className="min-w-0 basis-full shrink-0 sm:basis-[calc(50%_-_0.5rem)] xl:basis-[calc(25%_-_0.75rem)]"
+          >
             <ContactInfoCard {...item} />
           </motion.div>
         ))}
       </motion.div>
 
-      <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.28fr)_minmax(280px,0.72fr)] xl:gap-8">
-        <motion.div variants={itemVariants} className="min-w-0">
+      <div className="flex min-w-0 flex-col gap-6 xl:flex-row xl:gap-8">
+        <motion.div
+          variants={itemVariants}
+          className="min-w-0 xl:flex-[1.28_1_0]"
+        >
           <SpotlightCard className="p-0 shadow-[0_18px_42px_rgba(0,0,0,0.4)]">
             <motion.form
               onSubmit={handleSubmit(onSubmit)}
@@ -430,8 +437,8 @@ const Contact = () => {
                 {...register("company")}
               />
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div>
+              <div className="flex flex-wrap gap-4">
+                <div className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)]">
                   <label className="sr-only" htmlFor="contact-name">
                     Full name
                   </label>
@@ -460,7 +467,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div>
+                <div className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)]">
                   <label className="sr-only" htmlFor="contact-email">
                     Email address
                   </label>
@@ -486,8 +493,8 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div>
+              <div className="flex flex-wrap gap-4">
+                <div className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)]">
                   <label className="sr-only" htmlFor="contact-phone">
                     Phone number
                   </label>
@@ -511,7 +518,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div>
+                <div className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)]">
                   <label className="sr-only" htmlFor="contact-subject">
                     Project purpose
                   </label>
@@ -602,11 +609,15 @@ const Contact = () => {
 
         <motion.aside
           variants={containerVariants}
-          className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-1"
+          className="flex min-w-0 flex-wrap gap-4 xl:min-w-[280px] xl:flex-[0.72_1_0]"
           aria-label="Contact expectations"
         >
           {contactData.detailCards.map((item) => (
-            <motion.div key={item.title} variants={itemVariants}>
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              className="min-w-0 basis-full shrink-0 sm:basis-[calc(50%_-_0.5rem)] xl:basis-full"
+            >
               <ContactInfoCard {...item} />
             </motion.div>
           ))}

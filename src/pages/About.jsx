@@ -97,14 +97,14 @@ const About = () => {
             >
               {aboutData.hero.ctaLabel}
             </StarBorder>
-            <p className="poppins type-caption max-w-[260px] uppercase tracking-[0.28em] text-[#7feaa0]">
+            <p className="poppins type-caption max-w-[100%] uppercase tracking-[0.28em] text-[#7feaa0]">
               {aboutData.hero.stackSummary}
             </p>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             variants={containerVariants}
-            className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+            className="mt-7 flex flex-wrap gap-3"
             role="list"
           >
             {aboutData.heroFocusCards.map((item) => (
@@ -112,11 +112,12 @@ const About = () => {
                 key={item.title}
                 variants={itemVariants}
                 role="listitem"
+                className="min-w-0 basis-full shrink-0 sm:basis-[calc(50%_-_0.375rem)] xl:basis-[calc(25%_-_0.5625rem)]"
               >
                 <AboutFocusCard {...item} />
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
       </motion.div>
 
@@ -144,14 +145,14 @@ const About = () => {
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid min-w-0 gap-4 sm:mt-8 md:grid-cols-2 2xl:grid-cols-4"
+          className="mt-6 flex min-w-0 flex-wrap gap-4 sm:mt-8"
           role="list"
         >
           {aboutData.buildSection.cards.map((card) => (
             <motion.div
               key={card.title}
               variants={itemVariants}
-              className="min-w-0"
+              className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)] 2xl:basis-[calc(25%_-_0.75rem)]"
             >
               <SpotlightCard
                 role="listitem"
@@ -248,10 +249,14 @@ const About = () => {
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid gap-4 md:grid-cols-3"
+          className="mt-6 flex flex-wrap gap-4"
         >
           {aboutData.growthSection.items.map((item) => (
-            <motion.div key={item.title} variants={itemVariants}>
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              className="min-w-0 basis-full shrink-0 md:basis-[calc(33.333333%_-_0.666667rem)]"
+            >
               <article className="h-full rounded-2xl border border-[#00ff5e20] bg-[#0b140d] p-5 shadow-[0_12px_26px_rgba(0,0,0,0.28)] xs:p-6">
                 <h3 className="roboto-slab type-h4 text-white">
                   {item.title}

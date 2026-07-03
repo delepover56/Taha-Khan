@@ -3,6 +3,7 @@ const ProfileCard = ({
   name,
   role,
   status,
+  experience,
   children,
   actions,
   className = "",
@@ -17,15 +18,18 @@ const ProfileCard = ({
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,94,0.07),_rgba(5,12,8,0.22)_42%,_transparent_68%)]" />
       <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-linear-to-r from-transparent via-[#00ff5e66] to-transparent" />
-      <div className="relative z-10 flex flex-col gap-6">
-        <div className="flex flex-col gap-3 xs:flex-row xs:items-center xs:gap-4">
+      <div className="relative z-10 flex flex-col gap-4">
+        <div className="flex flex-col items-center md:items-start gap-3 xs:flex-row xs:items-center xs:gap-4">
           {avatar}
-          <div className="min-w-0">
-            <h2 className="merienda type-h3 text-white">{name}</h2>
-            <p className="poppins type-caption uppercase tracking-[0.32em] text-[#9fffbf]">
+          <div className="min-w-0 flex flex-col items-center md:items-start gap-1">
+            <h2 className="merienda type-h3 text-white text-center md:text-start">{name}</h2>
+            <p className="poppins type-caption uppercase tracking-[0.32em] text-[#9fffbf] text-center md:text-start">
               {role}
             </p>
-            {status}
+            <div className="flex flex-col items-center lg:items-start lg:flex-col gap-2 mt-2 md:flex-row md:items-center">
+              {status}
+              {experience}
+            </div>
           </div>
         </div>
         {children}

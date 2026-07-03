@@ -2,22 +2,25 @@
   "profile": {
     "name": "M. Taha Khan",
     "role": "Front-End Developer",
-    "statusText": "Open to work",
+    "experience": "3+ Years of Experience",
+    "statusText": "Open to Work",
     "avatarSrc": "/Images/myAvatar.webp",
     "avatarAlt": "Taha Khan",
-    "intro": "I build responsive, polished interfaces with clean structure, thoughtful interactions, and a growing React/Tailwind workflow.",
+    "intro": "Developing responsive websites and user-focused digital experiences with clean code, modern technologies, and attention to performance.",
     "resumeHref": "/Taha-Resume.pdf",
     "resumeLabel": "Download Resume"
   },
   "stackItems": [
-    "HTML5",
-    "CSS3",
     "React",
-    "Tailwind",
     "JavaScript",
+    "Tailwind CSS",
+    "Technical SEO",
+    "WooCommerce",  
     "WordPress",
-    "Shopify"
-  ],
+    "Shopify",
+    "HTML5",
+    "CSS3"
+],
   "contactItems": [
     {
       "label": "Phone",

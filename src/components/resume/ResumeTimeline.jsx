@@ -20,7 +20,7 @@ const ResumeTimeline = ({ eyebrow, title, summary, items = [] }) => {
 
       <AnimatedList
         items={items}
-        className="mt-6 grid gap-4 sm:mt-8"
+        className="mt-6 flex flex-col gap-4 sm:mt-8"
         renderItem={(item) => (
           <SpotlightCard className="p-5 xs:p-6">
             <article className="relative pl-6">

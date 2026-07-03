@@ -1,41 +1,83 @@
 {
   "hero": {
-    "eyebrow": "Front-End Developer",
+    "eyebrow": "About",
     "namePrefix": "Hi, I am ",
     "name": "M. Taha Khan",
     "introParagraphs": [
       [
         {
-          "text": "I am a front-end developer from Karachi crafting immersive, responsive interfaces with clean HTML, modern CSS, thoughtful JavaScript, and a growing React workflow."
-        }
-      ],
-      [
+          "text": "With over 3 years of professional experience in Front-End Developer, I build responsive websites, e-commerce solutions, and modern web interfaces using "
+        },
         {
-          "text": "My background includes custom "
+          "text": "React",
+          "highlight": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "WordPress",
           "highlight": true
         },
         {
-          "text": " and "
+          "text": ", "
+        },
+        {
+          "text": "WooCommerce",
+          "highlight": true
+        },
+        {
+          "text": ", and "
         },
         {
           "text": "Shopify",
           "highlight": true
         },
         {
-          "text": " solutions, performance optimization, and pixel-perfect delivery. I am currently building deeper expertise in "
+          "text": "."
+        }
+      ],
+      [
+        {
+          "text": "My experience includes developing custom "
         },
         {
-          "text": "React.js",
+          "text": "WordPress",
+          "highlight": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "WooCommerce",
+          "highlight": true
+        },
+        {
+          "text": ", and "
+        },
+        {
+          "text": "Shopify",
+          "highlight": true
+        },
+        {
+          "text": " websites, converting Figma designs into responsive interfaces, implementing technical SEO, optimizing performance, and delivering accessible web experiences. I work across modern frontend development with "
+        },
+        {
+          "text": "React",
+          "highlight": true
+        },
+        {
+          "text": " while applying SEO best practices in both code-driven projects and WordPress using "
+        },
+        {
+          "text": "Yoast SEO",
           "highlight": true
         },
         {
           "text": " and "
         },
         {
-          "text": "Tailwind CSS",
+          "text": "Rank Math",
           "highlight": true
         },
         {
@@ -45,101 +87,135 @@
     ],
     "ctaLabel": "View Projects",
     "ctaPath": "/projects",
-    "stackSummary": "React, Tailwind, WordPress, Shopify"
+    "stackSummary": "React • WordPress • WooCommerce • Shopify • Technical SEO"
   },
+
   "heroFocusCards": [
     {
-      "title": "UI Engineering",
-      "description": "Component-minded interfaces with clean structure and modern React habits."
+      "title": "Front-End Development",
+      "description": "Building modern, responsive interfaces with reusable components and clean, maintainable code."
     },
     {
-      "title": "Responsive UX",
-      "description": "Layouts that stay readable, touch-friendly, and balanced across screens."
+      "title": "Responsive Design",
+      "description": "Creating layouts that deliver consistent experiences across desktop, tablet, and mobile devices."
     },
     {
-      "title": "CMS Builds",
-      "description": "WordPress and Shopify experience for content and storefront delivery."
+      "title": "CMS Development",
+      "description": "Developing WordPress, WooCommerce, and Shopify websites for business and e-commerce needs."
     },
     {
-      "title": "Clean Delivery",
-      "description": "Polished details, performance awareness, and maintainable frontend work."
+      "title": "Performance & SEO",
+      "description": "Optimizing websites for speed, accessibility, Core Web Vitals, and technical SEO."
     }
   ],
+
   "buildSection": {
-    "eyebrow": "About / Focus",
-    "title": "What I build",
-    "summary": "Clean UI, practical CMS delivery, subtle interactions, and responsive layouts that keep the portfolio professional instead of noisy.",
+    "eyebrow": "Focus",
+    "title": "What I Build",
+    "summary": "Building responsive, accessible, and performance-focused websites that combine intuitive user experiences with clean, scalable front-end development.",
+
     "cards": [
       {
-        "label": "React / Tailwind UI",
-        "title": "Component-minded interfaces",
-        "text": "Building pixel-perfect, responsive front-ends with React.js, Tailwind CSS, optimized JavaScript, and a clean component workflow."
+        "label": "Front-End Development",
+        "title": "Modern React Interfaces",
+        "text": "Building responsive user interfaces using React, JavaScript, Tailwind CSS, and reusable component-based architecture."
       },
       {
-        "label": "CMS / E-commerce",
-        "title": "WordPress and Shopify builds",
-        "text": "Creating scalable CMS and storefront experiences with WordPress, Shopify, Elementor, Liquid, and practical theme customization."
+        "label": "CMS & E-commerce",
+        "title": "WordPress, WooCommerce & Shopify",
+        "text": "Developing business websites and e-commerce solutions using WordPress, WooCommerce, Shopify, Elementor, Divi, and Liquid while delivering responsive, accessible, and production-ready user experiences."
       },
       {
-        "label": "Responsive Design",
-        "title": "Layouts that hold up everywhere",
-        "text": "Turning clean HTML, modern CSS, and thoughtful UI structure into interfaces that stay usable across desktop and mobile."
+        "label": "Responsive Development",
+        "title": "Designed for Every Device",
+        "text": "Transforming Figma designs into responsive, accessible layouts that perform consistently across modern browsers and screen sizes."
       },
       {
-        "label": "Performance / Polish",
-        "title": "Fast, tidy delivery",
-        "text": "Keeping interactions subtle, code organized, and visuals refined with occasional image-editing support and game-inspired visual systems."
+        "label": "Performance & Technical SEO",
+        "title": "Optimized for Growth",
+        "text": "Improving Core Web Vitals, page speed, accessibility, and technical SEO across React and WordPress projects using modern development practices alongside Yoast SEO and Rank Math."
       }
     ]
   },
+
   "stackSection": {
-    "eyebrow": "Working Stack",
-    "title": "Technical showcase",
-    "summary": "A technical showcase of the frontend, styling, CMS, and workflow tools I use to turn ideas into polished interfaces.",
+    "eyebrow": "Technical Stack",
+    "title": "Technologies I Work With",
+    "summary": "The technologies, tools, and workflows I use to build responsive websites, interactive user interfaces, and scalable web experiences.",
+
     "skillGroups": [
       {
         "label": "Frontend",
-        "title": "Interface foundations",
-        "description": "The core layer I use to shape interactive browser experiences.",
-        "skills": ["HTML", "CSS", "JavaScript", "React.js"]
+        "title": "Modern Web Development",
+        "description": "Core technologies for building responsive and interactive web applications.",
+        "skills": [
+          "HTML5",
+          "CSS3",
+          "JavaScript (ES6+)",
+          "React"
+        ]
       },
       {
-        "label": "Styling / UI",
-        "title": "Visual systems",
-        "description": "Responsive layouts, utility-first styling, and polished UI details.",
-        "skills": ["Tailwind CSS", "Responsive UI", "Glassmorphism", "Performance CSS"],
+        "label": "Styling & UX",
+        "title": "Responsive Interfaces",
+        "description": "Creating accessible, responsive, and user-friendly experiences across modern devices.",
+        "skills": [
+          "Tailwind CSS",
+          "Responsive Design",
+          "Accessibility",
+          "Cross-Browser Compatibility"
+        ],
         "featured": true
       },
       {
-        "label": "CMS / E-commerce",
-        "title": "Content and storefronts",
-        "description": "Practical site-building experience across CMS and commerce tools.",
-        "skills": ["WordPress", "Shopify", "Elementor", "Liquid", "Theme editor"]
+        "label": "CMS & E-commerce",
+        "title": "Business Websites",
+        "description": "Professional experience building and optimizing CMS and e-commerce platforms.",
+        "skills": [
+          "WordPress",
+          "WooCommerce",
+          "Shopify",
+          "Elementor",
+          "Divi",
+          "Liquid",
+          "Yoast SEO",
+          "Rank Math"
+        ]
       },
       {
-        "label": "Tools",
-        "title": "Build workflow",
-        "description": "The current toolchain behind this portfolio and daily UI work.",
-        "skills": ["Vite", "React Router", "React Hook Form", "Swiper"]
+        "label": "Development Tools",
+        "title": "Workflow",
+        "description": "Tools and libraries that support my daily front-end development workflow.",
+        "skills": [
+          "Git",
+          "GitHub",
+          "Figma",
+          "Vite",
+          "React Router",
+          "React Hook Form",
+          "Swiper"
+        ]
       }
     ]
   },
+
   "growthSection": {
-    "eyebrow": "Future Growth",
-    "title": "Currently learning",
-    "summary": "The next layer of my growth connects today's UI work with more scalable React and production patterns.",
+    "eyebrow": "Continuous Learning",
+    "title": "Currently Learning",
+    "summary": "I continuously expand my frontend expertise by exploring scalable React patterns, modern tooling, and production-ready development practices.",
+
     "items": [
       {
         "title": "Advanced React",
-        "text": "Strengthening component architecture, state patterns, and production-minded UI decisions."
+        "text": "Strengthening component architecture, state management, custom hooks, and scalable application patterns."
       },
       {
-        "title": "Next.js and TypeScript",
-        "text": "Learning the stack behind more scalable React workflows and safer interfaces."
+        "title": "Next.js & TypeScript",
+        "text": "Learning modern React frameworks and type-safe development for larger production applications."
       },
       {
-        "title": "Production patterns",
-        "text": "Improving structure, performance habits, and deployment confidence."
+        "title": "Performance Engineering",
+        "text": "Deepening my understanding of rendering performance, accessibility, optimization techniques, and Core Web Vitals."
       }
     ]
   }

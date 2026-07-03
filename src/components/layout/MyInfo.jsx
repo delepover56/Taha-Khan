@@ -98,16 +98,24 @@ const MyInfo = () => {
           name={sideInfoBox.profile.name}
           role={sideInfoBox.profile.role}
           status={
-            <div className="mt-3 inline-flex max-w-full items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-1 sm:py-1.5">
+            <div className="inline-flex max-w-max items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-2 sm:py-1.5">
               <span className="h-2 w-2 rounded-full bg-[#00ff5e] shadow-[0_0_8px_rgba(0,255,94,0.6)] animate-[glowPulse_2.8s_ease-in-out_infinite]" />
               <span className="poppins type-caption capitalize tracking-[0.28em] text-[#9fffbf]">
                 {sideInfoBox.profile.statusText}
               </span>
             </div>
           }
+          experience={
+            <div className="rounded-xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 lg:hidden">
+              <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
+                {sideInfoBox.profile.experience}
+              </p>
+            </div>
+          }
+
           actions={
             <>
-              <div className="flex flex-wrap items-center gap-3 sm:w-max self-center md:self-start">
+              <div className="flex flex-wrap items-center gap-3 sm:w-max self-center lg:self-start">
                 {sideInfoBox.socialLinks.map((item) => (
                   <motion.a
                     key={item.label}
@@ -138,13 +146,19 @@ const MyInfo = () => {
                 href={sideInfoBox.profile.resumeHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="poppins-semibold w-max md:w-full sm:w-max self-center justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+                className="poppins-semibold w-max lg:w-full md:w-max self-center justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
               >
                 {sideInfoBox.profile.resumeLabel}
               </StarBorder>
             </>
           }
         >
+          <div className="rounded-2xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 hidden lg:flex md:hidden">
+            <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
+              {sideInfoBox.profile.experience}
+            </p>
+          </div>
+
           <div className="rounded-2xl border border-[#00ff5e1f] bg-[#07130d] p-4">
             <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
               {sideInfoBox.profile.intro}
@@ -166,7 +180,7 @@ const MyInfo = () => {
             variants={listVariants}
             initial={initialState}
             animate="show"
-            className="grid min-w-0 gap-3"
+            className="flex min-w-0 flex-col md:flex-row md:w-full md:flex-wrap lg:flex-col gap-3"
           >
             {sideInfoBox.contactItems.map((item) => {
               const isEmail = item.label === "Email";
@@ -176,7 +190,7 @@ const MyInfo = () => {
                   key={item.label}
                   variants={itemVariants}
                   whileHover={hoverGlow(shouldReduceMotion)}
-                  className="group flex min-w-0 max-w-full items-center gap-3 overflow-hidden rounded-2xl border border-[#00ff5e24] bg-[#08130d] p-3.5 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e12] xs:gap-4 xs:p-4"
+                  className="group flex min-w-0 max-w-full md:w-[49.2%] lg:w-full items-center gap-2 overflow-hidden rounded-2xl border border-[#00ff5e24] bg-[#08130d] p-3.5 lg:p-2 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e12] xs:gap-4 xs:p-4"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] transition-colors duration-200 group-hover:border-[#00ff5e66] group-hover:bg-[#00ff5e14] xs:h-11 xs:w-11">
                     <svg
@@ -196,7 +210,7 @@ const MyInfo = () => {
                       <a
                         href={item.href}
                         className={[
-                          "poppins-semibold type-body-sm text-white hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px]",
+                          "poppins-semibold type-body-sm text-white hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px] lg:text-xs",
                           isEmail
                             ? "break-all text-[12px] xs:text-[13px] sm:text-sm lg:whitespace-nowrap lg:break-normal lg:text-[13px] xl:text-sm"
                             : "break-words",

@@ -113,10 +113,14 @@ const Resume = () => {
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          className="mt-6 flex flex-wrap gap-4"
         >
           {resumeData.skills.groups.map((group) => (
-            <motion.div key={group.title} variants={itemVariants}>
+            <motion.div
+              key={group.title}
+              variants={itemVariants}
+              className="min-w-0 basis-full shrink-0 md:basis-[calc(50%_-_0.5rem)] xl:basis-[calc(33.333333%_-_0.666667rem)]"
+            >
               <ResumeSkillGroup {...group} />
             </motion.div>
           ))}
@@ -150,10 +154,14 @@ const Resume = () => {
 
         <motion.div
           variants={containerVariants}
-          className="mt-6 grid gap-4 md:grid-cols-3"
+          className="mt-6 flex flex-wrap gap-4"
         >
           {resumeData.learning.items.map((item) => (
-            <motion.div key={item.title} variants={itemVariants}>
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              className="min-w-0 basis-full shrink-0 md:basis-[calc(33.333333%_-_0.666667rem)]"
+            >
               <SpotlightCard className="h-full p-5 xs:p-6">
                 <article>
                   <h3 className="roboto-slab type-h4 text-white">

@@ -6,7 +6,7 @@ import { AppLoaderContext } from "@/context/loaderContext";
 const getImageSources = () =>
   Array.from(
     new Set([
-      "/favicon.svg",
+      "/favicon.png",
       sideInfoBox.profile.avatarSrc,
       ...projectsData.flatMap((project) => [
         project.image,
