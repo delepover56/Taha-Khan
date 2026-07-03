@@ -228,10 +228,6 @@
   font-family: "RobotoSlab", sans-serif;
 }
 
-* {
-  user-select: none;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
   background-color: transparent;

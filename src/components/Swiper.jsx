@@ -80,7 +80,7 @@ const Slider = ({ projects = [], swiperKey }) => {
             animate="show"
             className="h-full w-full min-w-0"
           >
-            <ProjectCard project={project} />
+            <ProjectCard project={project} priority={index === 0} />
           </motion.div>
         </SwiperSlide>
       ))}

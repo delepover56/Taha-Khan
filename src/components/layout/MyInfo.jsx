@@ -75,6 +75,7 @@ const MyInfo = () => {
 
   return (
     <motion.aside
+      aria-label="Profile and contact summary"
       variants={panelVariants}
       initial={initialState}
       animate="show"
@@ -90,6 +91,11 @@ const MyInfo = () => {
               <img
                 src={sideInfoBox.profile.avatarSrc}
                 alt={sideInfoBox.profile.avatarAlt}
+                width="96"
+                height="96"
+                fetchPriority="high"
+                decoding="async"
+                sizes="96px"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#00ff5e33]" />
@@ -130,6 +136,8 @@ const MyInfo = () => {
                     ].join(" ")}
                   >
                     <svg
+                      aria-hidden="true"
+                      focusable="false"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="#9fffbf"
@@ -194,6 +202,8 @@ const MyInfo = () => {
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] transition-colors duration-200 group-hover:border-[#00ff5e66] group-hover:bg-[#00ff5e14] xs:h-11 xs:w-11">
                     <svg
+                      aria-hidden="true"
+                      focusable="false"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="#00ff5e"

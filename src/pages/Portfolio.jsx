@@ -81,6 +81,7 @@ const Portfolio = () => {
 
   return (
     <motion.section
+      aria-labelledby="portfolio-heading"
       variants={containerVariants}
       initial={initialState}
       whileInView="show"
@@ -96,8 +97,12 @@ const Portfolio = () => {
             <p className="poppins type-caption uppercase tracking-[0.35em] text-[#7feaa0]">
               Portfolio
             </p>
-            <motion.h1 variants={fadeUp(shouldReduceMotion)} className="merienda type-h1 mt-2 text-white">
-              Featured Projects
+            <motion.h1
+              id="portfolio-heading"
+              variants={fadeUp(shouldReduceMotion)}
+              className="merienda type-h1 mt-2 text-white"
+            >
+              Featured Front-End Development Projects
             </motion.h1>
             <motion.span
               variants={fadeUp(shouldReduceMotion)}

@@ -1,6 +1,7 @@
-import { useCallback, useState } from "react";
+import { createElement, useCallback, useState } from "react";
 
 const SpotlightCard = ({
+  as: Component = "div",
   children,
   className = "",
   spotlightColor = "rgba(0, 255, 94, 0.16)",
@@ -17,27 +18,29 @@ const SpotlightCard = ({
     });
   }, []);
 
-  return (
-    <div
-      {...props}
-      onPointerMove={handlePointerMove}
-      onPointerEnter={() => setIsActive(true)}
-      onPointerLeave={() => setIsActive(false)}
-      onFocus={() => setIsActive(true)}
-      onBlur={() => setIsActive(false)}
-      className={[
+  return createElement(
+    Component,
+    {
+      ...props,
+      onPointerMove: handlePointerMove,
+      onPointerEnter: () => setIsActive(true),
+      onPointerLeave: () => setIsActive(false),
+      onFocus: () => setIsActive(true),
+      onBlur: () => setIsActive(false),
+      className: [
         "relative overflow-hidden rounded-2xl border border-[#00ff5e22] bg-[#0b140d] transition-colors duration-200",
         "focus-within:border-[#00ff5e88]",
         className,
-      ].join(" ")}
-      style={{
+      ].join(" "),
+      style: {
         "--spotlight-x": `${position.x}px`,
         "--spotlight-y": `${position.y}px`,
         "--spotlight-opacity": isActive ? 1 : 0,
         "--spotlight-color": spotlightColor,
         ...props.style,
-      }}
-    >
+      },
+    },
+    <>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[var(--spotlight-opacity)] transition-opacity duration-300 motion-reduce:opacity-0"
@@ -47,7 +50,7 @@ const SpotlightCard = ({
         }}
       />
       <div className="relative z-10">{children}</div>
-    </div>
+    </>
   );
 };
 

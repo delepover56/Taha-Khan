@@ -7,13 +7,16 @@ const STATUS_STYLES = {
   "Case Study": "border-[#4fd1b866] bg-[#4fd1b814] text-[#b8fff1]",
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, priority = false }) => {
   const shouldReduceMotion = useReducedMotion();
   const statusClass =
     STATUS_STYLES[project.status] ?? "border-[#00ff5e44] bg-[#06180f] text-[#c7ffd8]";
+  const imageLoading = priority ? "eager" : "lazy";
+  const imageFetchPriority = priority ? "high" : "auto";
 
   return (
     <SpotlightCard
+      as="article"
       className="group flex h-full min-h-[500px] w-full min-w-0 flex-col p-0 shadow-[0_16px_30px_rgba(0,0,0,0.45)] sm:min-h-[520px] lg:min-h-[500px]"
       spotlightColor="rgba(0, 255, 94, 0.14)"
     >
@@ -28,8 +31,12 @@ const ProjectCard = ({ project }) => {
           <img
             src={project.image}
             alt={project.alt}
-            loading="lazy"
+            width={project.imageWidth}
+            height={project.imageHeight}
+            loading={imageLoading}
+            fetchPriority={imageFetchPriority}
             decoding="async"
+            sizes="(min-width: 1024px) 50vw, (min-width: 768px) 62vw, 96vw"
             draggable={false}
             className={[
               "h-full w-full object-cover",
@@ -45,8 +52,12 @@ const ProjectCard = ({ project }) => {
           <img
             src={project.image}
             alt={project.alt}
-            loading="lazy"
+            width={project.imageWidth}
+            height={project.imageHeight}
+            loading={imageLoading}
+            fetchPriority={imageFetchPriority}
             decoding="async"
+            sizes="(min-width: 1024px) 50vw, (min-width: 768px) 62vw, 96vw"
             draggable={false}
             className="h-full w-full object-cover"
           />
@@ -80,6 +91,8 @@ const ProjectCard = ({ project }) => {
                     key={`${project.name}-tech-${index}`}
                     src={techIcon}
                     alt=""
+                    width="20"
+                    height="20"
                     className="h-5 w-5 object-contain opacity-80"
                     loading="lazy"
                     decoding="async"

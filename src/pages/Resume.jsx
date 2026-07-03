@@ -26,6 +26,7 @@ const Resume = () => {
 
   return (
     <motion.section
+      aria-labelledby="resume-heading"
       variants={containerVariants}
       initial={initialState}
       whileInView="show"
@@ -42,6 +43,7 @@ const Resume = () => {
               {resumeData.intro.eyebrow}
             </p>
             <motion.h1
+              id="resume-heading"
               variants={fadeUp(shouldReduceMotion)}
               className="merienda type-h1 mt-2 text-white"
             >

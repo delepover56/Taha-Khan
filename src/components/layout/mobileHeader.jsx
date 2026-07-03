@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
@@ -18,6 +18,7 @@ const MENU_ITEMS = [
 
 const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const closeButtonRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const shouldReduceMotion = useReducedMotion();
@@ -37,10 +38,10 @@ const MobileHeader = () => {
   const handleClick = useCallback(
     (to) => {
       setIsOpen(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
       navigate(to);
     },
-    [navigate]
+    [navigate, shouldReduceMotion]
   );
 
   const handleNavItemClick = useCallback(
@@ -73,6 +74,8 @@ const MobileHeader = () => {
   useEffect(() => {
     if (!isOpen) return;
     window.addEventListener("keydown", handleKeyDown);
+    closeButtonRef.current?.focus();
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -83,10 +86,11 @@ const MobileHeader = () => {
     return current?.label ?? "Menu";
   }, [location.pathname, menuItems]);
 
-  const handleBrandClick = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleBrandClick = useCallback((event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
     navigate("/");
-  }, [navigate]);
+  }, [navigate, shouldReduceMotion]);
 
   return (
     <motion.header
@@ -97,14 +101,21 @@ const MobileHeader = () => {
     >
       <div className="flex items-center justify-between rounded-2xl border border-[#00ff5e26] bg-[#0a120db8] px-4 py-3 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.45)] xs:px-5 xs:py-4">
         <div className="flex items-center gap-3">
-          <button
-            type="button"
+          <NavLink
+            to="/"
             onClick={handleBrandClick}
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-transparent transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
             aria-label="Go to home"
           >
-            <img src="./favicon.png" alt="Logo" className="h-full w-full" />
-          </button>
+            <img
+              src="/favicon.png"
+              alt=""
+              aria-hidden="true"
+              width="44"
+              height="44"
+              className="h-full w-full"
+            />
+          </NavLink>
           <div className="leading-tight">
             <p className="merienda text-lg text-[#00ff5e] xs:text-xl">
               Taha Khan
@@ -164,11 +175,14 @@ const MobileHeader = () => {
             animate="show"
             exit="exit"
             id="mobile-menu-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-menu-title"
             className="fixed right-0 top-0 z-50 flex h-full w-[82vw] max-w-[320px] flex-col border-l border-[#00ff5e26] bg-[#0a110d] px-5 pb-6 pt-[calc(env(safe-area-inset-top)+20px)]"
           >
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <p className="merienda text-xl text-[#00ff5e]">
+                <p id="mobile-menu-title" className="merienda text-xl text-[#00ff5e]">
                   Menu
                 </p>
                 <p className="poppins text-[10px] uppercase tracking-[0.28em] text-[#9fffbf]">
@@ -176,12 +190,15 @@ const MobileHeader = () => {
                 </p>
               </div>
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={closeMenu}
                 aria-label="Close menu"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-[#00ff5e44] bg-[#06180f] text-xs uppercase tracking-[0.25em] text-[#9fffbf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
               >
                 <svg
+                  aria-hidden="true"
+                  focusable="false"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -194,6 +211,7 @@ const MobileHeader = () => {
             </div>
 
             <motion.nav
+              aria-label="Mobile navigation"
               variants={listVariants}
               initial={initialState}
               animate="show"

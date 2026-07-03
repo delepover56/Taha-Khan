@@ -3,34 +3,10 @@ import projectsData from "@/data/projectsData.json";
 import sideInfoBox from "@/data/sideInfoBox.json";
 import { AppLoaderContext } from "@/context/loaderContext";
 
-const getImageSources = () =>
-  Array.from(
-    new Set([
-      "/favicon.png",
-      sideInfoBox.profile.avatarSrc,
-      ...projectsData.flatMap((project) => [
-        project.image,
-        ...(Array.isArray(project.tech) ? project.tech : []),
-      ]),
-    ].filter(Boolean))
-  );
+const CRITICAL_ASSET_TIMEOUT_MS = 600;
 
-const waitForWindowLoad = () => {
-  if (typeof window === "undefined") return Promise.resolve();
-  if (document.readyState === "complete") return Promise.resolve();
-
-  return new Promise((resolve) => {
-    window.addEventListener("load", resolve, { once: true });
-  });
-};
-
-const waitForFonts = () => {
-  if (typeof document === "undefined" || !document.fonts?.ready) {
-    return Promise.resolve();
-  }
-
-  return document.fonts.ready.catch(() => undefined);
-};
+const getCriticalImageSources = () =>
+  Array.from(new Set(["/favicon.png", sideInfoBox.profile.avatarSrc].filter(Boolean)));
 
 const waitForImage = (src) =>
   new Promise((resolve) => {
@@ -45,8 +21,16 @@ const waitForImage = (src) =>
     }
   });
 
-const waitForPortfolioAssets = () =>
-  Promise.all(getImageSources().map(waitForImage));
+const waitForCriticalAssets = () =>
+  Promise.all(getCriticalImageSources().map(waitForImage));
+
+const withTimeout = (promise, timeoutMs) =>
+  Promise.race([
+    promise,
+    new Promise((resolve) => {
+      window.setTimeout(resolve, timeoutMs);
+    }),
+  ]);
 
 export const AppLoaderProvider = ({ children }) => {
   const [projects] = useState(projectsData);
@@ -61,11 +45,10 @@ export const AppLoaderProvider = ({ children }) => {
   useEffect(() => {
     let isMounted = true;
 
-    Promise.all([
-      waitForWindowLoad(),
-      waitForFonts(),
-      waitForPortfolioAssets(),
-    ]).then(() => {
+    withTimeout(
+      waitForCriticalAssets(),
+      CRITICAL_ASSET_TIMEOUT_MS
+    ).then(() => {
       if (isMounted) setAreAssetsReady(true);
     });
 

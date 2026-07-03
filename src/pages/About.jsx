@@ -35,7 +35,8 @@ const About = () => {
   const containerVariants = staggerContainer(shouldReduceMotion, 0.05, 0.08);
   const itemVariants = staggerItem(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
-  const handleProjectsClick = () => {
+  const handleProjectsClick = (event) => {
+    event.preventDefault();
     window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
     navigate(aboutData.hero.ctaPath);
   };
@@ -46,6 +47,7 @@ const About = () => {
 
   return (
     <motion.section
+      aria-labelledby="about-heading"
       variants={containerVariants}
       initial={initialState}
       animate="show"
@@ -60,6 +62,7 @@ const About = () => {
             {aboutData.hero.eyebrow}
           </p>
           <motion.h1
+            id="about-heading"
             variants={fadeUp(shouldReduceMotion)}
             className="merienda mt-3 max-w-4xl text-[2rem] leading-tight text-white xs:text-[2.35rem] sm:text-5xl lg:text-[3.25rem] xl:text-[4rem]"
           >
@@ -91,7 +94,7 @@ const About = () => {
             className="mt-6 flex flex-wrap items-center gap-4"
           >
             <StarBorder
-              type="button"
+              href={aboutData.hero.ctaPath}
               onClick={handleProjectsClick}
               className="poppins-semibold type-button uppercase tracking-[0.26em] transition-colors duration-200 cursor-pointer hover:text-white"
             >

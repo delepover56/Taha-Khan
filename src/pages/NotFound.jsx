@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import Background from "@/components/background";
+import RouteSEO from "@/components/RouteSEO";
 import { GradientText, SpotlightCard, StarBorder } from "@/components/reactbits";
 import { fadeUp, staggerContainer, staggerItem } from "@/animations/motionPresets";
 
@@ -11,15 +12,27 @@ const NotFound = () => {
   const itemVariants = staggerItem(shouldReduceMotion);
   const initialState = shouldReduceMotion ? "show" : "hidden";
 
-  const handleHomeClick = () => {
+  const handleHomeClick = (event) => {
+    event.preventDefault();
     window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
     navigate("/", { replace: true });
   };
 
   return (
     <>
+      <RouteSEO path="/404" />
+      <a
+        href="#not-found-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-xl focus:border focus:border-[#00ff5e88] focus:bg-[#06180f] focus:px-4 focus:py-3 focus:text-sm focus:text-white focus:outline-none focus:ring-2 focus:ring-[#00ff5e66]"
+      >
+        Skip to page content
+      </a>
       <Background />
-      <main className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 py-10 xs:px-5 sm:px-6">
+      <main
+        id="not-found-content"
+        aria-labelledby="not-found-heading"
+        className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 py-10 xs:px-5 sm:px-6"
+      >
         <motion.div
           variants={containerVariants}
           initial={initialState}
@@ -38,6 +51,7 @@ const NotFound = () => {
             </motion.p>
 
             <motion.h1
+              id="not-found-heading"
               variants={fadeUp(shouldReduceMotion)}
               className="merienda mt-3 text-3xl leading-tight text-white xs:text-4xl sm:text-5xl"
             >
@@ -62,7 +76,7 @@ const NotFound = () => {
               className="mt-7 flex justify-center"
             >
               <StarBorder
-                type="button"
+                href="/"
                 onClick={handleHomeClick}
                 className="poppins-semibold type-button w-full max-w-[220px] justify-center uppercase tracking-[0.26em] transition-colors duration-200 hover:text-white xs:max-w-none xs:w-auto cursor-pointer"
                 contentClassName="w-full px-6 py-3"

@@ -39,13 +39,15 @@ const AppPreloader = () => {
               <img
                 src="/favicon.png"
                 alt="Taha Khan site logo"
+                width="68"
+                height="68"
                 className="h-full w-full object-contain"
               />
             </div>
 
-            <h2 className="merienda type-h3 mt-5 text-white">
+            <p className="merienda type-h3 mt-5 text-white">
               <GradientText>Taha Khan</GradientText> Portfolio
-            </h2>
+            </p>
             <p className="poppins type-body-sm mt-3 text-[#c7ffd8]">
               <span>Loading</span>
               <span aria-hidden="true" className="inline-flex w-5 justify-start text-[#00ff5e]">

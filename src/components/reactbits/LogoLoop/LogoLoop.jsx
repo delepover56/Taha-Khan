@@ -21,6 +21,7 @@ const LogoLoop = ({ items = [], className = "" }) => {
                 aria-hidden="true"
                 className="mr-2 h-5 w-5 object-contain"
                 loading="lazy"
+                decoding="async"
               />
             )}
             <span className="poppins type-caption uppercase tracking-[0.24em]">

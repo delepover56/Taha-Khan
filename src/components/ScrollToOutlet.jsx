@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useLocation, useNavigationType } from "react-router";
+import { useReducedMotion } from "motion/react";
 
 export default function ScrollToOutlet() {
   const { pathname } = useLocation();
   const navigationType = useNavigationType();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (window.innerWidth >= 1024) return;
@@ -13,10 +15,13 @@ export default function ScrollToOutlet() {
       const outlet = document.getElementById("route-outlet");
 
       if (outlet) {
-        outlet.scrollIntoView({ behavior: "smooth", block: "start" });
+        outlet.scrollIntoView({
+          behavior: shouldReduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
       }
     });
-  }, [pathname, navigationType]);
+  }, [pathname, navigationType, shouldReduceMotion]);
 
   return null;
 }

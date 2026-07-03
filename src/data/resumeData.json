@@ -1,8 +1,8 @@
 {
   "intro": {
     "eyebrow": "Resume",
-    "title": "Experience, education, and technical skills",
-    "summary": "An overview of my professional experience, education, and the technologies I use to build responsive, accessible, and performance-focused web applications.",
+    "title": "Front-end developer resume",
+    "summary": "An overview of my front-end development experience, education, and the technologies I use to build responsive, accessible, and performance-focused web applications.",
     "tags": [
       "Front-End",
       "React",

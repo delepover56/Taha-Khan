@@ -351,6 +351,7 @@ const Contact = () => {
 
   return (
     <motion.section
+      aria-labelledby="contact-heading"
       variants={containerVariants}
       initial={initialState}
       whileInView="show"
@@ -371,6 +372,7 @@ const Contact = () => {
               {contactData.intro.eyebrow}
             </p>
             <motion.h1
+              id="contact-heading"
               variants={fadeUp(shouldReduceMotion)}
               className="merienda type-h1 mt-2 text-white"
             >
@@ -457,11 +459,12 @@ const Contact = () => {
                       handleFieldChange();
                     }}
                     aria-invalid={errors.name ? "true" : "false"}
+                    aria-describedby={errors.name ? "contact-name-error" : undefined}
                     placeholder="Full name"
                     className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                   />
                   {errors.name && (
-                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                    <p id="contact-name-error" role="alert" className="poppins mt-2 text-xs text-red-300">
                       {errors.name.message}
                     </p>
                   )}
@@ -482,11 +485,12 @@ const Contact = () => {
                       handleFieldChange();
                     }}
                     aria-invalid={errors.email ? "true" : "false"}
+                    aria-describedby={errors.email ? "contact-email-error" : undefined}
                     placeholder="Email address"
                     className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                   />
                   {errors.email && (
-                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                    <p id="contact-email-error" role="alert" className="poppins mt-2 text-xs text-red-300">
                       {errors.email.message}
                     </p>
                   )}
@@ -508,11 +512,12 @@ const Contact = () => {
                       handleFieldChange();
                     }}
                     aria-invalid={errors.phone ? "true" : "false"}
+                    aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                     placeholder="Phone number"
                     className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                   />
                   {errors.phone && (
-                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                    <p id="contact-phone-error" role="alert" className="poppins mt-2 text-xs text-red-300">
                       {errors.phone.message}
                     </p>
                   )}
@@ -533,11 +538,12 @@ const Contact = () => {
                       handleFieldChange();
                     }}
                     aria-invalid={errors.subject ? "true" : "false"}
+                    aria-describedby={errors.subject ? "contact-subject-error" : undefined}
                     placeholder="Project purpose"
                     className="w-full rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                   />
                   {errors.subject && (
-                    <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                    <p id="contact-subject-error" role="alert" className="poppins mt-2 text-xs text-red-300">
                       {errors.subject.message}
                     </p>
                   )}
@@ -560,10 +566,11 @@ const Contact = () => {
                     handleFieldChange();
                   }}
                   aria-invalid={errors.message ? "true" : "false"}
+                  aria-describedby={errors.message ? "contact-message-error" : undefined}
                   className="w-full resize-none rounded-xl border border-[#00ff5e2a] bg-[#06180f] px-4 py-3 text-[13px] text-white outline-none transition-all duration-300 placeholder:text-[#7feaa088] focus:border-[#00ff5e] focus:ring-2 focus:ring-[#00ff5e44] xs:text-sm"
                 />
                 {errors.message && (
-                  <p role="alert" className="poppins mt-2 text-xs text-red-300">
+                  <p id="contact-message-error" role="alert" className="poppins mt-2 text-xs text-red-300">
                     {errors.message.message}
                   </p>
                 )}

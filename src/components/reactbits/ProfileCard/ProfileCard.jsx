@@ -22,7 +22,7 @@ const ProfileCard = ({
         <div className="flex flex-col items-center md:items-start gap-3 xs:flex-row xs:items-center xs:gap-4">
           {avatar}
           <div className="min-w-0 flex flex-col items-center md:items-start gap-1">
-            <h2 className="merienda type-h3 text-white text-center md:text-start">{name}</h2>
+            <p className="merienda type-h3 text-white text-center md:text-start">{name}</p>
             <p className="poppins type-caption uppercase tracking-[0.32em] text-[#9fffbf] text-center md:text-start">
               {role}
             </p>

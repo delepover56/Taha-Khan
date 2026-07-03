@@ -24,9 +24,9 @@ const Header = () => {
 
   const handleClick = useCallback((event, to) => {
     event.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
     navigate(to);
-  }, [navigate]);
+  }, [navigate, shouldReduceMotion]);
 
   return (
     <motion.header
@@ -41,7 +41,14 @@ const Header = () => {
         className="group flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
       >
         <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-transparent transition-colors duration-200 group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14]">
-          <img src="./favicon.png" alt="Logo" className="h-full w-full" />
+          <img
+            src="/favicon.png"
+            alt=""
+            aria-hidden="true"
+            width="44"
+            height="44"
+            className="h-full w-full"
+          />
         </div>
 
         <div className="leading-tight">
@@ -52,7 +59,7 @@ const Header = () => {
       </NavLink>
 
 
-      <nav>
+      <nav aria-label="Primary navigation">
         <motion.ul
           variants={listVariants}
           initial={initialState}

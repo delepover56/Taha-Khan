@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: withFallback(<About />) },
       {
+        path: "/about",
+        element: <Navigate to="/" replace />,
+      },
+      {
         path: "/resume",
         element: withFallback(<Resume />),
       },
@@ -32,6 +36,10 @@ export const router = createBrowserRouter([
         element: withFallback(<Contact />),
       },
     ],
+  },
+  {
+    path: "/404",
+    element: withFallback(<NotFound />),
   },
   {
     path: "*",
