@@ -1,105 +1,140 @@
 {
   "intro": {
     "eyebrow": "Resume",
-    "title": "Experience, education, and tools",
-    "summary": "A focused snapshot of my current development path: frontend delivery, CMS experience, foundational backend exposure, and the tools I am strengthening as I move deeper into modern React work.",
-    "tags": ["Frontend", "CMS", "Learning"]
+    "title": "Experience, education, and technical skills",
+    "summary": "An overview of my professional experience, education, and the technologies I use to build responsive, accessible, and performance-focused web applications.",
+    "tags": [
+      "Front-End",
+      "React",
+      "CMS",
+      "Technical SEO"
+    ]
   },
+
   "experience": {
     "eyebrow": "Experience",
-    "title": "Development timeline",
-    "summary": "A practical view of the areas I have been building across frontend and backend foundations.",
+    "title": "Professional journey",
+    "summary": "Building modern websites, e-commerce solutions, and responsive user interfaces across React, WordPress, WooCommerce, and Shopify.",
     "items": [
       {
         "id": "frontend-development",
-        "period": "3 Years",
+        "period": "2023 - Present",
         "title": "Front-End Development",
-        "place": "HTML, CSS, JavaScript, React, WordPress",
-        "note": "Focused on responsive interfaces, clean UI structure, and practical web delivery."
-      },
-      {
-        "id": "backend-development",
-        "period": "1 Year",
-        "title": "Back-End Development",
-        "place": "PHP and MySQL",
-        "note": "Built foundational backend understanding to support full web workflows."
+        "place": "React, WordPress, WooCommerce & Shopify",
+        "note": "Developing responsive websites, converting Figma designs into production-ready interfaces, improving accessibility, optimizing performance, and implementing technical SEO across client projects."
       }
     ]
   },
+
   "education": {
     "eyebrow": "Education",
-    "title": "Learning timeline",
-    "summary": "Formal learning milestones that support my web development path.",
+    "title": "Academic background",
+    "summary": "Formal education that established the foundation for my web development career.",
     "items": [
       {
         "id": "web-development-diploma",
         "period": "2023 - 2025",
         "title": "Diploma in Web Development",
-        "place": "ApTech Metro, Star Gate"
+        "place": "Aptech Metro, Star Gate"
       },
       {
         "id": "intermediate",
         "period": "2025 - Present",
         "title": "Intermediate",
-        "place": "ApTech Metro, Star Gate"
+        "place": "Aptech Metro, Star Gate"
       }
     ]
   },
+
   "skills": {
     "eyebrow": "Skills & Tools",
-    "title": "Applied toolset",
-    "summary": "A concise view of the tools, platforms, and habits behind my current frontend work.",
+    "title": "Technical expertise",
+    "summary": "Technologies, platforms, and development practices I use to build modern frontend experiences.",
+
     "groups": [
       {
-        "title": "Interface foundations",
-        "description": "The core browser skills behind my first production-style builds.",
-        "items": ["HTML", "CSS", "JavaScript"]
+        "title": "Frontend Development",
+        "description": "Core technologies for building responsive and interactive user interfaces.",
+        "items": [
+          "HTML5",
+          "CSS3",
+          "JavaScript (ES6+)",
+          "React"
+        ]
       },
       {
-        "title": "React workflow",
-        "description": "The modern frontend stack I am actively strengthening.",
-        "items": ["React", "Tailwind CSS", "Vite"]
+        "title": "Styling & UI",
+        "description": "Creating responsive, accessible, and consistent experiences across modern devices.",
+        "items": [
+          "Tailwind CSS",
+          "Responsive Design",
+          "Accessibility",
+          "Cross-Browser Compatibility"
+        ]
       },
       {
-        "title": "CMS management",
-        "description": "Hands-on CMS and storefront customization experience.",
-        "items": ["WordPress", "Shopify", "Elementor", "Liquid", "Theme editor"]
+        "title": "CMS & E-commerce",
+        "description": "Professional experience delivering business websites and online stores.",
+        "items": [
+          "WordPress",
+          "WooCommerce",
+          "Shopify",
+          "Elementor",
+          "Divi",
+          "Liquid"
+        ]
       },
       {
-        "title": "Backend basics",
-        "description": "Foundational backend tools that support broader web understanding.",
-        "items": ["PHP", "MySQL"]
+        "title": "Performance & SEO",
+        "description": "Optimizing websites for speed, search visibility, and user experience.",
+        "items": [
+          "Technical SEO",
+          "Core Web Vitals",
+          "Yoast SEO",
+          "Rank Math",
+          "Performance Optimization"
+        ]
       },
       {
-        "title": "Delivery habits",
-        "description": "The practical habits that shape the final interface quality.",
-        "items": ["Responsive UI", "Performance", "Polish"]
+        "title": "Development Workflow",
+        "description": "Tools and libraries that support my daily frontend development process.",
+        "items": [
+          "Git",
+          "GitHub",
+          "Figma",
+          "Vite",
+          "React Router",
+          "React Hook Form",
+          "Swiper"
+        ]
       }
     ]
   },
+
   "learning": {
     "eyebrow": "Currently Learning",
-    "title": "Next growth track",
-    "summary": "Focus areas that support the next step in my React workflow.",
+    "title": "Continuous growth",
+    "summary": "Expanding my frontend expertise through modern React architecture, scalable tooling, and production-ready development practices.",
     "items": [
       {
-        "title": "Next.js",
-        "text": "Learning production-oriented React patterns and routing concepts."
+        "title": "Advanced React",
+        "text": "Strengthening component architecture, reusable patterns, custom hooks, and scalable application structure."
       },
       {
-        "title": "TypeScript",
-        "text": "Building stronger habits around typed components and safer interfaces."
+        "title": "Next.js & TypeScript",
+        "text": "Learning modern React frameworks and type-safe development for larger production applications."
       },
       {
-        "title": "Production patterns",
-        "text": "Improving structure, maintainability, and deployment confidence."
+        "title": "Performance Engineering",
+        "text": "Deepening my understanding of rendering performance, accessibility, optimization techniques, and Core Web Vitals."
       }
     ]
   },
+
   "download": {
     "eyebrow": "Resume PDF",
     "title": "Download my resume",
-    "text": "Keep a local copy of my resume for a quick overview of my education, current development focus, and practical frontend skill set.",
+    "text": "Download a PDF version of my resume for a detailed overview of my experience, education, and frontend development skills.",
     "href": "/Taha-Resume.pdf",
     "label": "Download Resume"
   }

@@ -5,7 +5,7 @@ const NavBar = () => {
   const items = [
     { to: "/", label: "About" },
     { to: "/resume", label: "Resume" },
-    { to: "/projects", label: "Projects" },
+    { to: "/portfolio", label: "Portfolio" },
     { to: "/contact", label: "Contact" },
   ];
 

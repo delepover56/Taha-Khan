@@ -165,7 +165,7 @@ const MyInfo = () => {
             </p>
           </div>
 
-          <div className="flex max-w-full flex-wrap gap-2">
+          {/* <div className="flex max-w-full flex-wrap gap-2">
             {sideInfoBox.stackItems.map((item) => (
               <span
                 key={item}
@@ -174,7 +174,7 @@ const MyInfo = () => {
                 {item}
               </span>
             ))}
-          </div>
+          </div> */}
 
           <motion.div
             variants={listVariants}

@@ -32,7 +32,7 @@ function App() {
 
         <div className="relative z-10 mt-6 w-full max-w-[1320px] px-4 xs:px-5 sm:px-6 lg:mt-8 lg:px-8 2xl:max-w-[1600px]">
           <div className="flex min-w-0 flex-col gap-2 md:gap-8 lg:flex-row lg:items-start">
-            <div className="min-w-0 w-full lg:w-[352px] lg:shrink-0 xl:w-[380px] 2xl:w-[420px]">
+            <div className="min-w-0 w-full lg:w-[352px] lg:shrink-0 lg:self-stretch xl:w-[380px] 2xl:w-[420px]">
               <MyInfo />
             </div>
             <div id="route-outlet" className="min-w-0 w-full lg:flex-1">

@@ -174,7 +174,7 @@ const About = () => {
         </motion.div>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         variants={itemVariants}
         className="rounded-3xl border border-[#00ff5e2a] bg-[#09130dcc] p-5 backdrop-blur-xl shadow-[0_18px_40px_rgba(0,0,0,0.48)] xxs:p-6 sm:p-7 lg:p-8"
       >
@@ -220,7 +220,7 @@ const About = () => {
             }))}
           />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
 
       <motion.div
         variants={itemVariants}

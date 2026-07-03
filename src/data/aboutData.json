@@ -6,7 +6,7 @@
     "introParagraphs": [
       [
         {
-          "text": "With over 3 years of professional experience in Front-End Developer, I build responsive websites, e-commerce solutions, and modern web interfaces using "
+          "text": "With over 3 years of professional front-end development experience, I build responsive websites, e-commerce solutions, and modern web interfaces using "
         },
         {
           "text": "React",
@@ -86,7 +86,7 @@
       ]
     ],
     "ctaLabel": "View Projects",
-    "ctaPath": "/projects",
+    "ctaPath": "/portfolio",
     "stackSummary": "React • WordPress • WooCommerce • Shopify • Technical SEO"
   },
 
