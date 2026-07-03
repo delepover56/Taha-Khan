@@ -12,9 +12,6 @@ import {
 
 const FILTERS = ["All", "Frontend", "React", "WordPress", "Shopify"];
 
-const formatProjectCount = (count) =>
-  `Showing ${count} ${count === 1 ? "Project" : "Projects"}`;
-
 const galleryTransition = {
   duration: 0.38,
   ease: [0.16, 1, 0.3, 1],

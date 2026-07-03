@@ -1,8 +1,91 @@
 {
-  "eyebrow": "WhatsApp",
-  "title": "Quick chat",
-  "text": "Perfect for quick questions, project discussions, and faster communication.",
-  "href": "https://wa.me/923192924947",
-  "linkLabel": "Chat on WhatsApp",
-  "external": true
+  "intro": {
+    "eyebrow": "Contact",
+    "titleSegments": [
+      {
+        "text": "Let's build "
+      },
+      {
+        "text": "something great",
+        "highlight": true
+      }
+    ],
+    "summary": "Whether you're planning a new website, improving an existing one, or looking for a frontend developer to join your team, feel free to reach out through the contact form, email, or WhatsApp. I'd be happy to discuss your project and how I can help.",
+    "availability": "Available for frontend opportunities, freelance projects, and collaborations."
+  },
+
+  "quickContactCards": [
+    {
+      "eyebrow": "Email",
+      "title": "Let's start a conversation",
+      "text": "The best way to discuss projects, opportunities, and frontend development work.",
+      "href": "mailto:Taha82426980@gmail.com",
+      "linkLabel": "Send an Email"
+    },
+    {
+      "eyebrow": "WhatsApp",
+      "title": "Quick chat",
+      "text": "Ideal for quick questions, project discussions, and faster communication.",
+      "href": "https://wa.me/923192924947?text=Hi%20Taha,%20I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.",
+      "linkLabel": "Chat on WhatsApp",
+      "external": true
+    },
+    {
+      "eyebrow": "LinkedIn",
+      "title": "Connect professionally",
+      "text": "Let's connect to discuss opportunities, collaborations, and professional networking.",
+      "href": "https://www.linkedin.com/in/taha-khan03/",
+      "linkLabel": "View LinkedIn",
+      "external": true
+    },
+    {
+      "eyebrow": "Location",
+      "title": "Based in Karachi, Pakistan",
+      "text": "Available for remote work and collaborations with teams and clients worldwide."
+    }
+  ],
+
+  "formIntro": {
+    "eyebrow": "Contact Form",
+    "title": "Tell me about your project",
+    "summary": "Share your project goals, timeline, and requirements, and I'll get back to you with the next steps."
+  },
+
+  "detailCards": [
+    {
+      "eyebrow": "Response",
+      "title": "Usually within 24 hours",
+      "text": "I aim to reply promptly with clear communication and practical next steps. WhatsApp is often the fastest way to reach me."
+    },
+    {
+      "eyebrow": "Availability",
+      "title": "Open to new opportunities",
+      "text": "Currently available for frontend roles, freelance projects, and long-term collaborations."
+    }
+  ],
+
+  "ctaStrip": {
+    "eyebrow": "Prefer direct contact?",
+    "text": "If you'd rather skip the contact form, feel free to reach out by email or WhatsApp.",
+    "email": {
+      "href": "mailto:Taha82426980@gmail.com",
+      "label": "Email Me",
+      "ariaLabel": "Email Taha Khan directly"
+    },
+    "whatsapp": {
+      "href": "https://wa.me/923192924947?text=Hi%20Taha,%20I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.",
+      "label": "WhatsApp",
+      "ariaLabel": "Chat with Taha Khan on WhatsApp"
+    },
+    "socialLinks": [
+      {
+        "href": "https://github.com/delepover56",
+        "label": "GitHub"
+      },
+      {
+        "href": "https://www.linkedin.com/in/taha-khan03/",
+        "label": "LinkedIn"
+      }
+    ]
+  }
 }

@@ -13,7 +13,6 @@ const withFallback = (element) => <Suspense fallback={null}>{element}</Suspense>
 export const router = createBrowserRouter([
   {
     element: <App />,
-    errorElement: withFallback(<NotFound />),
     children: [
       { path: "/", element: withFallback(<About />) },
       {
