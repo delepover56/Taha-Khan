@@ -10,22 +10,43 @@
       "Technical SEO"
     ]
   },
-
   "experience": {
     "eyebrow": "Experience",
     "title": "Professional journey",
     "summary": "Building modern websites, e-commerce solutions, and responsive user interfaces across React, WordPress, WooCommerce, and Shopify.",
     "items": [
       {
-        "id": "frontend-development",
-        "period": "2023 - Present",
-        "title": "Front-End Development",
-        "place": "React, WordPress, WooCommerce & Shopify",
-        "note": "Developing responsive websites, converting Figma designs into production-ready interfaces, improving accessibility, optimizing performance, and implementing technical SEO across client projects."
+        "id": "zma-solutions",
+        "period": "Jun 2026 - Jul 2026",
+        "title": "WordPress Developer",
+        "place": "ZMA Solutions, Karachi, Pakistan",
+        "note": "Performed WordPress development, maintenance, customization, and troubleshooting for client sites, and contributed to project implementation and delivery across the development lifecycle."
+      },
+      {
+        "id": "rawd-tech-solutions",
+        "period": "Feb 2024 - Mar 2026",
+        "title": "Senior WordPress Developer",
+        "place": "RAWD Tech Solutions, Karachi, Pakistan",
+        "note": "Led WordPress site builds, customization, and troubleshooting within the Production Department, working independently and within cross-functional teams to deliver consistent, reliable solutions."
       }
     ]
   },
-
+  "certifications": {
+    "eyebrow": "Certifications",
+    "title": "Verified experience",
+    "summary": "Official documentation of professional roles and experience.",
+    "items": [
+      {
+        "id": "rawd-experience-certificate",
+        "period": "Issued Mar 2026",
+        "title": "Experience Certificate — Senior WordPress Developer",
+        "place": "RAWD Tech Solutions",
+        "note": "Certifies employment as Senior WordPress Developer in the Production Department from Feb 2024 to Mar 2026.",
+        "link": "/certificates/RAWD-Experience-Certificate.pdf",
+        "linkLabel": "View Certificate"
+      }
+    ]
+  },
   "education": {
     "eyebrow": "Education",
     "title": "Academic background",
@@ -33,24 +54,17 @@
     "items": [
       {
         "id": "web-development-diploma",
-        "period": "2023 - 2025",
+        "period": "2023 - 2026",
         "title": "Diploma in Web Development",
-        "place": "Aptech Metro, Star Gate"
-      },
-      {
-        "id": "intermediate",
-        "period": "2025 - Present",
-        "title": "Intermediate",
-        "place": "Aptech Metro, Star Gate"
+        "place": "Aptech Metro, Star Gate",
+        "note": "Specialized training in site architecture, responsive web design, and front-end development methodologies."
       }
     ]
   },
-
   "skills": {
     "eyebrow": "Skills & Tools",
     "title": "Technical expertise",
     "summary": "Technologies, platforms, and development practices I use to build modern frontend experiences.",
-
     "groups": [
       {
         "title": "Frontend Development",
@@ -110,7 +124,6 @@
       }
     ]
   },
-
   "learning": {
     "eyebrow": "Currently Learning",
     "title": "Continuous growth",
@@ -130,7 +143,6 @@
       }
     ]
   },
-
   "download": {
     "eyebrow": "Resume PDF",
     "title": "Download my resume",

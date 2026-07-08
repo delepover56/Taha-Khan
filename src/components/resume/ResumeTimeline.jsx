@@ -40,6 +40,17 @@ const ResumeTimeline = ({ eyebrow, title, summary, items = [] }) => {
                   {item.note}
                 </p>
               )}
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="poppins type-body-sm mt-4 inline-flex items-center gap-1.5 text-[#7feaa0] underline decoration-[#00ff5e55] underline-offset-4 transition-colors hover:text-[#9fffbf]"
+                >
+                  {item.linkLabel || "View"}
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              )}
             </article>
           </SpotlightCard>
         )}

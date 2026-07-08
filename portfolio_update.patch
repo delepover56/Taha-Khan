@@ -1,0 +1,106 @@
+diff --git a/src/components/resume/ResumeTimeline.jsx b/src/components/resume/ResumeTimeline.jsx
+index b4a3f41..9854e2f 100644
+--- a/src/components/resume/ResumeTimeline.jsx
++++ b/src/components/resume/ResumeTimeline.jsx
+@@ -40,6 +40,17 @@ const ResumeTimeline = ({ eyebrow, title, summary, items = [] }) => {
+                   {item.note}
+                 </p>
+               )}
++              {item.link && (
++                <a
++                  href={item.link}
++                  target="_blank"
++                  rel="noopener noreferrer"
++                  className="poppins type-body-sm mt-4 inline-flex items-center gap-1.5 text-[#7feaa0] underline decoration-[#00ff5e55] underline-offset-4 transition-colors hover:text-[#9fffbf]"
++                >
++                  {item.linkLabel || "View"}
++                  <span aria-hidden="true">&rarr;</span>
++                </a>
++              )}
+             </article>
+           </SpotlightCard>
+         )}
+diff --git a/src/data/resumeData.json b/src/data/resumeData.json
+index bd7e88b..05ca319 100644
+--- a/src/data/resumeData.json
++++ b/src/data/resumeData.json
+@@ -17,11 +17,35 @@
+     "summary": "Building modern websites, e-commerce solutions, and responsive user interfaces across React, WordPress, WooCommerce, and Shopify.",
+     "items": [
+       {
+-        "id": "frontend-development",
+-        "period": "2023 - Present",
+-        "title": "Front-End Development",
+-        "place": "React, WordPress, WooCommerce & Shopify",
+-        "note": "Developing responsive websites, converting Figma designs into production-ready interfaces, improving accessibility, optimizing performance, and implementing technical SEO across client projects."
++        "id": "zma-solutions",
++        "period": "Jun 2026 - Jul 2026",
++        "title": "WordPress Developer",
++        "place": "ZMA Solutions, Karachi, Pakistan",
++        "note": "Performed WordPress development, maintenance, customization, and troubleshooting for client sites, and contributed to project implementation and delivery across the development lifecycle."
++      },
++      {
++        "id": "rawd-tech-solutions",
++        "period": "Feb 2024 - Mar 2026",
++        "title": "Senior WordPress Developer",
++        "place": "RAWD Tech Solutions, Karachi, Pakistan",
++        "note": "Led WordPress site builds, customization, and troubleshooting within the Production Department, working independently and within cross-functional teams to deliver consistent, reliable solutions."
++      }
++    ]
++  },
++
++  "certifications": {
++    "eyebrow": "Certifications",
++    "title": "Verified experience",
++    "summary": "Official documentation of professional roles and experience.",
++    "items": [
++      {
++        "id": "rawd-experience-certificate",
++        "period": "Issued Jul 2026",
++        "title": "Experience Certificate — Senior WordPress Developer",
++        "place": "RAWD Tech Solutions",
++        "note": "Certifies employment as Senior WordPress Developer in the Production Department from Feb 2024 to Mar 2026.",
++        "link": "/certificates/RAWD-Experience-Certificate.pdf",
++        "linkLabel": "View Certificate"
+       }
+     ]
+   },
+@@ -33,15 +57,10 @@
+     "items": [
+       {
+         "id": "web-development-diploma",
+-        "period": "2023 - 2025",
++        "period": "2023 - 2026",
+         "title": "Diploma in Web Development",
+-        "place": "Aptech Metro, Star Gate"
+-      },
+-      {
+-        "id": "intermediate",
+-        "period": "2025 - Present",
+-        "title": "Intermediate",
+-        "place": "Aptech Metro, Star Gate"
++        "place": "Aptech Metro, Star Gate",
++        "note": "Specialized training in site architecture, responsive web design, and front-end development methodologies."
+       }
+     ]
+   },
+diff --git a/src/pages/Resume.jsx b/src/pages/Resume.jsx
+index 122bc19..1460c37 100644
+--- a/src/pages/Resume.jsx
++++ b/src/pages/Resume.jsx
+@@ -79,6 +79,15 @@ const Resume = () => {
+         />
+       </motion.div>
+ 
++      <motion.div variants={itemVariants}>
++        <ResumeTimeline
++          eyebrow={resumeData.certifications.eyebrow}
++          title={resumeData.certifications.title}
++          summary={resumeData.certifications.summary}
++          items={resumeData.certifications.items}
++        />
++      </motion.div>
++
+       <motion.div variants={itemVariants}>
+         <ResumeTimeline
+           eyebrow={resumeData.education.eyebrow}

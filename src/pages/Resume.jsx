@@ -8,7 +8,6 @@ import {
   fadeUp,
   staggerContainer,
   staggerItem,
-  viewportOnce,
 } from "@/animations/motionPresets";
 import resumeData from "@/data/resumeData.json";
 import { useAppLoader } from "@/context/loaderContext";
@@ -29,8 +28,7 @@ const Resume = () => {
       aria-labelledby="resume-heading"
       variants={containerVariants}
       initial={initialState}
-      whileInView="show"
-      viewport={viewportOnce}
+      animate="show"
       className="flex w-full flex-col gap-7 sm:gap-9"
     >
       <motion.div
@@ -76,6 +74,15 @@ const Resume = () => {
           title={resumeData.experience.title}
           summary={resumeData.experience.summary}
           items={resumeData.experience.items}
+        />
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <ResumeTimeline
+          eyebrow={resumeData.certifications.eyebrow}
+          title={resumeData.certifications.title}
+          summary={resumeData.certifications.summary}
+          items={resumeData.certifications.items}
         />
       </motion.div>
 
