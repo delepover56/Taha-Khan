@@ -328,11 +328,20 @@ const injectHeadMetadata = (html, page, projectsData) => {
     );
   }
 
+  const crawlerBoot = `
+  <script data-prerender-boot>
+    document.documentElement.classList.add("js");
+  </script>`;
+
   const crawlerStyle = `
   <style data-prerender-page>
     #root:has(.crawler-page) {
       min-height: 100vh;
       background: #050a08;
+    }
+
+    html.js #root:has(.crawler-page) {
+      overflow: hidden;
     }
 
     .crawler-page {
@@ -343,6 +352,10 @@ const injectHeadMetadata = (html, page, projectsData) => {
       color: #effff3;
       font-family: Arial, sans-serif;
       line-height: 1.6;
+    }
+
+    html.js .crawler-page {
+      display: none;
     }
 
     .crawler-page nav {
@@ -361,13 +374,28 @@ const injectHeadMetadata = (html, page, projectsData) => {
     .crawler-page a {
       color: #00ff5e;
     }
-  </style>`;
+  </style>
+  <noscript>
+    <style data-prerender-noscript>
+      .crawler-page {
+        display: block;
+      }
+    </style>
+  </noscript>`;
 
+  output = output.replace(
+    /\s*<script data-prerender-boot>[\s\S]*?<\/script>/g,
+    ""
+  );
   output = output.replace(
     /\s*<style data-prerender-page>[\s\S]*?<\/style>/g,
     ""
   );
-  output = output.replace("</head>", `${crawlerStyle}\n</head>`);
+  output = output.replace(
+    /\s*<noscript>\s*<style data-prerender-noscript>[\s\S]*?<\/style>\s*<\/noscript>/g,
+    ""
+  );
+  output = output.replace("</head>", `${crawlerBoot}\n${crawlerStyle}\n</head>`);
   return output;
 };
 
