@@ -7,17 +7,23 @@ const ProfileCard = ({
   children,
   actions,
   className = "",
+  surface = true,
 }) => {
   return (
     <div
       className={[
-        "relative overflow-hidden rounded-3xl border border-[#00ff5e36] bg-[#07100bcc] p-5 backdrop-blur-xl shadow-[0_18px_38px_rgba(0,0,0,0.58)]",
-        "w-full max-w-full xxs:p-6 sm:p-7",
+        surface
+          ? "relative overflow-hidden rounded-3xl border border-[#00ff5e36] bg-[#07100bcc] p-5 backdrop-blur-xl shadow-[0_18px_38px_rgba(0,0,0,0.58)] w-full max-w-full xxs:p-6 sm:p-7"
+          : "relative w-full max-w-full",
         className,
       ].join(" ")}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,94,0.07),_rgba(5,12,8,0.22)_42%,_transparent_68%)]" />
-      <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-linear-to-r from-transparent via-[#00ff5e66] to-transparent" />
+      {surface ? (
+        <>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,94,0.07),_rgba(5,12,8,0.22)_42%,_transparent_68%)]" />
+          <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-linear-to-r from-transparent via-[#00ff5e66] to-transparent" />
+        </>
+      ) : null}
       <div className="relative z-10 flex flex-col gap-4">
         <div className="flex flex-col lg:flex-row items-center md:items-start gap-3 xs:items-center xs:gap-4">
           {avatar}

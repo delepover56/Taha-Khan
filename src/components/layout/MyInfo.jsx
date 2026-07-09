@@ -8,7 +8,7 @@ import {
   staggerItem,
 } from "@/animations/motionPresets";
 import ProfileCard from "@/components/reactbits/ProfileCard/ProfileCard";
-import { StarBorder } from "@/components/reactbits";
+import { SpotlightCard, StarBorder } from "@/components/reactbits";
 import sideInfoBox from "@/data/sideInfoBox.json";
 
 const ICON_MAP = {
@@ -66,6 +66,17 @@ const SOCIAL_HOVER_CLASSES = {
     "hover:border-transparent hover:bg-gradient-to-br hover:from-[#22c55e] hover:via-[#16a34a] hover:to-[#86efac] hover:shadow-[0_0_18px_rgba(34,197,94,0.28)]",
 };
 
+const CONTACT_ICON_HOVER_CLASSES = {
+  phone:
+    "group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14] group-hover:shadow-[0_0_18px_rgba(0,255,94,0.24)]",
+  email:
+    "group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14] group-hover:shadow-[0_0_18px_rgba(0,255,94,0.24)]",
+  location:
+    "group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14] group-hover:shadow-[0_0_18px_rgba(0,255,94,0.24)]",
+  birthday:
+    "group-hover:border-[#00ff5e88] group-hover:bg-[#00ff5e14] group-hover:shadow-[0_0_18px_rgba(0,255,94,0.24)]",
+};
+
 const MyInfo = () => {
   const shouldReduceMotion = useReducedMotion();
   const panelVariants = slideRight(shouldReduceMotion);
@@ -79,174 +90,184 @@ const MyInfo = () => {
       variants={panelVariants}
       initial={initialState}
       animate="show"
-      className="min-w-0 w-full max-w-full lg:sticky lg:top-10"
+      className="min-w-0 w-full max-w-full lg:sticky lg:top-3 lg:max-w-[360px] xl:max-w-[400px] 2xl:max-w-[440px] 3xl:max-w-[480px] 4xl:max-w-[520px]"
     >
       <motion.div
         variants={fadeUp(shouldReduceMotion)}
         className="min-w-0 w-full max-w-full"
       >
-        <ProfileCard
-          avatar={
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[#00ff5e55] bg-[#06180f] shadow-[0_0_24px_rgba(0,255,94,0.12)] xxs:h-22 xxs:w-22 sm:h-24 sm:w-24">
-              <img
-                src={sideInfoBox.profile.avatarSrc}
-                alt={sideInfoBox.profile.avatarAlt}
-                width="96"
-                height="96"
-                fetchPriority="high"
-                decoding="async"
-                sizes="96px"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#00ff5e33]" />
-            </div>
-          }
-          name={sideInfoBox.profile.name}
-          role={sideInfoBox.profile.role}
-          status={
-            <div className="inline-flex max-w-max items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-2 sm:py-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#00ff5e] shadow-[0_0_8px_rgba(0,255,94,0.6)] animate-[glowPulse_2.8s_ease-in-out_infinite]" />
-              <span className="poppins type-caption capitalize tracking-[0.28em] text-[#9fffbf]">
-                {sideInfoBox.profile.statusText}
-              </span>
-            </div>
-          }
-          experience={
-            <div className="rounded-xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 lg:hidden">
+        <SpotlightCard
+          className="w-full max-w-full rounded-3xl border-[#00ff5e36] bg-[#07100bcc] p-5 shadow-[0_18px_38px_rgba(0,0,0,0.58)] backdrop-blur-xl xxs:p-6 sm:p-7"
+          spotlightColor="rgba(0, 255, 94, 0.18)"
+        >
+          <ProfileCard
+            surface={false}
+            avatar={
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[#00ff5e55] bg-[#06180f] shadow-[0_0_24px_rgba(0,255,94,0.12)] xxs:h-22 xxs:w-22 sm:h-24 sm:w-24">
+                <img
+                  src={sideInfoBox.profile.avatarSrc}
+                  alt={sideInfoBox.profile.avatarAlt}
+                  width="96"
+                  height="96"
+                  fetchPriority="high"
+                  decoding="async"
+                  sizes="96px"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#00ff5e33]" />
+              </div>
+            }
+            name={sideInfoBox.profile.name}
+            role={sideInfoBox.profile.role}
+            status={
+              <div className="inline-flex max-w-max items-center gap-2 rounded-full border border-[#00ff5e2e] bg-[#07180f] px-3 py-2 sm:py-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#00ff5e] shadow-[0_0_8px_rgba(0,255,94,0.6)] animate-[glowPulse_2.8s_ease-in-out_infinite]" />
+                <span className="poppins type-caption capitalize tracking-[0.28em] text-[#9fffbf]">
+                  {sideInfoBox.profile.statusText}
+                </span>
+              </div>
+            }
+            experience={
+              <div className="rounded-xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 lg:hidden">
+                <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
+                  {sideInfoBox.profile.experience}
+                </p>
+              </div>
+            }
+
+            actions={
+              <>
+                <div className="flex flex-wrap items-center gap-3 sm:w-max self-center lg:self-start">
+                  {sideInfoBox.socialLinks.map((item) => (
+                    <motion.a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={hoverGlow(shouldReduceMotion)}
+                      className={[
+                        "group flex h-10 w-10 items-center justify-center rounded-xl border border-[#00ff5e26] bg-[#06180f] bg-clip-padding shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] xs:h-11 xs:w-11",
+                        SOCIAL_HOVER_CLASSES[item.iconKey] ??
+                        "hover:border-transparent hover:bg-gradient-to-br hover:from-[#06180f] hover:via-[#00ff5e33] hover:to-[#00ff5e66]",
+                      ].join(" ")}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="#9fffbf"
+                        className="h-4 w-4 transition-colors duration-200 group-hover:fill-white xs:h-5 xs:w-5"
+                      >
+                        {ICON_MAP[item.iconKey]}
+                      </svg>
+                      <span className="sr-only">{item.label}</span>
+                    </motion.a>
+                  ))}
+                </div>
+
+                <StarBorder
+                  href={sideInfoBox.profile.resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="poppins-semibold w-max lg:w-full md:w-max self-center justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
+                >
+                  {sideInfoBox.profile.resumeLabel}
+                </StarBorder>
+              </>
+            }
+          >
+            <div className="rounded-2xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 hidden lg:flex md:hidden">
               <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
                 {sideInfoBox.profile.experience}
               </p>
             </div>
-          }
 
-          actions={
-            <>
-              <div className="flex flex-wrap items-center gap-3 sm:w-max self-center lg:self-start">
-                {sideInfoBox.socialLinks.map((item) => (
-                  <motion.a
+            <div className="rounded-2xl border border-[#00ff5e1f] bg-[#07130d] p-4">
+              <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
+                {sideInfoBox.profile.intro}
+              </p>
+            </div>
+
+            {/* <div className="flex max-w-full flex-wrap gap-2">
+              {sideInfoBox.stackItems.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-[#00ff5e2f] bg-[#06180f] px-3 py-1.5 text-[9px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div> */}
+
+            <motion.div
+              variants={listVariants}
+              initial={initialState}
+              animate="show"
+              className="flex min-w-0 flex-col md:flex-row md:w-full md:flex-wrap lg:flex-col gap-3"
+            >
+              {sideInfoBox.contactItems.map((item) => {
+                const isEmail = item.label === "Email";
+                const ContactItem = item.href ? motion.a : motion.div;
+                const isExternalLink = item.href?.startsWith("http");
+
+                return (
+                  <ContactItem
                     key={item.label}
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={isExternalLink ? "_blank" : undefined}
+                    rel={isExternalLink ? "noopener noreferrer" : undefined}
+                    aria-label={
+                      item.href ? `${item.label}: ${item.value}` : undefined
+                    }
+                    variants={itemVariants}
                     whileHover={hoverGlow(shouldReduceMotion)}
                     className={[
-                      "group flex h-10 w-10 items-center justify-center rounded-xl border border-[#00ff5e26] bg-[#06180f] bg-clip-padding shadow-[0_8px_18px_rgba(0,0,0,0.4)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08] xs:h-11 xs:w-11",
-                      SOCIAL_HOVER_CLASSES[item.iconKey] ??
-                      "hover:border-transparent hover:bg-gradient-to-br hover:from-[#06180f] hover:via-[#00ff5e33] hover:to-[#00ff5e66]",
+                      "group flex min-w-0 max-w-full md:w-[49.2%] lg:w-full items-center gap-2 overflow-hidden rounded-2xl border border-[#00ff5e24] bg-[#08130d] p-3.5 lg:p-2 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e12] xs:gap-4 xs:p-4",
+                      item.href
+                        ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ff5e66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050a08]"
+                        : "",
                     ].join(" ")}
                   >
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="#9fffbf"
-                      className="h-4 w-4 transition-colors duration-200 group-hover:fill-white xs:h-5 xs:w-5"
+                    <div
+                      className={[
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.03] xs:h-11 xs:w-11",
+                        CONTACT_ICON_HOVER_CLASSES[item.iconKey] ??
+                        "group-hover:border-transparent group-hover:bg-gradient-to-br group-hover:from-[#06180f] group-hover:via-[#00ff5e33] group-hover:to-[#00ff5e66]",
+                      ].join(" ")}
                     >
-                      {ICON_MAP[item.iconKey]}
-                    </svg>
-                    <span className="sr-only">{item.label}</span>
-                  </motion.a>
-                ))}
-              </div>
-
-              <StarBorder
-                href={sideInfoBox.profile.resumeHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="poppins-semibold w-max lg:w-full md:w-max self-center justify-center text-center text-[11px] uppercase tracking-[0.24em] shadow-[0_0_22px_rgba(0,255,94,0.14)] hover:text-white xs:text-xs xs:tracking-[0.28em] sm:text-sm"
-              >
-                {sideInfoBox.profile.resumeLabel}
-              </StarBorder>
-            </>
-          }
-        >
-          <div className="rounded-2xl border w-max self-center md:self-start border-[#00ff5e1f] bg-[#07130d] py-2 px-4 hidden lg:flex md:hidden">
-            <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
-              {sideInfoBox.profile.experience}
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-[#00ff5e1f] bg-[#07130d] p-4">
-            <p className="poppins type-body leading-relaxed text-[#c7ffd8]">
-              {sideInfoBox.profile.intro}
-            </p>
-          </div>
-
-          {/* <div className="flex max-w-full flex-wrap gap-2">
-            {sideInfoBox.stackItems.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-[#00ff5e2f] bg-[#06180f] px-3 py-1.5 text-[9px] uppercase tracking-[0.24em] text-[#9fffbf] transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e14] hover:text-white xxs:text-[10px]"
-              >
-                {item}
-              </span>
-            ))}
-          </div> */}
-
-          <motion.div
-            variants={listVariants}
-            initial={initialState}
-            animate="show"
-            className="flex min-w-0 flex-col md:flex-row md:w-full md:flex-wrap lg:flex-col gap-3"
-          >
-            {sideInfoBox.contactItems.map((item) => {
-              const isEmail = item.label === "Email";
-
-              return (
-                <motion.div
-                  key={item.label}
-                  variants={itemVariants}
-                  whileHover={hoverGlow(shouldReduceMotion)}
-                  className="group flex min-w-0 max-w-full md:w-[49.2%] lg:w-full items-center gap-2 overflow-hidden rounded-2xl border border-[#00ff5e24] bg-[#08130d] p-3.5 lg:p-2 transition-colors duration-200 hover:border-[#00ff5e88] hover:bg-[#00ff5e12] xs:gap-4 xs:p-4"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#00ff5e1f] bg-[#06180f] transition-colors duration-200 group-hover:border-[#00ff5e66] group-hover:bg-[#00ff5e14] xs:h-11 xs:w-11">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="#00ff5e"
-                      className="h-5 w-5 transition-colors duration-200 group-hover:fill-white xs:h-[22px] xs:w-[22px]"
-                    >
-                      {ICON_MAP[item.iconKey]}
-                    </svg>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="poppins type-caption uppercase tracking-[0.28em] text-[#7feaa0]">
-                      {item.label}
-                    </p>
-                    {item.href ? (
-                      <a
-                        href={item.href}
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="#00ff5e"
+                        className="h-5 w-5 transition-colors duration-200 group-hover:fill-white xs:h-[22px] xs:w-[22px]"
+                      >
+                        {ICON_MAP[item.iconKey]}
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="poppins type-caption uppercase tracking-[0.28em] text-[#7feaa0]">
+                        {item.label}
+                      </p>
+                      <p
                         className={[
-                          "poppins-semibold type-body-sm text-white hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px] lg:text-xs",
+                          "poppins-semibold type-body-sm text-white transition-colors duration-200 group-hover:text-[#00ff5e] xxs:text-[11px] xs:text-[13px] lg:text-xs",
                           isEmail
                             ? "break-all text-[12px] xs:text-[13px] sm:text-sm lg:whitespace-nowrap lg:break-normal lg:text-[13px] xl:text-sm"
                             : "break-words",
                         ].join(" ")}
-                        target={
-                          item.href.startsWith("http") ? "_blank" : undefined
-                        }
-                        rel={
-                          item.href.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
                       >
                         {item.value}
-                      </a>
-                    ) : (
-                      <p className="poppins-semibold type-body-sm break-words text-white xxs:text-[11px]">
-                        {item.value}
                       </p>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </ProfileCard>
+                    </div>
+                  </ContactItem>
+                );
+              })}
+            </motion.div>
+          </ProfileCard>
+        </SpotlightCard>
       </motion.div>
     </motion.aside>
   );

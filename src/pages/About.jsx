@@ -260,14 +260,18 @@ const About = () => {
               variants={itemVariants}
               className="min-w-0 basis-full shrink-0 md:basis-[calc(33.333333%_-_0.666667rem)]"
             >
-              <article className="h-full rounded-2xl border border-[#00ff5e20] bg-[#0b140d] p-5 shadow-[0_12px_26px_rgba(0,0,0,0.28)] xs:p-6">
+              <SpotlightCard
+                as="article"
+                className="h-full rounded-2xl border-[#00ff5e20] p-5 shadow-[0_12px_26px_rgba(0,0,0,0.28)] xs:p-6"
+                spotlightColor="rgba(0, 255, 94, 0.18)"
+              >
                 <h3 className="roboto-slab type-h4 text-white">
                   {item.title}
                 </h3>
                 <p className="poppins type-body-sm mt-3 leading-relaxed text-[#c7ffd8]">
                   {item.text}
                 </p>
-              </article>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>
