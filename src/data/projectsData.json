@@ -9,8 +9,14 @@
     "alt": "Homepage screenshot of the Chic Lighting frontend project",
     "description": "A polished lighting storefront interface focused on clean product presentation and responsive frontend layout.",
     "category": "Frontend",
-    "filters": ["Frontend"],
-    "stack": ["HTML", "CSS", "JavaScript"],
+    "filters": [
+      "Frontend"
+    ],
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
     "tech": [
       "/Images/Icons/HTML.svg",
       "/Images/Icons/CSS.svg",
@@ -29,8 +35,14 @@
     "alt": "Homepage screenshot of the Tasbeeh Wala frontend project",
     "description": "A focused digital tasbeeh experience with a simple interaction model and mobile-friendly presentation.",
     "category": "Frontend",
-    "filters": ["Frontend"],
-    "stack": ["HTML", "CSS", "JavaScript"],
+    "filters": [
+      "Frontend"
+    ],
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
     "tech": [
       "/Images/Icons/HTML.svg",
       "/Images/Icons/CSS.svg",
@@ -49,8 +61,14 @@
     "alt": "Homepage screenshot of the True Vegan Sea Food frontend project",
     "description": "A responsive restaurant-style website presenting brand content, sections, and calls to action with a clean visual flow.",
     "category": "Frontend",
-    "filters": ["Frontend"],
-    "stack": ["HTML", "CSS", "JavaScript"],
+    "filters": [
+      "Frontend"
+    ],
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
     "tech": [
       "/Images/Icons/HTML.svg",
       "/Images/Icons/CSS.svg",
@@ -69,8 +87,95 @@
     "alt": "Homepage screenshot of the Jalbani Writes Client project",
     "description": "A responsive WordPress website for a professional writing brand, showcasing services, expertise, and contact options through a clean, modern interface.",
     "category": "Frontend",
-    "filters": ["WordPress", "Frontend"],
-    "stack": ["WordPress", "CSS", "JavaScript"],
+    "filters": [
+      "WordPress",
+      "Frontend"
+    ],
+    "stack": [
+      "WordPress",
+      "CSS",
+      "JavaScript"
+    ],
+    "tech": [
+      "/Images/Icons/WordPress.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": true
+  },
+  {
+    "name": "Interiors by BP",
+    "link": "https://interiorsbybp.com/",
+    "github": "",
+    "image": "/Images/Projects/Interiors-by-BP.webp",
+    "imageWidth": 1262,
+    "imageHeight": 1020,
+    "alt": "Homepage screenshot of the Interiors by BP project",
+    "description": "A responsive interior design website showcasing renovation services, project portfolios, and consultation opportunities through a modern interface.",
+    "category": "Frontend",
+    "filters": [
+      "WordPress",
+      "Frontend"
+    ],
+    "stack": [
+      "WordPress",
+      "CSS",
+      "JavaScript"
+    ],
+    "tech": [
+      "/Images/Icons/WordPress.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": true
+  },
+  {
+    "name": "Endless Blue Villa",
+    "link": "https://endlessblueturksandcaicos.com/",
+    "github": "",
+    "image": "/Images/Projects/Endless-Blue-Villa.webp",
+    "imageWidth": 1262,
+    "imageHeight": 1020,
+    "alt": "Homepage screenshot of the Endless Blue Villa project",
+    "description": "A responsive WordPress website showcasing a luxury beachfront villa, premium amenities, and seamless booking information through a modern interface.",
+    "category": "Frontend",
+    "filters": [
+      "WordPress",
+      "Frontend"
+    ],
+    "stack": [
+      "WordPress",
+      "CSS",
+      "JavaScript"
+    ],
+    "tech": [
+      "/Images/Icons/WordPress.svg",
+      "/Images/Icons/CSS.svg",
+      "/Images/Icons/JavaScript.svg"
+    ],
+    "status": "Live",
+    "featured": true
+  },
+  {
+    "name": "Bakersfield Tree Removal",
+    "link": "https://bakersfieldtreeremovalsolutions.com/",
+    "github": "",
+    "image": "/Images/Projects/Bakersfield-Tree-Removal.webp",
+    "imageWidth": 1262,
+    "imageHeight": 1020,
+    "alt": "Homepage screenshot of the Bakersfield Tree Removal project",
+    "description": "A responsive WordPress website for a tree removal company, showcasing professional services, emergency solutions, and contact options through a clean, modern interface.",
+    "filters": [
+      "WordPress",
+      "Frontend"
+    ],
+    "stack": [
+      "WordPress",
+      "CSS",
+      "JavaScript"
+    ],
     "tech": [
       "/Images/Icons/WordPress.svg",
       "/Images/Icons/CSS.svg",
